@@ -15,7 +15,6 @@
 		70B721441E39B4D000401B9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B721421E39B4D000401B9D /* LaunchScreen.storyboard */; };
 		70B7214F1E39B4D000401B9D /* Mission_HealthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B7214E1E39B4D000401B9D /* Mission_HealthTests.m */; };
 		70B7215A1E39B4D000401B9D /* Mission_HealthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721591E39B4D000401B9D /* Mission_HealthUITests.m */; };
-		70B721681E39B53C00401B9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70B721671E39B53C00401B9D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +51,6 @@
 		70B721551E39B4D000401B9D /* Mission HealthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mission HealthUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B721591E39B4D000401B9D /* Mission_HealthUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mission_HealthUITests.m; sourceTree = "<group>"; };
 		70B7215B1E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		70B721671E39B53C00401B9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +109,6 @@
 				70B721401E39B4D000401B9D /* Assets.xcassets */,
 				70B721421E39B4D000401B9D /* LaunchScreen.storyboard */,
 				70B721451E39B4D000401B9D /* Info.plist */,
-				70B721671E39B53C00401B9D /* GoogleService-Info.plist */,
 				70B721341E39B4D000401B9D /* Supporting Files */,
 			);
 			path = "Mission Health";
@@ -253,7 +250,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				70B721441E39B4D000401B9D /* LaunchScreen.storyboard in Resources */,
-				70B721681E39B53C00401B9D /* GoogleService-Info.plist in Resources */,
 				70B721411E39B4D000401B9D /* Assets.xcassets in Resources */,
 				70B7213F1E39B4D000401B9D /* Main.storyboard in Resources */,
 			);
@@ -520,6 +516,7 @@
 				70B721601E39B4D000401B9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		70B721611E39B4D000401B9D /* Build configuration list for PBXNativeTarget "Mission HealthTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +525,7 @@
 				70B721631E39B4D000401B9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		70B721641E39B4D000401B9D /* Build configuration list for PBXNativeTarget "Mission HealthUITests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +534,7 @@
 				70B721661E39B4D000401B9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
