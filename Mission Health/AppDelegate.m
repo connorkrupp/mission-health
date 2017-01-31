@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MHUser+CoreDataClass.h"
 
 @interface AppDelegate ()
 

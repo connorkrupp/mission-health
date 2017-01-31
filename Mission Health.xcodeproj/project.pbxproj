@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7025E9B91E3FB350008EAD28 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9B71E3FB350008EAD28 /* Model.xcdatamodeld */; };
 		7025E9C71E3FD8B5008EAD28 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */; };
+		7025E9D61E40416F008EAD28 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9D51E40416F008EAD28 /* Store.m */; };
+		7025E9D91E4045C9008EAD28 /* MHUser+MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */; };
 		70B721361E39B4D000401B9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721351E39B4D000401B9D /* main.m */; };
 		70B721391E39B4D000401B9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721381E39B4D000401B9D /* AppDelegate.m */; };
 		70B7213C1E39B4D000401B9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B7213B1E39B4D000401B9D /* ViewController.m */; };
@@ -40,6 +42,10 @@
 		7025E9B81E3FB350008EAD28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7025E9C51E3FD8B5008EAD28 /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersistenceManager.h; path = "Mission Health/PersistenceManager.h"; sourceTree = "<group>"; };
 		7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersistenceManager.m; path = "Mission Health/PersistenceManager.m"; sourceTree = "<group>"; };
+		7025E9D41E40416F008EAD28 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		7025E9D51E40416F008EAD28 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		7025E9D71E4045C9008EAD28 /* MHUser+MHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MHUser+MHUser.h"; sourceTree = "<group>"; };
+		7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MHUser+MHUser.m"; sourceTree = "<group>"; };
 		70B721311E39B4D000401B9D /* Mission Health.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mission Health.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B721351E39B4D000401B9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		70B721371E39B4D000401B9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,6 +95,10 @@
 				7025E9B71E3FB350008EAD28 /* Model.xcdatamodeld */,
 				7025E9C51E3FD8B5008EAD28 /* PersistenceManager.h */,
 				7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */,
+				7025E9D41E40416F008EAD28 /* Store.h */,
+				7025E9D51E40416F008EAD28 /* Store.m */,
+				7025E9D71E4045C9008EAD28 /* MHUser+MHUser.h */,
+				7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */,
 				70B721331E39B4D000401B9D /* Mission Health */,
 				70B7214D1E39B4D000401B9D /* Mission HealthTests */,
 				70B721581E39B4D000401B9D /* Mission HealthUITests */,
@@ -285,8 +295,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7025E9D91E4045C9008EAD28 /* MHUser+MHUser.m in Sources */,
 				70B7213C1E39B4D000401B9D /* ViewController.m in Sources */,
 				70B721391E39B4D000401B9D /* AppDelegate.m in Sources */,
+				7025E9D61E40416F008EAD28 /* Store.m in Sources */,
 				70B721361E39B4D000401B9D /* main.m in Sources */,
 				7025E9B91E3FB350008EAD28 /* Model.xcdatamodeld in Sources */,
 				7025E9C71E3FD8B5008EAD28 /* PersistenceManager.m in Sources */,
