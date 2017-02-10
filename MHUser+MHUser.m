@@ -28,7 +28,6 @@
     return user;
 }
 
-
 + (NSString *)entityName {
     return @"MHUser";
 }

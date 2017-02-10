@@ -10,6 +10,8 @@
 #import "PersistenceManager.h"
 #import "Store.h"
 #import "MHUser+CoreDataClass.h"
+#import "DailySummaryViewController.h"
+#import "MealManager.h"
 
 @interface AppDelegate ()
 
@@ -29,6 +31,15 @@
     
     self.store.managedObjectContext = self.persistenceManager.managedObjectContext;
     
+    MealManager *mealManager = [[MealManager alloc] initWithManagedObjectContext:self.store.managedObjectContext];
+    
+    DailySummaryViewController *dailySummaryViewController = [[DailySummaryViewController alloc] initWithMealManager:mealManager];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -38,7 +49,7 @@
 }
 
 - (NSURL *)modelURL {
-    return [[NSBundle mainBundle] URLForResource:@"MissionHealth" withExtension:@"momd"];
+    return [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

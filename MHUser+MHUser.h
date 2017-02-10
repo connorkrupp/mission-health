@@ -7,6 +7,7 @@
 //
 
 #import "MHUser+CoreDataClass.h"
+#import "Food+CoreDataClass.h"
 
 @interface MHUser (MHUser)
 
