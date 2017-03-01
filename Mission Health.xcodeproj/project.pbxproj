@@ -19,6 +19,10 @@
 		70B7214F1E39B4D000401B9D /* Mission_HealthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B7214E1E39B4D000401B9D /* Mission_HealthTests.m */; };
 		70B7215A1E39B4D000401B9D /* Mission_HealthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721591E39B4D000401B9D /* Mission_HealthUITests.m */; };
 		70E223241E6676A40079FF22 /* MHFood.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223231E6676A40079FF22 /* MHFood.m */; };
+		70E223291E6707D30079FF22 /* MissionsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223281E6707D30079FF22 /* MissionsCollectionViewController.m */; };
+		70E2232C1E6708430079FF22 /* MissionsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */; };
+		70E2232F1E6710190079FF22 /* MHGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E2232E1E6710190079FF22 /* MHGroup.m */; };
+		70E223321E6710650079FF22 /* GroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223311E6710650079FF22 /* GroupManager.m */; };
 		70F00A541E4B8E7F00401407 /* configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F00A531E4B8E7F00401407 /* configuration.plist */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +68,14 @@
 		70B7215B1E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70E223221E6676A40079FF22 /* MHFood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFood.h; sourceTree = "<group>"; };
 		70E223231E6676A40079FF22 /* MHFood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFood.m; sourceTree = "<group>"; };
+		70E223271E6707D30079FF22 /* MissionsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsCollectionViewController.h; sourceTree = "<group>"; };
+		70E223281E6707D30079FF22 /* MissionsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsCollectionViewController.m; sourceTree = "<group>"; };
+		70E2232A1E6708430079FF22 /* MissionsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsCollectionViewCell.h; sourceTree = "<group>"; };
+		70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsCollectionViewCell.m; sourceTree = "<group>"; };
+		70E2232D1E6710190079FF22 /* MHGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHGroup.h; sourceTree = "<group>"; };
+		70E2232E1E6710190079FF22 /* MHGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHGroup.m; sourceTree = "<group>"; };
+		70E223301E6710650079FF22 /* GroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupManager.h; sourceTree = "<group>"; };
+		70E223311E6710650079FF22 /* GroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupManager.m; sourceTree = "<group>"; };
 		70F00A531E4B8E7F00401407 /* configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configuration.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,8 +118,12 @@
 			children = (
 				70E223221E6676A40079FF22 /* MHFood.h */,
 				70E223231E6676A40079FF22 /* MHFood.m */,
+				70E2232D1E6710190079FF22 /* MHGroup.h */,
+				70E2232E1E6710190079FF22 /* MHGroup.m */,
 				705B94CC1E4C4435006241F1 /* MealManager.h */,
 				705B94CD1E4C4435006241F1 /* MealManager.m */,
+				70E223301E6710650079FF22 /* GroupManager.h */,
+				70E223311E6710650079FF22 /* GroupManager.m */,
 				70B721331E39B4D000401B9D /* Mission Health */,
 				70B7214D1E39B4D000401B9D /* Mission HealthTests */,
 				70B721581E39B4D000401B9D /* Mission HealthUITests */,
@@ -131,7 +147,8 @@
 			children = (
 				70B721371E39B4D000401B9D /* AppDelegate.h */,
 				70B721381E39B4D000401B9D /* AppDelegate.m */,
-				70E223251E6680DD0079FF22 /* Daily View */,
+				70E223261E67077E0079FF22 /* Missions Tab */,
+				70E223251E6680DD0079FF22 /* Daily Summary Tab */,
 				705B94C91E4C3C1A006241F1 /* TextFieldTableViewCell.h */,
 				705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */,
 				70F00A531E4B8E7F00401407 /* configuration.plist */,
@@ -169,7 +186,7 @@
 			path = "Mission HealthUITests";
 			sourceTree = "<group>";
 		};
-		70E223251E6680DD0079FF22 /* Daily View */ = {
+		70E223251E6680DD0079FF22 /* Daily Summary Tab */ = {
 			isa = PBXGroup;
 			children = (
 				70954C541E4A603F00832400 /* DailySummaryViewController.h */,
@@ -177,7 +194,18 @@
 				705B94C61E4C396E006241F1 /* AddFoodViewController.h */,
 				705B94C71E4C396E006241F1 /* AddFoodViewController.m */,
 			);
-			name = "Daily View";
+			name = "Daily Summary Tab";
+			sourceTree = "<group>";
+		};
+		70E223261E67077E0079FF22 /* Missions Tab */ = {
+			isa = PBXGroup;
+			children = (
+				70E223271E6707D30079FF22 /* MissionsCollectionViewController.h */,
+				70E223281E6707D30079FF22 /* MissionsCollectionViewController.m */,
+				70E2232A1E6708430079FF22 /* MissionsCollectionViewCell.h */,
+				70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */,
+			);
+			name = "Missions Tab";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,11 +364,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				70E223241E6676A40079FF22 /* MHFood.m in Sources */,
+				70E223291E6707D30079FF22 /* MissionsCollectionViewController.m in Sources */,
 				70B721391E39B4D000401B9D /* AppDelegate.m in Sources */,
 				70B721361E39B4D000401B9D /* main.m in Sources */,
 				705B94CE1E4C4435006241F1 /* MealManager.m in Sources */,
+				70E2232C1E6708430079FF22 /* MissionsCollectionViewCell.m in Sources */,
 				70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */,
 				705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */,
+				70E2232F1E6710190079FF22 /* MHGroup.m in Sources */,
+				70E223321E6710650079FF22 /* GroupManager.m in Sources */,
 				705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

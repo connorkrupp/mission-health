@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MissionsCollectionViewController.h"
 #import "DailySummaryViewController.h"
 #import "MealManager.h"
 
@@ -22,11 +23,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     MealManager *mealManager = [[MealManager alloc] init];
+    
+    
+    UIViewController *groupViewController = [[MissionsCollectionViewController alloc] init];
+    UINavigationController *groupNavigationController = [[UINavigationController alloc] initWithRootViewController:groupViewController];
+    groupNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Missions" image:nil tag:1];
+    
     DailySummaryViewController *dailySummaryViewController = [[DailySummaryViewController alloc] initWithMealManager:mealManager];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
+    UINavigationController *dailySummaryNavigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
+    dailySummaryNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Summary" image:nil tag:1];
+    
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[groupNavigationController, dailySummaryNavigationController];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = navigationController;
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
     
     return YES;

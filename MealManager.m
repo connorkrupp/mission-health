@@ -42,9 +42,7 @@
         [realm addObject:food];
     }];
     
-    NSMutableArray *mealArray = self.meals[food.meal];
-    
-    [mealArray addObject:food];
+    [self.meals[meal] addObject:food];
 }
 
 @end
