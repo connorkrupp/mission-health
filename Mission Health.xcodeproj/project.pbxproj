@@ -7,21 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7025E9B91E3FB350008EAD28 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9B71E3FB350008EAD28 /* Model.xcdatamodeld */; };
-		7025E9C71E3FD8B5008EAD28 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */; };
-		7025E9D91E4045C9008EAD28 /* MHUser+MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */; };
-		705B3B5B1E4CFB3C00F318FE /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B3B5A1E4CFB3C00F318FE /* UserManager.m */; };
 		705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94C71E4C396E006241F1 /* AddFoodViewController.m */; };
 		705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */; };
 		705B94CE1E4C4435006241F1 /* MealManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94CD1E4C4435006241F1 /* MealManager.m */; };
+		706004291E66735D00FA1EFF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706004281E66735D00FA1EFF /* Realm.framework */; };
 		70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70954C551E4A603F00832400 /* DailySummaryViewController.m */; };
 		70B721361E39B4D000401B9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721351E39B4D000401B9D /* main.m */; };
 		70B721391E39B4D000401B9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721381E39B4D000401B9D /* AppDelegate.m */; };
-		70B7213F1E39B4D000401B9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B7213D1E39B4D000401B9D /* Main.storyboard */; };
 		70B721411E39B4D000401B9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70B721401E39B4D000401B9D /* Assets.xcassets */; };
 		70B721441E39B4D000401B9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B721421E39B4D000401B9D /* LaunchScreen.storyboard */; };
 		70B7214F1E39B4D000401B9D /* Mission_HealthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B7214E1E39B4D000401B9D /* Mission_HealthTests.m */; };
 		70B7215A1E39B4D000401B9D /* Mission_HealthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721591E39B4D000401B9D /* Mission_HealthUITests.m */; };
+		70E223241E6676A40079FF22 /* MHFood.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223231E6676A40079FF22 /* MHFood.m */; };
 		70F00A541E4B8E7F00401407 /* configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F00A531E4B8E7F00401407 /* configuration.plist */; };
 /* End PBXBuildFile section */
 
@@ -43,26 +40,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7025E9B81E3FB350008EAD28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		7025E9C51E3FD8B5008EAD28 /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersistenceManager.h; path = "Mission Health/PersistenceManager.h"; sourceTree = "<group>"; };
-		7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersistenceManager.m; path = "Mission Health/PersistenceManager.m"; sourceTree = "<group>"; };
-		7025E9D71E4045C9008EAD28 /* MHUser+MHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MHUser+MHUser.h"; sourceTree = "<group>"; };
-		7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MHUser+MHUser.m"; sourceTree = "<group>"; };
-		705B3B591E4CFB3C00F318FE /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
-		705B3B5A1E4CFB3C00F318FE /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		705B94C61E4C396E006241F1 /* AddFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodViewController.h; sourceTree = "<group>"; };
 		705B94C71E4C396E006241F1 /* AddFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFoodViewController.m; sourceTree = "<group>"; };
 		705B94C91E4C3C1A006241F1 /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
 		705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableViewCell.m; sourceTree = "<group>"; };
 		705B94CC1E4C4435006241F1 /* MealManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealManager.h; sourceTree = "<group>"; };
 		705B94CD1E4C4435006241F1 /* MealManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealManager.m; sourceTree = "<group>"; };
+		706004281E66735D00FA1EFF /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		70954C541E4A603F00832400 /* DailySummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailySummaryViewController.h; sourceTree = "<group>"; };
 		70954C551E4A603F00832400 /* DailySummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySummaryViewController.m; sourceTree = "<group>"; };
 		70B721311E39B4D000401B9D /* Mission Health.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mission Health.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B721351E39B4D000401B9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		70B721371E39B4D000401B9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		70B721381E39B4D000401B9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		70B7213E1E39B4D000401B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70B721401E39B4D000401B9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70B721431E39B4D000401B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70B721451E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +62,8 @@
 		70B721551E39B4D000401B9D /* Mission HealthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mission HealthUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B721591E39B4D000401B9D /* Mission_HealthUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mission_HealthUITests.m; sourceTree = "<group>"; };
 		70B7215B1E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70E223221E6676A40079FF22 /* MHFood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFood.h; sourceTree = "<group>"; };
+		70E223231E6676A40079FF22 /* MHFood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFood.m; sourceTree = "<group>"; };
 		70F00A531E4B8E7F00401407 /* configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configuration.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				706004291E66735D00FA1EFF /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,22 +93,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		706004271E66735C00FA1EFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				706004281E66735D00FA1EFF /* Realm.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		70B721281E39B4D000401B9D = {
 			isa = PBXGroup;
 			children = (
-				7025E9B71E3FB350008EAD28 /* Model.xcdatamodeld */,
-				7025E9C51E3FD8B5008EAD28 /* PersistenceManager.h */,
-				7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */,
+				70E223221E6676A40079FF22 /* MHFood.h */,
+				70E223231E6676A40079FF22 /* MHFood.m */,
 				705B94CC1E4C4435006241F1 /* MealManager.h */,
 				705B94CD1E4C4435006241F1 /* MealManager.m */,
-				705B3B591E4CFB3C00F318FE /* UserManager.h */,
-				705B3B5A1E4CFB3C00F318FE /* UserManager.m */,
-				7025E9D71E4045C9008EAD28 /* MHUser+MHUser.h */,
-				7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */,
 				70B721331E39B4D000401B9D /* Mission Health */,
 				70B7214D1E39B4D000401B9D /* Mission HealthTests */,
 				70B721581E39B4D000401B9D /* Mission HealthUITests */,
 				70B721321E39B4D000401B9D /* Products */,
+				706004271E66735C00FA1EFF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,14 +131,10 @@
 			children = (
 				70B721371E39B4D000401B9D /* AppDelegate.h */,
 				70B721381E39B4D000401B9D /* AppDelegate.m */,
-				70954C541E4A603F00832400 /* DailySummaryViewController.h */,
-				70954C551E4A603F00832400 /* DailySummaryViewController.m */,
-				705B94C61E4C396E006241F1 /* AddFoodViewController.h */,
-				705B94C71E4C396E006241F1 /* AddFoodViewController.m */,
+				70E223251E6680DD0079FF22 /* Daily View */,
 				705B94C91E4C3C1A006241F1 /* TextFieldTableViewCell.h */,
 				705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */,
 				70F00A531E4B8E7F00401407 /* configuration.plist */,
-				70B7213D1E39B4D000401B9D /* Main.storyboard */,
 				70B721401E39B4D000401B9D /* Assets.xcassets */,
 				70B721421E39B4D000401B9D /* LaunchScreen.storyboard */,
 				70B721451E39B4D000401B9D /* Info.plist */,
@@ -176,6 +169,17 @@
 			path = "Mission HealthUITests";
 			sourceTree = "<group>";
 		};
+		70E223251E6680DD0079FF22 /* Daily View */ = {
+			isa = PBXGroup;
+			children = (
+				70954C541E4A603F00832400 /* DailySummaryViewController.h */,
+				70954C551E4A603F00832400 /* DailySummaryViewController.m */,
+				705B94C61E4C396E006241F1 /* AddFoodViewController.h */,
+				705B94C71E4C396E006241F1 /* AddFoodViewController.m */,
+			);
+			name = "Daily View";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -186,6 +190,7 @@
 				70B7212D1E39B4D000401B9D /* Sources */,
 				70B7212E1E39B4D000401B9D /* Frameworks */,
 				70B7212F1E39B4D000401B9D /* Resources */,
+				7060042A1E66737000FA1EFF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -289,7 +294,6 @@
 				70B721441E39B4D000401B9D /* LaunchScreen.storyboard in Resources */,
 				70F00A541E4B8E7F00401407 /* configuration.plist in Resources */,
 				70B721411E39B4D000401B9D /* Assets.xcassets in Resources */,
-				70B7213F1E39B4D000401B9D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,20 +313,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7060042A1E66737000FA1EFF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		70B7212D1E39B4D000401B9D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7025E9D91E4045C9008EAD28 /* MHUser+MHUser.m in Sources */,
+				70E223241E6676A40079FF22 /* MHFood.m in Sources */,
 				70B721391E39B4D000401B9D /* AppDelegate.m in Sources */,
 				70B721361E39B4D000401B9D /* main.m in Sources */,
-				7025E9B91E3FB350008EAD28 /* Model.xcdatamodeld in Sources */,
-				7025E9C71E3FD8B5008EAD28 /* PersistenceManager.m in Sources */,
 				705B94CE1E4C4435006241F1 /* MealManager.m in Sources */,
 				70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */,
 				705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */,
-				705B3B5B1E4CFB3C00F318FE /* UserManager.m in Sources */,
 				705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,14 +377,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		70B7213D1E39B4D000401B9D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				70B7213E1E39B4D000401B9D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		70B721421E39B4D000401B9D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -474,6 +484,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 49Z72NQ45H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Mission Health/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.connorkrupp.Mission-Health";
@@ -489,6 +503,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 49Z72NQ45H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Mission Health/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.connorkrupp.Mission-Health";
@@ -587,19 +605,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		7025E9B71E3FB350008EAD28 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				7025E9B81E3FB350008EAD28 /* Model.xcdatamodel */,
-			);
-			currentVersion = 7025E9B81E3FB350008EAD28 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 70B721291E39B4D000401B9D /* Project object */;
 }

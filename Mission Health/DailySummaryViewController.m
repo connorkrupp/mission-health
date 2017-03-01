@@ -8,7 +8,6 @@
 
 #import "DailySummaryViewController.h"
 #import "AddFoodViewController.h"
-#import "Food+CoreDataClass.h"
 
 @interface DailySummaryViewController ()
 
@@ -27,6 +26,42 @@
     
     return self;
 }
+
+- (void)addItem {
+    AddFoodViewController *addFoodViewController = [[AddFoodViewController alloc] initWithMealManager:self.mealManager];
+    UINavigationController *addFoodNavigationController = [[UINavigationController alloc] initWithRootViewController:addFoodViewController];
+    
+    [self presentViewController:addFoodNavigationController animated:true completion:nil];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.mealManager.meals.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSArray *mealNames = @[@"breakfast", @"lunch", @"dinner", @"snacks"];
+    
+    return mealNames[section];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.mealManager.meals[section].count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
+    
+    MHFood *food = self.mealManager.meals[indexPath.section][indexPath.row];
+    
+    cell.textLabel.text = food.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f", food.calories];
+    
+    return cell;
+}
+
 
 - (void)loadView {
     self.view = [[UIView alloc] init];
@@ -81,41 +116,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.tableView reloadData];
-}
-
-- (void)addItem {
-    AddFoodViewController *addFoodViewController = [[AddFoodViewController alloc] initWithMealManager:self.mealManager];
-    UINavigationController *addFoodNavigationController = [[UINavigationController alloc] initWithRootViewController:addFoodViewController];
-    
-    [self presentViewController:addFoodNavigationController animated:true completion:nil];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.mealManager.meals.count;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSArray *mealNames = @[@"breakfast", @"lunch", @"dinner", @"snacks"];
-    
-    return mealNames[section];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.mealManager.meals[section].count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    }
-    
-    Food *food = self.mealManager.meals[indexPath.section][indexPath.row];
-    
-    cell.textLabel.text = food.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f", food.calories];
-    
-    return cell;
 }
 
 @end

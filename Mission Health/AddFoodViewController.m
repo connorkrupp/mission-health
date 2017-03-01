@@ -102,9 +102,9 @@
 - (void)saveItem {
     NSString *foodName = self.foodTableViewCell.textField.text;
     double calories = self.caloriesTableViewCell.textField.text.doubleValue;
-    NSString *mealName = self.mealTableViewCell.textField.text;
+    int meal = self.mealTableViewCell.textField.text.intValue;
     
-    [self.mealManager quickAddFoodWithName:foodName calories:calories inMeal:mealName];
+    [self.mealManager quickAddFoodWithName:foodName calories:calories inMeal:meal];
     [self dismissViewControllerAnimated:true completion:nil];
 }
 

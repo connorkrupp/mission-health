@@ -5,24 +5,8 @@
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="meal" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="consumedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHUser" inverseName="consumed" inverseEntity="MHUser" syncable="YES"/>
-    </entity>
-    <entity name="MHQuantitySample" representedClassName="MHQuantitySample" syncable="YES" codeGenerationType="class">
-        <attribute name="dataRecorded" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
-        <attribute name="quantity" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
-        <relationship name="recordedFor" maxCount="1" deletionRule="Nullify" destinationEntity="MHUser" inverseName="recorded" inverseEntity="MHUser" syncable="YES"/>
-    </entity>
-    <entity name="MHUser" representedClassName="MHUser" syncable="YES" codeGenerationType="class">
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="preferredUnits" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="consumed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" inverseName="consumedBy" inverseEntity="Food" syncable="YES"/>
-        <relationship name="recorded" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHQuantitySample" inverseName="recordedFor" inverseEntity="MHQuantitySample" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Food" positionX="153" positionY="135" width="128" height="120"/>
-        <element name="MHQuantitySample" positionX="358" positionY="207" width="128" height="103"/>
-        <element name="MHUser" positionX="-45" positionY="-18" width="128" height="120"/>
+        <element name="Food" positionX="153" positionY="135" width="128" height="105"/>
     </elements>
 </model>

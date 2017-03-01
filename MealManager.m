@@ -6,27 +6,21 @@
 //  Copyright © 2017 Connor Krupp. All rights reserved.
 //
 
-@import CoreData;
+@import Realm;
 
 #import "MealManager.h"
-#import "Food+CoreDataClass.h"
+#import "MHFood.h"
 
 @implementation MealManager
 
-- (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+- (instancetype)init {
     if (self = [super init]) {
-        self.managedObjectContext = managedObjectContext;
         self.meals = @[[NSMutableArray new],[NSMutableArray new],[NSMutableArray new],[NSMutableArray new]];
         
-        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Food"];
-        NSError *error = [[NSError alloc] initWithDomain:NSSQLiteErrorDomain code:0 userInfo:nil];
-        NSArray *foods = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        RLMResults<MHFood *> *foods = [MHFood allObjects];
         
-        
-        
-        NSArray *mealNames = @[@"breakfast", @"lunch", @"dinner", @"snacks"];
-        for (Food *food in foods) {
-            [self.meals[[mealNames indexOfObject:food.meal]] addObject:food];
+        for (MHFood *food in foods) {
+            [self.meals[food.meal] addObject:food];
         }
     }
     
@@ -35,48 +29,22 @@
 
 - (void)quickAddFoodWithName:(NSString *)name
                     calories:(double)calories
-                      inMeal:(NSString *)meal {
+                      inMeal:(int)meal {
     
-    NSArray *mealNames = @[@"breakfast", @"lunch", @"dinner", @"snacks"];
+    MHFood *food = [[MHFood alloc] init];
+    food.calories = calories;
+    food.name = name;
+    food.date = [NSDate new];
+    food.meal = meal;
     
-    NSUInteger mealIndex = [mealNames indexOfObject:meal];
-    if (mealIndex == NSNotFound) {
-        meal = @"snacks";
-        mealIndex = [mealNames indexOfObject:meal];
-    }
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm addObject:food];
+    }];
     
-    Food *food = [self createFoodWithName:name calories:calories inMeal:meal inManagedObjectContext:self.managedObjectContext];
-    
-    NSError *error = nil;
-    if ([self.managedObjectContext save:&error] == NO) {
-        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-    }
-    
-    NSMutableArray *mealArray = self.meals[mealIndex];
+    NSMutableArray *mealArray = self.meals[food.meal];
     
     [mealArray addObject:food];
-}
-
-- (Food *)createFoodInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
-    Food *food = [NSEntityDescription insertNewObjectForEntityForName:@"Food"
-                                                 inManagedObjectContext:managedObjectContext];
-    
-    return food;
-}
-
-- (Food *)createFoodWithName:(NSString *)name
-                    calories:(double)calories
-                      inMeal:(NSString *)meal
-      inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
-    
-    Food *food = [self createFoodInManagedObjectContext:managedObjectContext];
-    
-    food.name = name;
-    food.calories = calories;
-    food.meal = meal;
-    food.date = [NSDate new];
-    
-    return food;
 }
 
 @end

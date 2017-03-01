@@ -7,15 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "PersistenceManager.h"
-#import "MHUser+CoreDataClass.h"
 #import "DailySummaryViewController.h"
 #import "MealManager.h"
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) MealManager *mealManager;
-@property (nonatomic, strong) PersistenceManager *persistenceManager;
 
 @end
 
@@ -23,12 +20,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
-    self.persistenceManager = [[PersistenceManager alloc] initWithStoreURL:self.storeURL modelURL:self.modelURL];
-    
-    MealManager *mealManager = [[MealManager alloc] initWithManagedObjectContext:self.persistenceManager.managedObjectContext];
-    
+    MealManager *mealManager = [[MealManager alloc] init];
     DailySummaryViewController *dailySummaryViewController = [[DailySummaryViewController alloc] initWithMealManager:mealManager];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
     
@@ -37,15 +30,6 @@
     [self.window makeKeyAndVisible];
     
     return YES;
-}
-
-- (NSURL *)storeURL {
-    NSURL *documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-    return [documentsDirectory URLByAppendingPathComponent:@"db.sqlite"];
-}
-
-- (NSURL *)modelURL {
-    return [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -57,8 +41,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    [self.mealManager.managedObjectContext save:NULL];
     
 }
 

@@ -8,16 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MHFood.h"
+
 @interface MealManager : NSObject
 
-@property (strong, nonatomic) NSArray<NSMutableArray *> *meals;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSArray<NSMutableArray<MHFood *> *> *meals;
 
-- (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-    
 - (void)quickAddFoodWithName:(NSString *)name
                     calories:(double)calories
-                      inMeal:(NSString *)meal;
+                      inMeal:(int)meal;
 
 
 @end
