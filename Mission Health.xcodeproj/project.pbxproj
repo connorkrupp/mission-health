@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7025E9B91E3FB350008EAD28 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9B71E3FB350008EAD28 /* Model.xcdatamodeld */; };
 		7025E9C71E3FD8B5008EAD28 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */; };
-		7025E9D61E40416F008EAD28 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9D51E40416F008EAD28 /* Store.m */; };
 		7025E9D91E4045C9008EAD28 /* MHUser+MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */; };
 		705B3B5B1E4CFB3C00F318FE /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B3B5A1E4CFB3C00F318FE /* UserManager.m */; };
 		705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94C71E4C396E006241F1 /* AddFoodViewController.m */; };
@@ -18,7 +17,6 @@
 		70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70954C551E4A603F00832400 /* DailySummaryViewController.m */; };
 		70B721361E39B4D000401B9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721351E39B4D000401B9D /* main.m */; };
 		70B721391E39B4D000401B9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721381E39B4D000401B9D /* AppDelegate.m */; };
-		70B7213C1E39B4D000401B9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B7213B1E39B4D000401B9D /* ViewController.m */; };
 		70B7213F1E39B4D000401B9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B7213D1E39B4D000401B9D /* Main.storyboard */; };
 		70B721411E39B4D000401B9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70B721401E39B4D000401B9D /* Assets.xcassets */; };
 		70B721441E39B4D000401B9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B721421E39B4D000401B9D /* LaunchScreen.storyboard */; };
@@ -48,8 +46,6 @@
 		7025E9B81E3FB350008EAD28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7025E9C51E3FD8B5008EAD28 /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersistenceManager.h; path = "Mission Health/PersistenceManager.h"; sourceTree = "<group>"; };
 		7025E9C61E3FD8B5008EAD28 /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersistenceManager.m; path = "Mission Health/PersistenceManager.m"; sourceTree = "<group>"; };
-		7025E9D41E40416F008EAD28 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
-		7025E9D51E40416F008EAD28 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		7025E9D71E4045C9008EAD28 /* MHUser+MHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MHUser+MHUser.h"; sourceTree = "<group>"; };
 		7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MHUser+MHUser.m"; sourceTree = "<group>"; };
 		705B3B591E4CFB3C00F318FE /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
@@ -66,8 +62,6 @@
 		70B721351E39B4D000401B9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		70B721371E39B4D000401B9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		70B721381E39B4D000401B9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		70B7213A1E39B4D000401B9D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		70B7213B1E39B4D000401B9D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		70B7213E1E39B4D000401B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70B721401E39B4D000401B9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70B721431E39B4D000401B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -116,8 +110,6 @@
 				705B94CD1E4C4435006241F1 /* MealManager.m */,
 				705B3B591E4CFB3C00F318FE /* UserManager.h */,
 				705B3B5A1E4CFB3C00F318FE /* UserManager.m */,
-				7025E9D41E40416F008EAD28 /* Store.h */,
-				7025E9D51E40416F008EAD28 /* Store.m */,
 				7025E9D71E4045C9008EAD28 /* MHUser+MHUser.h */,
 				7025E9D81E4045C9008EAD28 /* MHUser+MHUser.m */,
 				70B721331E39B4D000401B9D /* Mission Health */,
@@ -149,8 +141,6 @@
 				705B94C91E4C3C1A006241F1 /* TextFieldTableViewCell.h */,
 				705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */,
 				70F00A531E4B8E7F00401407 /* configuration.plist */,
-				70B7213A1E39B4D000401B9D /* ViewController.h */,
-				70B7213B1E39B4D000401B9D /* ViewController.m */,
 				70B7213D1E39B4D000401B9D /* Main.storyboard */,
 				70B721401E39B4D000401B9D /* Assets.xcassets */,
 				70B721421E39B4D000401B9D /* LaunchScreen.storyboard */,
@@ -325,9 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7025E9D91E4045C9008EAD28 /* MHUser+MHUser.m in Sources */,
-				70B7213C1E39B4D000401B9D /* ViewController.m in Sources */,
 				70B721391E39B4D000401B9D /* AppDelegate.m in Sources */,
-				7025E9D61E40416F008EAD28 /* Store.m in Sources */,
 				70B721361E39B4D000401B9D /* main.m in Sources */,
 				7025E9B91E3FB350008EAD28 /* Model.xcdatamodeld in Sources */,
 				7025E9C71E3FD8B5008EAD28 /* PersistenceManager.m in Sources */,

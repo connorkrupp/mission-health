@@ -8,14 +8,13 @@
 
 #import "AppDelegate.h"
 #import "PersistenceManager.h"
-#import "Store.h"
 #import "MHUser+CoreDataClass.h"
 #import "DailySummaryViewController.h"
 #import "MealManager.h"
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) Store *store;
+@property (nonatomic, strong) MealManager *mealManager;
 @property (nonatomic, strong) PersistenceManager *persistenceManager;
 
 @end
@@ -27,11 +26,8 @@
     // Override point for customization after application launch.
     
     self.persistenceManager = [[PersistenceManager alloc] initWithStoreURL:self.storeURL modelURL:self.modelURL];
-    self.store = [[Store alloc] init];
     
-    self.store.managedObjectContext = self.persistenceManager.managedObjectContext;
-    
-    MealManager *mealManager = [[MealManager alloc] initWithManagedObjectContext:self.store.managedObjectContext];
+    MealManager *mealManager = [[MealManager alloc] initWithManagedObjectContext:self.persistenceManager.managedObjectContext];
     
     DailySummaryViewController *dailySummaryViewController = [[DailySummaryViewController alloc] initWithMealManager:mealManager];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
@@ -62,7 +58,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    [self.store.managedObjectContext save:NULL];
+    [self.mealManager.managedObjectContext save:NULL];
     
 }
 

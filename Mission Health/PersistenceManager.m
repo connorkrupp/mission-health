@@ -18,7 +18,7 @@
 
 @implementation PersistenceManager
 
-- (id)initWithStoreURL:(NSURL *)storeURL modelURL:(NSURL *)modelURL {
+- (instancetype)initWithStoreURL:(NSURL *)storeURL modelURL:(NSURL *)modelURL {
     if (self = [super init]) {
         self.storeURL = storeURL;
         self.modelURL = modelURL;

@@ -19,7 +19,10 @@
         self.meals = @[[NSMutableArray new],[NSMutableArray new],[NSMutableArray new],[NSMutableArray new]];
         
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Food"];
-        NSArray *foods = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+        NSError *error = [[NSError alloc] initWithDomain:NSSQLiteErrorDomain code:0 userInfo:nil];
+        NSArray *foods = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        
         
         NSArray *mealNames = @[@"breakfast", @"lunch", @"dinner", @"snacks"];
         for (Food *food in foods) {
@@ -34,20 +37,20 @@
                     calories:(double)calories
                       inMeal:(NSString *)meal {
     
-    Food *food = [self createFoodInManagedObjectContext:self.managedObjectContext];
-    
-    food.name = name;
-    food.calories = calories;
-    food.meal = meal;
-    
     NSArray *mealNames = @[@"breakfast", @"lunch", @"dinner", @"snacks"];
     
-    NSUInteger mealIndex = [mealNames indexOfObject:food.meal];
+    NSUInteger mealIndex = [mealNames indexOfObject:meal];
     if (mealIndex == NSNotFound) {
-        mealIndex = 3;
+        meal = @"snacks";
+        mealIndex = [mealNames indexOfObject:meal];
     }
     
-    [self.managedObjectContext save:nil];
+    Food *food = [self createFoodWithName:name calories:calories inMeal:meal inManagedObjectContext:self.managedObjectContext];
+    
+    NSError *error = nil;
+    if ([self.managedObjectContext save:&error] == NO) {
+        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+    }
     
     NSMutableArray *mealArray = self.meals[mealIndex];
     
@@ -57,6 +60,21 @@
 - (Food *)createFoodInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     Food *food = [NSEntityDescription insertNewObjectForEntityForName:@"Food"
                                                  inManagedObjectContext:managedObjectContext];
+    
+    return food;
+}
+
+- (Food *)createFoodWithName:(NSString *)name
+                    calories:(double)calories
+                      inMeal:(NSString *)meal
+      inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    
+    Food *food = [self createFoodInManagedObjectContext:managedObjectContext];
+    
+    food.name = name;
+    food.calories = calories;
+    food.meal = meal;
+    food.date = [NSDate new];
     
     return food;
 }

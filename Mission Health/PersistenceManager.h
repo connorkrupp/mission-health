@@ -11,7 +11,7 @@
 
 @interface PersistenceManager : NSObject
 
-- (id)initWithStoreURL:(NSURL *)storeURL modelURL:(NSURL *)modelURL;
+- (instancetype)initWithStoreURL:(NSURL *)storeURL modelURL:(NSURL *)modelURL;
 
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 
