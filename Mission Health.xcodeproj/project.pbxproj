@@ -23,6 +23,8 @@
 		70E2232C1E6708430079FF22 /* MissionsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */; };
 		70E2232F1E6710190079FF22 /* MHGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E2232E1E6710190079FF22 /* MHGroup.m */; };
 		70E223321E6710650079FF22 /* GroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223311E6710650079FF22 /* GroupManager.m */; };
+		70E223351E675D3C0079FF22 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223341E675D3B0079FF22 /* AddGroupViewController.m */; };
+		70E223381E6766B00079FF22 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223371E6766B00079FF22 /* GroupViewController.m */; };
 		70F00A541E4B8E7F00401407 /* configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F00A531E4B8E7F00401407 /* configuration.plist */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,10 @@
 		70E2232E1E6710190079FF22 /* MHGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHGroup.m; sourceTree = "<group>"; };
 		70E223301E6710650079FF22 /* GroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupManager.h; sourceTree = "<group>"; };
 		70E223311E6710650079FF22 /* GroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupManager.m; sourceTree = "<group>"; };
+		70E223331E675D3B0079FF22 /* AddGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGroupViewController.h; sourceTree = "<group>"; };
+		70E223341E675D3B0079FF22 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
+		70E223361E6766B00079FF22 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
+		70E223371E6766B00079FF22 /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupViewController.m; sourceTree = "<group>"; };
 		70F00A531E4B8E7F00401407 /* configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configuration.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +208,10 @@
 			children = (
 				70E223271E6707D30079FF22 /* MissionsCollectionViewController.h */,
 				70E223281E6707D30079FF22 /* MissionsCollectionViewController.m */,
+				70E223331E675D3B0079FF22 /* AddGroupViewController.h */,
+				70E223341E675D3B0079FF22 /* AddGroupViewController.m */,
+				70E223361E6766B00079FF22 /* GroupViewController.h */,
+				70E223371E6766B00079FF22 /* GroupViewController.m */,
 				70E2232A1E6708430079FF22 /* MissionsCollectionViewCell.h */,
 				70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */,
 			);
@@ -363,8 +373,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70E223381E6766B00079FF22 /* GroupViewController.m in Sources */,
 				70E223241E6676A40079FF22 /* MHFood.m in Sources */,
 				70E223291E6707D30079FF22 /* MissionsCollectionViewController.m in Sources */,
+				70E223351E675D3C0079FF22 /* AddGroupViewController.m in Sources */,
 				70B721391E39B4D000401B9D /* AppDelegate.m in Sources */,
 				70B721361E39B4D000401B9D /* main.m in Sources */,
 				705B94CE1E4C4435006241F1 /* MealManager.m in Sources */,

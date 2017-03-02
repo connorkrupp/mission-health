@@ -24,5 +24,7 @@
 @property (weak, nonatomic) id<GroupManagerDelegate> delegate;
 
 - (void)getGroups;
+- (void)createGroup:(NSString *)name;
+- (void)joinGroup:(int)groupId;
 
 @end

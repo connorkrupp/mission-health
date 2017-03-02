@@ -8,6 +8,8 @@
 
 #import "MissionsCollectionViewController.h"
 #import "MissionsCollectionViewCell.h"
+#import "AddGroupViewController.h"
+#import "GroupViewController.h"
 
 #import "GroupManager.h"
 
@@ -30,13 +32,20 @@ static NSString * const reuseIdentifier = @"GroupCell";
     [self.collectionView registerClass:[MissionsCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.title = @"Missions";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroup)];
     
     self.groupManager = [[GroupManager alloc] init];
     self.groupManager.delegate = self;
     [self.groupManager getGroups];
     
     return self;
+}
+
+- (void)addGroup {
+    AddGroupViewController *addGroupViewController = [[AddGroupViewController alloc] initWithGroupManager:self.groupManager];
+    UINavigationController *addGroupNavigationController = [[UINavigationController alloc] initWithRootViewController:addGroupViewController];
+    
+    [self presentViewController:addGroupNavigationController animated:true completion:nil];
 }
 
 #pragma mark <GroupManagerDelegate>
@@ -60,12 +69,21 @@ static NSString * const reuseIdentifier = @"GroupCell";
     MissionsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     MHGroup *group = self.groupManager.groups[indexPath.row];
-    NSLog(@"%d", group.groupId);
     
     cell.missionsLabel.text = group.name;
     cell.backgroundColor = [UIColor orangeColor];
     
     return cell;
+}
+
+#pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    MHGroup *group = self.groupManager.groups[indexPath.row];
+    
+    GroupViewController *groupViewController = [[GroupViewController alloc] initWithGroup:group];
+    
+    [self.navigationController pushViewController:groupViewController animated:true];
 }
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
