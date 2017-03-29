@@ -25,8 +25,6 @@
 }
 
 - (void)loadView {
-    [super loadView];
-    
     UILabel *namelabel = [[UILabel alloc] init];
     namelabel.textAlignment = NSTextAlignmentCenter;
     UILabel *groupIdlabel = [[UILabel alloc] init];

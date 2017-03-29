@@ -26,8 +26,6 @@
 }
 
 - (void)loadView {
-    [super loadView];
-    
     self.navigationItem.title = @"Add Group";
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];

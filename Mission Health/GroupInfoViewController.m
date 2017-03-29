@@ -15,7 +15,7 @@
 @implementation GroupInfoViewController
 
 - (void)loadView {
-    [super loadView];
+    
 }
 
 @end
