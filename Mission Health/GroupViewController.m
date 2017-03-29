@@ -31,12 +31,15 @@
     namelabel.textAlignment = NSTextAlignmentCenter;
     UILabel *groupIdlabel = [[UILabel alloc] init];
     groupIdlabel.textAlignment = NSTextAlignmentCenter;
+    UILabel *groupMemberslabel = [[UILabel alloc] init];
+    groupMemberslabel.textAlignment = NSTextAlignmentCenter;
     
     self.title = self.group.name;
     namelabel.text = self.group.name;
+    groupMemberslabel.text = [NSString stringWithFormat:@"%lu Members", (unsigned long)self.group.members.count];
     groupIdlabel.text = [NSString stringWithFormat:@"Group ID: %d", self.group.groupId];
     
-    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[namelabel, groupIdlabel]];
+    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[namelabel, groupIdlabel, groupMemberslabel]];
     stackView.axis = UILayoutConstraintAxisVertical;
     
     self.view = [[UIView alloc] init];

@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 
 #import "MHGroup.h"
+#import "MHMember.h"
 
 @class GroupManager;
 
 @protocol GroupManagerDelegate <NSObject>
 
 - (void)groupManagerDidLoadGroups:(GroupManager *)groupManager;
+- (void)groupManagerDidLoadGroupInfo:(GroupManager *)groupManager;
 
 @end
 
@@ -26,5 +28,6 @@
 - (void)getGroups;
 - (void)createGroup:(NSString *)name;
 - (void)joinGroup:(int)groupId;
+- (void)getGroupInfo:(int)groupId;
 
 @end

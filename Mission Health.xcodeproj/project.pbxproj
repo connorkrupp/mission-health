@@ -11,7 +11,9 @@
 		705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */; };
 		705B94CE1E4C4435006241F1 /* MealManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94CD1E4C4435006241F1 /* MealManager.m */; };
 		706004291E66735D00FA1EFF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706004281E66735D00FA1EFF /* Realm.framework */; };
+		70643C101E78805600DD3370 /* MHMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 70643C0F1E78805600DD3370 /* MHMember.m */; };
 		70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70954C551E4A603F00832400 /* DailySummaryViewController.m */; };
+		70A030DB1E8C3F2800539BBB /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A030DA1E8C3F2800539BBB /* GroupInfoViewController.m */; };
 		70B721361E39B4D000401B9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721351E39B4D000401B9D /* main.m */; };
 		70B721391E39B4D000401B9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721381E39B4D000401B9D /* AppDelegate.m */; };
 		70B721411E39B4D000401B9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70B721401E39B4D000401B9D /* Assets.xcassets */; };
@@ -53,8 +55,12 @@
 		705B94CC1E4C4435006241F1 /* MealManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealManager.h; sourceTree = "<group>"; };
 		705B94CD1E4C4435006241F1 /* MealManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealManager.m; sourceTree = "<group>"; };
 		706004281E66735D00FA1EFF /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		70643C0E1E78805600DD3370 /* MHMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMember.h; sourceTree = "<group>"; };
+		70643C0F1E78805600DD3370 /* MHMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMember.m; sourceTree = "<group>"; };
 		70954C541E4A603F00832400 /* DailySummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailySummaryViewController.h; sourceTree = "<group>"; };
 		70954C551E4A603F00832400 /* DailySummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySummaryViewController.m; sourceTree = "<group>"; };
+		70A030D91E8C3F2800539BBB /* GroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoViewController.h; sourceTree = "<group>"; };
+		70A030DA1E8C3F2800539BBB /* GroupInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupInfoViewController.m; sourceTree = "<group>"; };
 		70B721311E39B4D000401B9D /* Mission Health.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mission Health.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B721351E39B4D000401B9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		70B721371E39B4D000401B9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -126,6 +132,8 @@
 				70E223231E6676A40079FF22 /* MHFood.m */,
 				70E2232D1E6710190079FF22 /* MHGroup.h */,
 				70E2232E1E6710190079FF22 /* MHGroup.m */,
+				70643C0E1E78805600DD3370 /* MHMember.h */,
+				70643C0F1E78805600DD3370 /* MHMember.m */,
 				705B94CC1E4C4435006241F1 /* MealManager.h */,
 				705B94CD1E4C4435006241F1 /* MealManager.m */,
 				70E223301E6710650079FF22 /* GroupManager.h */,
@@ -212,6 +220,8 @@
 				70E223341E675D3B0079FF22 /* AddGroupViewController.m */,
 				70E223361E6766B00079FF22 /* GroupViewController.h */,
 				70E223371E6766B00079FF22 /* GroupViewController.m */,
+				70A030D91E8C3F2800539BBB /* GroupInfoViewController.h */,
+				70A030DA1E8C3F2800539BBB /* GroupInfoViewController.m */,
 				70E2232A1E6708430079FF22 /* MissionsCollectionViewCell.h */,
 				70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */,
 			);
@@ -382,7 +392,9 @@
 				705B94CE1E4C4435006241F1 /* MealManager.m in Sources */,
 				70E2232C1E6708430079FF22 /* MissionsCollectionViewCell.m in Sources */,
 				70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */,
+				70A030DB1E8C3F2800539BBB /* GroupInfoViewController.m in Sources */,
 				705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */,
+				70643C101E78805600DD3370 /* MHMember.m in Sources */,
 				70E2232F1E6710190079FF22 /* MHGroup.m in Sources */,
 				70E223321E6710650079FF22 /* GroupManager.m in Sources */,
 				705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */,

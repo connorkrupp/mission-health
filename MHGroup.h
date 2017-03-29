@@ -8,10 +8,14 @@
 
 #import <Realm/Realm.h>
 
+#import "MHMember.h"
+
 @interface MHGroup : RLMObject
 
 @property int groupId;
 @property NSString *name;
+
+@property RLMArray<MHMember *><MHMember> *members;
 
 @end
 
