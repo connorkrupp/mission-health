@@ -65,6 +65,15 @@
     }];
 }
 
+- (void)joinGroup:(int)groupId {
+    NSDictionary<NSString *, id> *parameters = @{@"user_id": @1};
+    [self taskWithRoute:[NSString stringWithFormat:@"/groups/%d/join", groupId] parameters:parameters usingMethod:@"POST" completion:^(NSDictionary<NSString *,id> *json) {
+        
+        [self getGroups];
+    }];
+}
+
+
 - (NSURLRequest *)createRequestForRoute:(NSString *)route parameters:(NSDictionary<NSString *, id> *)parameters usingHTTPMethod:(NSString *)method {
     
     // Generate URL Components
@@ -134,9 +143,6 @@
     [task resume];
 }
 
-
-- (void)joinGroup:(int)groupId {
-}
 
 - (void)getGroupInfo:(int)groupId {
     NSURL *url = [self.baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%d", groupId]];

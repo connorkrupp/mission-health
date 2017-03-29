@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHGroup.h"
 
 @interface GroupInfoViewController : UIViewController
 
+- (instancetype)initWithGroup:(MHGroup *)group;
+    
 @end

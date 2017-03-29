@@ -8,6 +8,8 @@
 
 #import "GroupViewController.h"
 
+#import "GroupInfoViewController.h"
+
 @interface GroupViewController ()
 
 @property (nonatomic, strong) MHGroup *group;
@@ -25,6 +27,12 @@
 }
 
 - (void)loadView {
+    self.view = [[UIView alloc] init];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Info" style:UIBarButtonItemStylePlain target:self action:@selector(loadGroupInfo)];
+    self.navigationItem.rightBarButtonItem = infoButton;
+    
     UILabel *namelabel = [[UILabel alloc] init];
     namelabel.textAlignment = NSTextAlignmentCenter;
     UILabel *groupIdlabel = [[UILabel alloc] init];
@@ -39,9 +47,6 @@
     
     UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[namelabel, groupIdlabel, groupMemberslabel]];
     stackView.axis = UILayoutConstraintAxisVertical;
-    
-    self.view = [[UIView alloc] init];
-    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:stackView];
     
     stackView.translatesAutoresizingMaskIntoConstraints = false;
@@ -68,6 +73,12 @@
                                         constant:20.0]
           
     ]];
+}
+
+- (void)loadGroupInfo {
+    GroupInfoViewController *groupInfoViewController = [[GroupInfoViewController alloc] initWithGroup:self.group];
+    
+    [self.navigationController pushViewController:groupInfoViewController animated:true];
 }
 
 @end

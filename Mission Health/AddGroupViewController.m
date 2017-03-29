@@ -26,6 +26,12 @@
 }
 
 - (void)loadView {
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    self.view = tableView;
+    self.tableView = tableView;
+    
     self.navigationItem.title = @"Add Group";
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
