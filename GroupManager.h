@@ -16,7 +16,6 @@
 @protocol GroupManagerDelegate <NSObject>
 
 - (void)groupManagerDidLoadGroups:(GroupManager *)groupManager;
-- (void)groupManagerDidLoadGroupInfo:(GroupManager *)groupManager;
 
 @end
 
@@ -28,6 +27,5 @@
 - (void)getGroups;
 - (void)createGroup:(NSString *)name;
 - (void)joinGroup:(int)groupId;
-- (void)getGroupInfo:(int)groupId;
 
 @end

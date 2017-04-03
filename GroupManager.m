@@ -7,10 +7,14 @@
 //
 
 #import "GroupManager.h"
+#import "APIManager.h"
 
 @interface GroupManager ()
 
 @property (strong, nonatomic) NSURL *baseURL;
+
+@property (strong, nonatomic) NSString *apiConsumerKey;
+@property (strong, nonatomic) NSString *apiConsumerSecret;
 
 @end
 
@@ -20,15 +24,51 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        
+#if TARGET_IPHONE_SIMULATOR
         self.baseURL = [[NSURL alloc] initWithString:@"http://localhost:3000/api"];
-        //self.baseURL = [[NSURL alloc] initWithString:@"http://mission-health.herokuapp.com/api/groups"];
+#else
+        self.baseURL = [[NSURL alloc] initWithString:@"http://mission-health.herokuapp.com/api"];
+#endif
+        
+        NSString *configurationPath = [[NSBundle mainBundle] pathForResource:@"configuration" ofType:@"plist"];
+        NSDictionary *configuration = [NSDictionary dictionaryWithContentsOfFile:configurationPath];
+        self.apiConsumerKey = configuration[@"fatsecret-consumer-key"];
+        self.apiConsumerSecret = configuration[@"fatsecret-consumer-secret"];
+        
+        [self searchFoodsWithExpression:@"Taco"];
     }
     
     return self;
 }
 
+- (void)searchFoodsWithExpression:(NSString *)expression {
+    NSString *route = @"/rest/server.api";
+    NSURL *baseURL = [NSURL URLWithString:@"http://platform.fatsecret.com"];
+    NSString *method = @"GET";
+
+    NSDictionary<NSString *, id> *parameters = @{
+            @"method": @"foods.search",
+            @"format": @"json",
+            @"search_expression": expression
+    };
+    
+    [APIManager secureTaskWithRoute:route
+                          atBaseURL:baseURL
+                        usingMethod:method
+                     withParameters:parameters
+                    withConsumerKey:self.apiConsumerKey
+                 withConsumerSecret:self.apiConsumerSecret
+                   withAccessSecret:@""
+                         completion:^(NSDictionary<NSString *,id> *json) {
+                             NSLog(@"JSON: %@", json);
+                         }];
+
+
+}
+
 - (void)getGroups {
-    [self taskWithRoute:@"/users/1/groups" parameters:nil usingMethod:@"GET" completion:^(NSDictionary<NSString *,id> *json) {
+    [APIManager taskWithRoute:@"/users/1/groups" atBaseURL:self.baseURL parameters:nil usingMethod:@"GET" completion:^(NSDictionary<NSString *,id> *json) {
         
         NSMutableArray *groups = [[NSMutableArray alloc] init];
         for (NSDictionary *data in json[@"data"]) {
@@ -59,7 +99,7 @@
 
 - (void)createGroup:(NSString *)name {
     NSDictionary<NSString *, id> *parameters = @{@"name": name, @"user_id": @1};
-    [self taskWithRoute:@"/groups" parameters:parameters usingMethod:@"POST" completion:^(NSDictionary<NSString *,id> *json) {
+    [APIManager taskWithRoute:@"/groups" atBaseURL:self.baseURL parameters:parameters usingMethod:@"POST" completion:^(NSDictionary<NSString *,id> *json) {
         
         [self getGroups];
     }];
@@ -67,110 +107,10 @@
 
 - (void)joinGroup:(int)groupId {
     NSDictionary<NSString *, id> *parameters = @{@"user_id": @1};
-    [self taskWithRoute:[NSString stringWithFormat:@"/groups/%d/join", groupId] parameters:parameters usingMethod:@"POST" completion:^(NSDictionary<NSString *,id> *json) {
+    [APIManager taskWithRoute:[NSString stringWithFormat:@"/groups/%d/join", groupId] atBaseURL:self.baseURL parameters:parameters usingMethod:@"POST" completion:^(NSDictionary<NSString *,id> *json) {
         
         [self getGroups];
     }];
-}
-
-
-- (NSURLRequest *)createRequestForRoute:(NSString *)route parameters:(NSDictionary<NSString *, id> *)parameters usingHTTPMethod:(NSString *)method {
-    
-    // Generate URL Components
-    NSURLComponents *urlComponenets = [[NSURLComponents alloc] initWithURL:[self.baseURL URLByAppendingPathComponent:route] resolvingAgainstBaseURL:false];
-    
-    // Generate Query String
-    NSMutableString *formData = [NSMutableString new];
-    for (NSString *key in parameters) {
-        [formData appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
-    }
-    if ([formData length] > 0) {
-        [formData deleteCharactersInRange:NSMakeRange([formData length] - 1, 1)];
-    }
-    
-    if ([method isEqualToString:@"GET"]) {
-        urlComponenets.query = formData;
-    }
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlComponenets.URL];
-    request.HTTPMethod = method;
-    
-    if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"PATCH"]) {
-        request.HTTPBody = [formData dataUsingEncoding:NSUTF8StringEncoding];
-        [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    }
-    
-    return request;
-}
-
-- (void)taskWithRoute:(NSString *)route parameters:(NSDictionary<NSString *, id> *)parameters usingMethod:(NSString *)method completion:(void (^)(NSDictionary<NSString *, id> *))completionBlock {
-    
-    if (![method isEqualToString:@"GET"] &&
-        ![method isEqualToString:@"POST"] &&
-        ![method isEqualToString:@"PUT"] &&
-        ![method isEqualToString:@"PATCH"]) {
-        
-        NSLog(@"MUST IMPLEMENT METHOD");
-        return;
-    }
-    
-    NSURLRequest *request = [self createRequestForRoute:route parameters:parameters usingHTTPMethod:method];
-    
-    // TODO Show network indicator
-    
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-        
-        if (statusCode == 403 || statusCode == 401) {
-            NSLog(@"Permission Denied");
-            return;
-        }
-        
-        if (error) {
-            NSLog(@"%@", error.localizedDescription);
-            return;
-        }
-        
-        // TODO add handling for errors
-        
-        NSDictionary<NSString *, id> *json = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableLeaves error: nil];
-        
-        if (completionBlock) {
-            completionBlock(json);
-        }
-    }];
-    [task resume];
-}
-
-
-- (void)getGroupInfo:(int)groupId {
-    NSURL *url = [self.baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%d", groupId]];
-    
-    NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
-                                                                     options:kNilOptions
-                                                                       error:&error];
-      
-        NSMutableArray<MHMember> *groupMembers = [[NSMutableArray<MHMember> alloc] init];
-        NSDictionary *dict = jsonResponse[@"data"];
-        for (NSDictionary *memberDict in dict[@"members"]) {
-            MHMember *member = [[MHMember alloc] init];
-            member.memberId = [(NSNumber *)memberDict[@"id"] intValue];
-            member.name = memberDict[@"name"];
-            
-            [groupMembers addObject:member];
-        }
-              
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //MHGroup *group = [self.groups objec];
-            [self.delegate groupManagerDidLoadGroups:self];
-        });
-  }];
-    
-    [downloadTask resume];
 }
 
 @end

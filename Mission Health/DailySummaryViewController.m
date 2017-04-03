@@ -22,6 +22,8 @@
 - (instancetype)initWithMealManager:(MealManager *)mealManager {
     if (self = [super init]) {
         self.mealManager = mealManager;
+        
+        
     }
     
     return self;

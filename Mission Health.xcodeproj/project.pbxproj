@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		700E64C11E92E275009E914F /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 700E64C01E92E275009E914F /* APIManager.m */; };
 		705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94C71E4C396E006241F1 /* AddFoodViewController.m */; };
 		705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */; };
 		705B94CE1E4C4435006241F1 /* MealManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94CD1E4C4435006241F1 /* MealManager.m */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		700E64BF1E92E275009E914F /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		700E64C01E92E275009E914F /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		705B94C61E4C396E006241F1 /* AddFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodViewController.h; sourceTree = "<group>"; };
 		705B94C71E4C396E006241F1 /* AddFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFoodViewController.m; sourceTree = "<group>"; };
 		705B94C91E4C3C1A006241F1 /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				705B94CD1E4C4435006241F1 /* MealManager.m */,
 				70E223301E6710650079FF22 /* GroupManager.h */,
 				70E223311E6710650079FF22 /* GroupManager.m */,
+				700E64BF1E92E275009E914F /* APIManager.h */,
+				700E64C01E92E275009E914F /* APIManager.m */,
 				70B721331E39B4D000401B9D /* Mission Health */,
 				70B7214D1E39B4D000401B9D /* Mission HealthTests */,
 				70B721581E39B4D000401B9D /* Mission HealthUITests */,
@@ -395,6 +400,7 @@
 				70A030DB1E8C3F2800539BBB /* GroupInfoViewController.m in Sources */,
 				705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */,
 				70643C101E78805600DD3370 /* MHMember.m in Sources */,
+				700E64C11E92E275009E914F /* APIManager.m in Sources */,
 				70E2232F1E6710190079FF22 /* MHGroup.m in Sources */,
 				70E223321E6710650079FF22 /* GroupManager.m in Sources */,
 				705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */,
