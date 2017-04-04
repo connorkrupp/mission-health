@@ -8,6 +8,8 @@
 
 #import "DailySummaryViewController.h"
 #import "AddFoodViewController.h"
+#import "FoodSearchViewController.h"
+#import "FoodTableViewCell.h"
 
 @interface DailySummaryViewController ()
 
@@ -22,16 +24,21 @@
 - (instancetype)initWithMealManager:(MealManager *)mealManager {
     if (self = [super init]) {
         self.mealManager = mealManager;
-        
-        
     }
     
     return self;
 }
 
 - (void)addItem {
+    /*
     AddFoodViewController *addFoodViewController = [[AddFoodViewController alloc] initWithMealManager:self.mealManager];
     UINavigationController *addFoodNavigationController = [[UINavigationController alloc] initWithRootViewController:addFoodViewController];
+    
+    [self presentViewController:addFoodNavigationController animated:true completion:nil];
+     */
+    FoodSearchViewController *foodSearchViewController = [[FoodSearchViewController alloc] initWithMealManager:self.mealManager];
+    
+    UINavigationController *addFoodNavigationController = [[UINavigationController alloc] initWithRootViewController:foodSearchViewController];
     
     [self presentViewController:addFoodNavigationController animated:true completion:nil];
 }
@@ -51,15 +58,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    }
+    FoodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     MHFood *food = self.mealManager.meals[indexPath.section][indexPath.row];
     
-    cell.textLabel.text = food.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f", food.calories];
+    cell.titleLabel.text = food.name;
+    cell.subtitleLabel.text = food.brand != nil ? food.brand : @"Generic";
+    cell.detailLabel.text = [NSString stringWithFormat:@"%.f", food.calories];
     
     return cell;
 }
@@ -77,6 +82,9 @@
     
     UITableView *tableView = [[UITableView alloc] init];
     self.tableView = tableView;
+    [self.tableView registerClass:[FoodTableViewCell class] forCellReuseIdentifier:@"cell"];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 80.0;
     tableView.dataSource = self;
     tableView.delegate = self;
     

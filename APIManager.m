@@ -177,8 +177,11 @@
     CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
 
     NSData *HMACData = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    
+    NSString *base64Encoded = [HMACData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    //NSString *percentEncoded = [self percentEncodeRFC3986:base64Encoded];
 
-    return [HMACData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return base64Encoded;
 }
 
 + (NSString *)percentEncodeRFC3986:(NSString *)str {

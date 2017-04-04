@@ -13,9 +13,6 @@
 
 @property (strong, nonatomic) NSURL *baseURL;
 
-@property (strong, nonatomic) NSString *apiConsumerKey;
-@property (strong, nonatomic) NSString *apiConsumerSecret;
-
 @end
 
 
@@ -30,41 +27,9 @@
 #else
         self.baseURL = [[NSURL alloc] initWithString:@"http://mission-health.herokuapp.com/api"];
 #endif
-        
-        NSString *configurationPath = [[NSBundle mainBundle] pathForResource:@"configuration" ofType:@"plist"];
-        NSDictionary *configuration = [NSDictionary dictionaryWithContentsOfFile:configurationPath];
-        self.apiConsumerKey = configuration[@"fatsecret-consumer-key"];
-        self.apiConsumerSecret = configuration[@"fatsecret-consumer-secret"];
-        
-        [self searchFoodsWithExpression:@"Taco"];
     }
     
     return self;
-}
-
-- (void)searchFoodsWithExpression:(NSString *)expression {
-    NSString *route = @"/rest/server.api";
-    NSURL *baseURL = [NSURL URLWithString:@"http://platform.fatsecret.com"];
-    NSString *method = @"GET";
-
-    NSDictionary<NSString *, id> *parameters = @{
-            @"method": @"foods.search",
-            @"format": @"json",
-            @"search_expression": expression
-    };
-    
-    [APIManager secureTaskWithRoute:route
-                          atBaseURL:baseURL
-                        usingMethod:method
-                     withParameters:parameters
-                    withConsumerKey:self.apiConsumerKey
-                 withConsumerSecret:self.apiConsumerSecret
-                   withAccessSecret:@""
-                         completion:^(NSDictionary<NSString *,id> *json) {
-                             NSLog(@"JSON: %@", json);
-                         }];
-
-
 }
 
 - (void)getGroups {

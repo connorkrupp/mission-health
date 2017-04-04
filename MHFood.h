@@ -11,8 +11,17 @@
 @interface MHFood : RLMObject
 
 @property NSString *name;
-@property int meal;
+@property NSString *brand;
+@property NSString *serving;
+
 @property double calories;
+@property double fat;
+@property double carbs;
+@property double protein;
+
+@property int foodId;
+
+@property int meal;
 @property NSDate *date;
 
 @end

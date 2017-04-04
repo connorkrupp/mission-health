@@ -11,6 +11,8 @@
 #import "DailySummaryViewController.h"
 #import "MealManager.h"
 
+#import "FoodSearchViewController.h"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) MealManager *mealManager;
@@ -24,8 +26,9 @@
     
     MealManager *mealManager = [[MealManager alloc] init];
     
+    //FoodSearchViewController *foodSearchViewController = [[FoodSearchViewController alloc] initWithMealManager:mealManager];
     
-    UIViewController *groupViewController = [[MissionsCollectionViewController alloc] init];
+    MissionsCollectionViewController *groupViewController = [[MissionsCollectionViewController alloc] init];
     UINavigationController *groupNavigationController = [[UINavigationController alloc] initWithRootViewController:groupViewController];
     groupNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Missions" image:nil tag:1];
     
