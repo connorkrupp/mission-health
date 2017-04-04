@@ -58,8 +58,8 @@
     
     /// Generate URL Components
     NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:requestURL resolvingAgainstBaseURL:false];
-    urlComponents.query = parameterString;
-
+    urlComponents.percentEncodedQuery = parameterString;
+    
     /// Generate Request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlComponents.URL];
     request.HTTPMethod = method;
@@ -179,9 +179,9 @@
     NSData *HMACData = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
     
     NSString *base64Encoded = [HMACData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    //NSString *percentEncoded = [self percentEncodeRFC3986:base64Encoded];
 
-    return base64Encoded;
+    NSCharacterSet *allowed = [NSCharacterSet characterSetWithCharactersInString:@" =\"#%/<>?@\\^`{}[]|&+"].invertedSet;
+    return [base64Encoded stringByAddingPercentEncodingWithAllowedCharacters:allowed];
 }
 
 + (NSString *)percentEncodeRFC3986:(NSString *)str {
