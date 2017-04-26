@@ -120,7 +120,7 @@
 		70B721381E39B4D000401B9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		70B721401E39B4D000401B9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70B721431E39B4D000401B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		70B721451E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
+		70B721451E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70B7214A1E39B4D000401B9D /* Mission HealthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mission HealthTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B7214E1E39B4D000401B9D /* Mission_HealthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mission_HealthTests.m; sourceTree = "<group>"; };
 		70B721501E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -216,6 +216,7 @@
 				7002C5881EB045E80086210A /* TextField */,
 				7002C56D1EB02FFB0086210A /* Weight */,
 			);
+			name = "Table View Cells";
 			path = "Table View Cells";
 			sourceTree = "<group>";
 		};
@@ -223,12 +224,13 @@
 			isa = PBXGroup;
 			children = (
 				7002C5861EB045CB0086210A /* NutritionInfo */,
+				7002C55F1EAFA7470086210A /* Table View Cells */,
 				7002C5871EB045D30086210A /* WeightInfo */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7002C5611EAFA7C30086210A /* Managers */ = {
+		7002C5611EAFA7C30086210A /* Stores */ = {
 			isa = PBXGroup;
 			children = (
 				7002C5831EB045970086210A /* Meals */,
@@ -236,7 +238,8 @@
 				7002C5841EB0459D0086210A /* Networking */,
 				7002C5811EB045860086210A /* WeightHistory */,
 			);
-			path = Managers;
+			name = Stores;
+			path = Stores;
 			sourceTree = "<group>";
 		};
 		7002C5671EB02FE60086210A /* Progress Tab */ = {
@@ -362,6 +365,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7098D1E91EB04826000BF478 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				70E223251E6680DD0079FF22 /* Daily Summary Tab */,
+				70E223261E67077E0079FF22 /* Missions Tab */,
+				7002C5671EB02FE60086210A /* Progress Tab */,
+			);
+			name = Controllers;
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		70B721281E39B4D000401B9D = {
 			isa = PBXGroup;
 			children = (
@@ -387,13 +401,10 @@
 			isa = PBXGroup;
 			children = (
 				7002C5851EB045A40086210A /* Categories */,
-				70E223251E6680DD0079FF22 /* Daily Summary Tab */,
-				7002C5611EAFA7C30086210A /* Managers */,
-				70E223261E67077E0079FF22 /* Missions Tab */,
+				7098D1E91EB04826000BF478 /* Controllers */,
 				7002C55C1EAFA6FA0086210A /* Models */,
-				7002C5671EB02FE60086210A /* Progress Tab */,
+				7002C5611EAFA7C30086210A /* Stores */,
 				70B721341E39B4D000401B9D /* Supporting Files */,
-				7002C55F1EAFA7470086210A /* Table View Cells */,
 				7002C5601EAFA7700086210A /* Views */,
 				70B721371E39B4D000401B9D /* AppDelegate.h */,
 				70B721381E39B4D000401B9D /* AppDelegate.m */,
