@@ -21,7 +21,6 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        
 #if TARGET_IPHONE_SIMULATOR
         self.baseURL = [[NSURL alloc] initWithString:@"http://localhost:3000/api"];
 #else

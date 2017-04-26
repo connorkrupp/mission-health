@@ -30,15 +30,37 @@
     
     MissionsCollectionViewController *groupViewController = [[MissionsCollectionViewController alloc] init];
     UINavigationController *groupNavigationController = [[UINavigationController alloc] initWithRootViewController:groupViewController];
-    groupNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Missions" image:nil tag:1];
+    groupNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Missions" image:[UIImage imageNamed:@"cup"] tag:1];
     
     DailySummaryViewController *dailySummaryViewController = [[DailySummaryViewController alloc] initWithMealManager:mealManager];
     UINavigationController *dailySummaryNavigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
-    dailySummaryNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Summary" image:nil tag:1];
+    dailySummaryNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Summary" image:[UIImage imageNamed:@"log"] tag:2];
+    
+    UIViewController *progressViewController = [[UIViewController alloc] init];
+    UINavigationController *progressNavigationController = [[UINavigationController alloc] initWithRootViewController:progressViewController];
+    progressNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Progress" image:[UIImage imageNamed:@"progress"] tag:3];
+    
+    UIViewController *profileViewController = [[UIViewController alloc] init];
+    UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    profileNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Me" image:[UIImage imageNamed:@"profile"] tag:4];
     
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[groupNavigationController, dailySummaryNavigationController];
+    tabBarController.viewControllers = @[groupNavigationController, dailySummaryNavigationController, progressNavigationController, profileNavigationController];
+    
+    //og blue UIColor *primary = [UIColor colorWithRed:46.0/255.0 green:196.0/255.0 blue:182.0/255.0 alpha:1.0];
+    //green UIColor *primary = [UIColor colorWithRed:36.0/255.0 green:219.0/255.0 blue:165.0/255.0 alpha:1.0];
+    UIColor *primary = [UIColor colorWithRed:123.0/255.0 green:216.0/255.0 blue:237.0/255.0 alpha:1.0];
+
+    [UINavigationBar appearance].barTintColor = primary;
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [UINavigationBar appearance].translucent = false;
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"HKGrotesk-SemiBold" size:19.0]
+                                                           }];
+    
+    [UITabBar appearance].tintColor = primary;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabBarController;

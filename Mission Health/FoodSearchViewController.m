@@ -10,7 +10,7 @@
 #import "FoodTableViewCell.h"
 #import "MHFood.h"
 
-@interface FoodSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MealManagerDelegate>
+@interface FoodSearchViewController () <UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MealManagerDelegate>
 
 @property (strong, nonatomic) MealManager *mealManager;
 @property (strong, nonatomic) UITableView *resultsTableView;
@@ -31,11 +31,13 @@
 - (void)loadView {
     self.view = [UIView new];
     self.view.backgroundColor = [UIColor whiteColor];
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
-    searchBar.placeholder = @"Foodz";
-    
+    searchBar.placeholder = @"Food Search";
+
     self.resultsTableView = [[UITableView alloc] init];
     self.resultsTableView.dataSource = self;
     self.resultsTableView.delegate = self;
@@ -79,6 +81,11 @@
                                         constant:0.0]
               
     ]];
+}
+
+- (void)cancel {
+    [self.mealManager didCancelSearch];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 #pragma mark - MealManagerDelegate

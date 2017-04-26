@@ -22,15 +22,14 @@
         self.titleLabel = [[UILabel alloc] init];
         self.subtitleLabel = [[UILabel alloc] init];
         self.detailLabel = [[UILabel alloc] init];
-        
-        self.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        self.titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:16.0];
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.adjustsFontSizeToFitWidth = true;
         
-        self.subtitleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        self.subtitleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:15.0];
         self.subtitleLabel.textColor = [UIColor grayColor];
         
-        self.detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        self.detailLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:16.0];
         self.detailLabel.textAlignment = NSTextAlignmentRight;
         
         UIStackView *primaryContentStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.titleLabel, self.subtitleLabel]];

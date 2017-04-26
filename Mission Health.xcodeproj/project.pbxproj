@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7002C5581EAFA0BE0086210A /* HKGrotesk-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7002C5541EAFA0BE0086210A /* HKGrotesk-Light.otf */; };
+		7002C5591EAFA0BE0086210A /* HKGrotesk-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7002C5551EAFA0BE0086210A /* HKGrotesk-Medium.otf */; };
+		7002C55A1EAFA0BE0086210A /* HKGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7002C5561EAFA0BE0086210A /* HKGrotesk-Regular.otf */; };
+		7002C55B1EAFA0BE0086210A /* HKGrotesk-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7002C5571EAFA0BE0086210A /* HKGrotesk-SemiBold.otf */; };
 		700E64C11E92E275009E914F /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 700E64C01E92E275009E914F /* APIManager.m */; };
 		700E64C71E92FD20009E914F /* configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 700E64C61E92FD20009E914F /* configuration.plist */; };
 		700E64CA1E932A6E009E914F /* FoodSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 700E64C91E932A6E009E914F /* FoodSearchViewController.m */; };
@@ -16,6 +20,9 @@
 		705B94CE1E4C4435006241F1 /* MealManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B94CD1E4C4435006241F1 /* MealManager.m */; };
 		706004291E66735D00FA1EFF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706004281E66735D00FA1EFF /* Realm.framework */; };
 		70643C101E78805600DD3370 /* MHMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 70643C0F1E78805600DD3370 /* MHMember.m */; };
+		709470421EAD192E00C2C876 /* NutritionInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 709470411EAD192E00C2C876 /* NutritionInfo.xib */; };
+		709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */; };
+		7094704B1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7094704A1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib */; };
 		70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70954C551E4A603F00832400 /* DailySummaryViewController.m */; };
 		70A030DB1E8C3F2800539BBB /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A030DA1E8C3F2800539BBB /* GroupInfoViewController.m */; };
 		70B721361E39B4D000401B9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721351E39B4D000401B9D /* main.m */; };
@@ -31,6 +38,7 @@
 		70E223321E6710650079FF22 /* GroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223311E6710650079FF22 /* GroupManager.m */; };
 		70E223351E675D3C0079FF22 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223341E675D3B0079FF22 /* AddGroupViewController.m */; };
 		70E223381E6766B00079FF22 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223371E6766B00079FF22 /* GroupViewController.m */; };
+		90E7B6F9E137A5920A036412 /* NutritionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E7B9056890092DC83530F7 /* NutritionInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7002C5541EAFA0BE0086210A /* HKGrotesk-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Light.otf"; sourceTree = "<group>"; };
+		7002C5551EAFA0BE0086210A /* HKGrotesk-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Medium.otf"; sourceTree = "<group>"; };
+		7002C5561EAFA0BE0086210A /* HKGrotesk-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Regular.otf"; sourceTree = "<group>"; };
+		7002C5571EAFA0BE0086210A /* HKGrotesk-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-SemiBold.otf"; sourceTree = "<group>"; };
 		700E64BF1E92E275009E914F /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		700E64C01E92E275009E914F /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		700E64C61E92FD20009E914F /* configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configuration.plist; sourceTree = "<group>"; };
@@ -67,6 +79,10 @@
 		706004281E66735D00FA1EFF /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		70643C0E1E78805600DD3370 /* MHMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMember.h; sourceTree = "<group>"; };
 		70643C0F1E78805600DD3370 /* MHMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMember.m; sourceTree = "<group>"; };
+		709470411EAD192E00C2C876 /* NutritionInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NutritionInfo.xib; path = ../NutritionInfo.xib; sourceTree = "<group>"; };
+		709470471EAD380B00C2C876 /* DailySummaryTableSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailySummaryTableSectionHeader.h; sourceTree = "<group>"; };
+		709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySummaryTableSectionHeader.m; sourceTree = "<group>"; };
+		7094704A1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailySummaryTableSectionHeader.xib; sourceTree = "<group>"; };
 		70954C541E4A603F00832400 /* DailySummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailySummaryViewController.h; sourceTree = "<group>"; };
 		70954C551E4A603F00832400 /* DailySummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySummaryViewController.m; sourceTree = "<group>"; };
 		70A030D91E8C3F2800539BBB /* GroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoViewController.h; sourceTree = "<group>"; };
@@ -77,7 +93,7 @@
 		70B721381E39B4D000401B9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		70B721401E39B4D000401B9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70B721431E39B4D000401B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		70B721451E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70B721451E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Mission Health/Info.plist"; sourceTree = "<group>"; };
 		70B7214A1E39B4D000401B9D /* Mission HealthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mission HealthTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B7214E1E39B4D000401B9D /* Mission_HealthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mission_HealthTests.m; sourceTree = "<group>"; };
 		70B721501E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +114,8 @@
 		70E223341E675D3B0079FF22 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
 		70E223361E6766B00079FF22 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
 		70E223371E6766B00079FF22 /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupViewController.m; sourceTree = "<group>"; };
+		90E7B4A9E15834511AF699A9 /* NutritionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NutritionInfo.h; path = ../NutritionInfo.h; sourceTree = "<group>"; };
+		90E7B9056890092DC83530F7 /* NutritionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NutritionInfo.m; path = ../NutritionInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +144,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7002C55C1EAFA6FA0086210A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				70E223221E6676A40079FF22 /* MHFood.h */,
+				70E223231E6676A40079FF22 /* MHFood.m */,
+				70E2232D1E6710190079FF22 /* MHGroup.h */,
+				70E2232E1E6710190079FF22 /* MHGroup.m */,
+				70643C0E1E78805600DD3370 /* MHMember.h */,
+				70643C0F1E78805600DD3370 /* MHMember.m */,
+			);
+			name = Models;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		7002C55D1EAFA7140086210A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				70B721451E39B4D000401B9D /* Info.plist */,
+				7002C5541EAFA0BE0086210A /* HKGrotesk-Light.otf */,
+				7002C5551EAFA0BE0086210A /* HKGrotesk-Medium.otf */,
+				7002C5561EAFA0BE0086210A /* HKGrotesk-Regular.otf */,
+				7002C5571EAFA0BE0086210A /* HKGrotesk-SemiBold.otf */,
+			);
+			name = Fonts;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		7002C55E1EAFA71B0086210A /* DailySummaryTableSectionHeader */ = {
+			isa = PBXGroup;
+			children = (
+				709470471EAD380B00C2C876 /* DailySummaryTableSectionHeader.h */,
+				709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */,
+				7094704A1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib */,
+			);
+			name = DailySummaryTableSectionHeader;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		7002C55F1EAFA7470086210A /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				705B94C91E4C3C1A006241F1 /* TextFieldTableViewCell.h */,
+				705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */,
+				700E64CB1E933E3B009E914F /* FoodTableViewCell.h */,
+				700E64CC1E933E3B009E914F /* FoodTableViewCell.m */,
+				70E2232A1E6708430079FF22 /* MissionsCollectionViewCell.h */,
+				70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */,
+				7002C55E1EAFA71B0086210A /* DailySummaryTableSectionHeader */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		7002C5601EAFA7700086210A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				90E7B4A9E15834511AF699A9 /* NutritionInfo.h */,
+				90E7B9056890092DC83530F7 /* NutritionInfo.m */,
+				709470411EAD192E00C2C876 /* NutritionInfo.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7002C5611EAFA7C30086210A /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				705B94CC1E4C4435006241F1 /* MealManager.h */,
+				705B94CD1E4C4435006241F1 /* MealManager.m */,
+				70E223301E6710650079FF22 /* GroupManager.h */,
+				70E223311E6710650079FF22 /* GroupManager.m */,
+				700E64BF1E92E275009E914F /* APIManager.h */,
+				700E64C01E92E275009E914F /* APIManager.m */,
+			);
+			name = Managers;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		706004271E66735C00FA1EFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,18 +231,6 @@
 		70B721281E39B4D000401B9D = {
 			isa = PBXGroup;
 			children = (
-				70E223221E6676A40079FF22 /* MHFood.h */,
-				70E223231E6676A40079FF22 /* MHFood.m */,
-				70E2232D1E6710190079FF22 /* MHGroup.h */,
-				70E2232E1E6710190079FF22 /* MHGroup.m */,
-				70643C0E1E78805600DD3370 /* MHMember.h */,
-				70643C0F1E78805600DD3370 /* MHMember.m */,
-				705B94CC1E4C4435006241F1 /* MealManager.h */,
-				705B94CD1E4C4435006241F1 /* MealManager.m */,
-				70E223301E6710650079FF22 /* GroupManager.h */,
-				70E223311E6710650079FF22 /* GroupManager.m */,
-				700E64BF1E92E275009E914F /* APIManager.h */,
-				700E64C01E92E275009E914F /* APIManager.m */,
 				70B721331E39B4D000401B9D /* Mission Health */,
 				70B7214D1E39B4D000401B9D /* Mission HealthTests */,
 				70B721581E39B4D000401B9D /* Mission HealthUITests */,
@@ -172,14 +254,14 @@
 			children = (
 				70B721371E39B4D000401B9D /* AppDelegate.h */,
 				70B721381E39B4D000401B9D /* AppDelegate.m */,
+				7002C5611EAFA7C30086210A /* Managers */,
+				7002C55C1EAFA6FA0086210A /* Models */,
 				70E223261E67077E0079FF22 /* Missions Tab */,
 				70E223251E6680DD0079FF22 /* Daily Summary Tab */,
-				705B94C91E4C3C1A006241F1 /* TextFieldTableViewCell.h */,
-				705B94CA1E4C3C1A006241F1 /* TextFieldTableViewCell.m */,
+				7002C55F1EAFA7470086210A /* Table View Cells */,
+				7002C5601EAFA7700086210A /* Views */,
 				70B721401E39B4D000401B9D /* Assets.xcassets */,
 				70B721421E39B4D000401B9D /* LaunchScreen.storyboard */,
-				70B721451E39B4D000401B9D /* Info.plist */,
-				700E64C61E92FD20009E914F /* configuration.plist */,
 				70B721341E39B4D000401B9D /* Supporting Files */,
 			);
 			path = "Mission Health";
@@ -188,6 +270,8 @@
 		70B721341E39B4D000401B9D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7002C55D1EAFA7140086210A /* Fonts */,
+				700E64C61E92FD20009E914F /* configuration.plist */,
 				70B721351E39B4D000401B9D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -220,8 +304,6 @@
 				705B94C71E4C396E006241F1 /* AddFoodViewController.m */,
 				700E64C81E932A6E009E914F /* FoodSearchViewController.h */,
 				700E64C91E932A6E009E914F /* FoodSearchViewController.m */,
-				700E64CB1E933E3B009E914F /* FoodTableViewCell.h */,
-				700E64CC1E933E3B009E914F /* FoodTableViewCell.m */,
 			);
 			name = "Daily Summary Tab";
 			sourceTree = "<group>";
@@ -237,8 +319,6 @@
 				70E223371E6766B00079FF22 /* GroupViewController.m */,
 				70A030D91E8C3F2800539BBB /* GroupInfoViewController.h */,
 				70A030DA1E8C3F2800539BBB /* GroupInfoViewController.m */,
-				70E2232A1E6708430079FF22 /* MissionsCollectionViewCell.h */,
-				70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */,
 			);
 			name = "Missions Tab";
 			sourceTree = "<group>";
@@ -311,7 +391,7 @@
 				TargetAttributes = {
 					70B721301E39B4D000401B9D = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 49Z72NQ45H;
+						DevelopmentTeam = UHGXZH2S96;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -354,8 +434,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7002C55B1EAFA0BE0086210A /* HKGrotesk-SemiBold.otf in Resources */,
 				70B721441E39B4D000401B9D /* LaunchScreen.storyboard in Resources */,
+				7002C5581EAFA0BE0086210A /* HKGrotesk-Light.otf in Resources */,
 				700E64C71E92FD20009E914F /* configuration.plist in Resources */,
+				7094704B1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib in Resources */,
+				709470421EAD192E00C2C876 /* NutritionInfo.xib in Resources */,
+				7002C55A1EAFA0BE0086210A /* HKGrotesk-Regular.otf in Resources */,
+				7002C5591EAFA0BE0086210A /* HKGrotesk-Medium.otf in Resources */,
 				70B721411E39B4D000401B9D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +484,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */,
 				70E223381E6766B00079FF22 /* GroupViewController.m in Sources */,
 				70E223241E6676A40079FF22 /* MHFood.m in Sources */,
 				70E223291E6707D30079FF22 /* MissionsCollectionViewController.m in Sources */,
@@ -416,6 +503,7 @@
 				70E2232F1E6710190079FF22 /* MHGroup.m in Sources */,
 				70E223321E6710650079FF22 /* GroupManager.m in Sources */,
 				705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */,
+				90E7B6F9E137A5920A036412 /* NutritionInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,7 +645,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 49Z72NQ45H;
+				DEVELOPMENT_TEAM = UHGXZH2S96;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -576,7 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 49Z72NQ45H;
+				DEVELOPMENT_TEAM = UHGXZH2S96;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

@@ -71,7 +71,14 @@ static NSString * const reuseIdentifier = @"GroupCell";
     MHGroup *group = self.groupManager.groups[indexPath.row];
     
     cell.missionsLabel.text = group.name;
-    cell.backgroundColor = [UIColor orangeColor];
+    cell.missionsLabel.textColor = [UIColor whiteColor];
+    NSArray<UIColor *> *colors = @[
+                                   [UIColor colorWithRed:188.0/255.0 green:227.0/255.0 blue:166.0/255.0 alpha:1.0],
+                                   [UIColor colorWithRed:242.0/255.0 green:187.0/255.0 blue:155.0/255.0 alpha:1.0],
+                                   [UIColor colorWithRed:123.0/255.0 green:216.0/255.0 blue:237.0/255.0 alpha:1.0]
+                                  ];
+    
+    cell.backgroundColor = colors[indexPath.row % colors.count];
     
     return cell;
 }

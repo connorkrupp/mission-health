@@ -31,5 +31,6 @@
                       inMeal:(int)meal;
 
 - (void)searchFoodsWithExpression:(NSString *)expression;
+- (void)didCancelSearch;
 
 @end

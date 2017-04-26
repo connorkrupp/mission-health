@@ -111,11 +111,11 @@
                                      NSString *fatInfo = [nutritionInfo[1] componentsSeparatedByString:@": "][1];
                                      NSString *carbsInfo = [nutritionInfo[2] componentsSeparatedByString:@": "][1];
                                      NSString *proteinInfo = [nutritionInfo[3] componentsSeparatedByString:@": "][1];
-                                     
-                                     food.calories = [(NSNumber *)[caloriesInfo substringToIndex:caloriesInfo.length - 4] doubleValue];
-                                     food.fat = [(NSNumber *)[fatInfo substringToIndex:fatInfo.length - 1] doubleValue];
-                                     food.carbs = [(NSNumber *)[carbsInfo substringToIndex:carbsInfo.length - 1] doubleValue];
-                                     food.protein = [(NSNumber *)[proteinInfo substringToIndex:proteinInfo.length - 1] doubleValue];
+
+                                     food.calories = [[caloriesInfo substringToIndex:caloriesInfo.length - 4] doubleValue];
+                                     food.fat = [[fatInfo substringToIndex:fatInfo.length - 1] doubleValue];
+                                     food.carbs = [[carbsInfo substringToIndex:carbsInfo.length - 1] doubleValue];
+                                     food.protein = [[proteinInfo substringToIndex:proteinInfo.length - 1] doubleValue];
                                      food.serving = [[desc componentsSeparatedByString:@" - "][0] componentsSeparatedByString:@" "][1];
                                      
                                      food.name = foodData[@"food_name"];
@@ -139,6 +139,10 @@
                          }];
 
 
+}
+
+- (void)didCancelSearch {
+    self.searchResults = [[NSArray<MHFood *> alloc] init];
 }
 
 @end

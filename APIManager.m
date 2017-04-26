@@ -127,7 +127,7 @@
     NSMutableString *parameterString = [NSMutableString new];
     NSArray *sortedParameters = [[parameters allKeys] sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
     for (NSString *key in sortedParameters) {
-        [parameterString appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
+        [parameterString appendString:[NSString stringWithFormat:@"%@=%@&", [self percentEncodeRFC3986:key], [self percentEncodeRFC3986:parameters[key]]]];
     }
     if ([parameterString length] > 0) {
         [parameterString deleteCharactersInRange:NSMakeRange([parameterString length] - 1, 1)];
