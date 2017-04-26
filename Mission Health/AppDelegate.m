@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MissionsCollectionViewController.h"
 #import "DailySummaryViewController.h"
+#import "WeightSummaryViewController.h"
 #import "MealManager.h"
 
 #import "FoodSearchViewController.h"
@@ -36,7 +37,7 @@
     UINavigationController *dailySummaryNavigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
     dailySummaryNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Summary" image:[UIImage imageNamed:@"log"] tag:2];
     
-    UIViewController *progressViewController = [[UIViewController alloc] init];
+    WeightSummaryViewController *progressViewController = [[WeightSummaryViewController alloc] init];
     UINavigationController *progressNavigationController = [[UINavigationController alloc] initWithRootViewController:progressViewController];
     progressNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Progress" image:[UIImage imageNamed:@"progress"] tag:3];
     

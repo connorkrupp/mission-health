@@ -10,7 +10,7 @@
 #import "FoodTableViewCell.h"
 #import "MHFood.h"
 
-@interface FoodSearchViewController () <UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MealManagerDelegate>
+@interface FoodSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MealManagerDelegate>
 
 @property (strong, nonatomic) MealManager *mealManager;
 @property (strong, nonatomic) UITableView *resultsTableView;

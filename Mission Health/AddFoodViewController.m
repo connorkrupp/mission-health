@@ -30,8 +30,6 @@
 }
 
 - (void)loadView {
-    [super loadView];
-    
     self.view = [[UIView alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
     

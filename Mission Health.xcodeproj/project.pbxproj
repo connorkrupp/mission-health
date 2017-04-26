@@ -11,6 +11,15 @@
 		7002C5591EAFA0BE0086210A /* HKGrotesk-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7002C5551EAFA0BE0086210A /* HKGrotesk-Medium.otf */; };
 		7002C55A1EAFA0BE0086210A /* HKGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7002C5561EAFA0BE0086210A /* HKGrotesk-Regular.otf */; };
 		7002C55B1EAFA0BE0086210A /* HKGrotesk-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7002C5571EAFA0BE0086210A /* HKGrotesk-SemiBold.otf */; };
+		7002C5661EB02FB10086210A /* WeightSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002C5641EB02FB10086210A /* WeightSummaryViewController.m */; };
+		7002C56B1EB02FF60086210A /* WeightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002C5691EB02FF60086210A /* WeightTableViewCell.m */; };
+		7002C56C1EB02FF60086210A /* WeightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7002C56A1EB02FF60086210A /* WeightTableViewCell.xib */; };
+		7002C5701EB030400086210A /* MHWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002C56F1EB030400086210A /* MHWeight.m */; };
+		7002C5741EB030840086210A /* WeightHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002C5721EB030840086210A /* WeightHistoryManager.m */; };
+		7002C5771EB031260086210A /* AddWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002C5761EB031260086210A /* AddWeightViewController.m */; };
+		7002C57B1EB031EF0086210A /* UIColor+MHColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002C57A1EB031EF0086210A /* UIColor+MHColors.m */; };
+		7002C57D1EB037AB0086210A /* WeightInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7002C57C1EB037AB0086210A /* WeightInfo.xib */; };
+		7002C5801EB037B80086210A /* WeightInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002C57F1EB037B80086210A /* WeightInfo.m */; };
 		700E64C11E92E275009E914F /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 700E64C01E92E275009E914F /* APIManager.m */; };
 		700E64C71E92FD20009E914F /* configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 700E64C61E92FD20009E914F /* configuration.plist */; };
 		700E64CA1E932A6E009E914F /* FoodSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 700E64C91E932A6E009E914F /* FoodSearchViewController.m */; };
@@ -63,6 +72,24 @@
 		7002C5551EAFA0BE0086210A /* HKGrotesk-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Medium.otf"; sourceTree = "<group>"; };
 		7002C5561EAFA0BE0086210A /* HKGrotesk-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Regular.otf"; sourceTree = "<group>"; };
 		7002C5571EAFA0BE0086210A /* HKGrotesk-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-SemiBold.otf"; sourceTree = "<group>"; };
+		7002C5631EB02FB10086210A /* WeightSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightSummaryViewController.h; sourceTree = "<group>"; };
+		7002C5641EB02FB10086210A /* WeightSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightSummaryViewController.m; sourceTree = "<group>"; };
+		7002C5681EB02FF60086210A /* WeightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightTableViewCell.h; sourceTree = "<group>"; };
+		7002C5691EB02FF60086210A /* WeightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightTableViewCell.m; sourceTree = "<group>"; };
+		7002C56A1EB02FF60086210A /* WeightTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeightTableViewCell.xib; sourceTree = "<group>"; };
+		7002C56E1EB030400086210A /* MHWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHWeight.h; sourceTree = "<group>"; };
+		7002C56F1EB030400086210A /* MHWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHWeight.m; sourceTree = "<group>"; };
+		7002C5711EB030840086210A /* WeightHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightHistoryManager.h; sourceTree = "<group>"; };
+		7002C5721EB030840086210A /* WeightHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightHistoryManager.m; sourceTree = "<group>"; };
+		7002C5731EB030840086210A /* WeightHistoryManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightHistoryManagerDelegate.h; sourceTree = "<group>"; };
+		7002C5751EB031260086210A /* AddWeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWeightViewController.h; sourceTree = "<group>"; };
+		7002C5761EB031260086210A /* AddWeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWeightViewController.m; sourceTree = "<group>"; };
+		7002C5781EB031900086210A /* AddWeightViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddWeightViewControllerDelegate.h; sourceTree = "<group>"; };
+		7002C5791EB031EF0086210A /* UIColor+MHColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MHColors.h"; sourceTree = "<group>"; };
+		7002C57A1EB031EF0086210A /* UIColor+MHColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MHColors.m"; sourceTree = "<group>"; };
+		7002C57C1EB037AB0086210A /* WeightInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeightInfo.xib; sourceTree = "<group>"; };
+		7002C57E1EB037B80086210A /* WeightInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightInfo.h; sourceTree = "<group>"; };
+		7002C57F1EB037B80086210A /* WeightInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightInfo.m; sourceTree = "<group>"; };
 		700E64BF1E92E275009E914F /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		700E64C01E92E275009E914F /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		700E64C61E92FD20009E914F /* configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configuration.plist; sourceTree = "<group>"; };
@@ -153,6 +180,8 @@
 				70E2232E1E6710190079FF22 /* MHGroup.m */,
 				70643C0E1E78805600DD3370 /* MHMember.h */,
 				70643C0F1E78805600DD3370 /* MHMember.m */,
+				7002C56E1EB030400086210A /* MHWeight.h */,
+				7002C56F1EB030400086210A /* MHWeight.m */,
 			);
 			name = Models;
 			path = ..;
@@ -202,6 +231,9 @@
 				90E7B4A9E15834511AF699A9 /* NutritionInfo.h */,
 				90E7B9056890092DC83530F7 /* NutritionInfo.m */,
 				709470411EAD192E00C2C876 /* NutritionInfo.xib */,
+				7002C57E1EB037B80086210A /* WeightInfo.h */,
+				7002C57F1EB037B80086210A /* WeightInfo.m */,
+				7002C57C1EB037AB0086210A /* WeightInfo.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -215,9 +247,35 @@
 				70E223311E6710650079FF22 /* GroupManager.m */,
 				700E64BF1E92E275009E914F /* APIManager.h */,
 				700E64C01E92E275009E914F /* APIManager.m */,
+				7002C5711EB030840086210A /* WeightHistoryManager.h */,
+				7002C5721EB030840086210A /* WeightHistoryManager.m */,
+				7002C5731EB030840086210A /* WeightHistoryManagerDelegate.h */,
 			);
 			name = Managers;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		7002C5671EB02FE60086210A /* Progress Tab */ = {
+			isa = PBXGroup;
+			children = (
+				7002C5631EB02FB10086210A /* WeightSummaryViewController.h */,
+				7002C5641EB02FB10086210A /* WeightSummaryViewController.m */,
+				7002C5751EB031260086210A /* AddWeightViewController.h */,
+				7002C5761EB031260086210A /* AddWeightViewController.m */,
+				7002C5781EB031900086210A /* AddWeightViewControllerDelegate.h */,
+				7002C56D1EB02FFB0086210A /* WeightTableViewCell */,
+			);
+			name = "Progress Tab";
+			sourceTree = "<group>";
+		};
+		7002C56D1EB02FFB0086210A /* WeightTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7002C5681EB02FF60086210A /* WeightTableViewCell.h */,
+				7002C5691EB02FF60086210A /* WeightTableViewCell.m */,
+				7002C56A1EB02FF60086210A /* WeightTableViewCell.xib */,
+			);
+			name = WeightTableViewCell;
 			sourceTree = "<group>";
 		};
 		706004271E66735C00FA1EFF /* Frameworks */ = {
@@ -254,10 +312,13 @@
 			children = (
 				70B721371E39B4D000401B9D /* AppDelegate.h */,
 				70B721381E39B4D000401B9D /* AppDelegate.m */,
+				7002C5791EB031EF0086210A /* UIColor+MHColors.h */,
+				7002C57A1EB031EF0086210A /* UIColor+MHColors.m */,
 				7002C5611EAFA7C30086210A /* Managers */,
 				7002C55C1EAFA6FA0086210A /* Models */,
 				70E223261E67077E0079FF22 /* Missions Tab */,
 				70E223251E6680DD0079FF22 /* Daily Summary Tab */,
+				7002C5671EB02FE60086210A /* Progress Tab */,
 				7002C55F1EAFA7470086210A /* Table View Cells */,
 				7002C5601EAFA7700086210A /* Views */,
 				70B721401E39B4D000401B9D /* Assets.xcassets */,
@@ -434,11 +495,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7002C57D1EB037AB0086210A /* WeightInfo.xib in Resources */,
 				7002C55B1EAFA0BE0086210A /* HKGrotesk-SemiBold.otf in Resources */,
 				70B721441E39B4D000401B9D /* LaunchScreen.storyboard in Resources */,
 				7002C5581EAFA0BE0086210A /* HKGrotesk-Light.otf in Resources */,
 				700E64C71E92FD20009E914F /* configuration.plist in Resources */,
 				7094704B1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib in Resources */,
+				7002C56C1EB02FF60086210A /* WeightTableViewCell.xib in Resources */,
 				709470421EAD192E00C2C876 /* NutritionInfo.xib in Resources */,
 				7002C55A1EAFA0BE0086210A /* HKGrotesk-Regular.otf in Resources */,
 				7002C5591EAFA0BE0086210A /* HKGrotesk-Medium.otf in Resources */,
@@ -486,6 +549,7 @@
 			files = (
 				709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */,
 				70E223381E6766B00079FF22 /* GroupViewController.m in Sources */,
+				7002C5801EB037B80086210A /* WeightInfo.m in Sources */,
 				70E223241E6676A40079FF22 /* MHFood.m in Sources */,
 				70E223291E6707D30079FF22 /* MissionsCollectionViewController.m in Sources */,
 				70E223351E675D3C0079FF22 /* AddGroupViewController.m in Sources */,
@@ -496,14 +560,20 @@
 				70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */,
 				700E64CD1E933E3B009E914F /* FoodTableViewCell.m in Sources */,
 				70A030DB1E8C3F2800539BBB /* GroupInfoViewController.m in Sources */,
+				7002C57B1EB031EF0086210A /* UIColor+MHColors.m in Sources */,
 				705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */,
 				70643C101E78805600DD3370 /* MHMember.m in Sources */,
+				7002C5741EB030840086210A /* WeightHistoryManager.m in Sources */,
 				700E64C11E92E275009E914F /* APIManager.m in Sources */,
 				700E64CA1E932A6E009E914F /* FoodSearchViewController.m in Sources */,
 				70E2232F1E6710190079FF22 /* MHGroup.m in Sources */,
+				7002C5701EB030400086210A /* MHWeight.m in Sources */,
 				70E223321E6710650079FF22 /* GroupManager.m in Sources */,
 				705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */,
 				90E7B6F9E137A5920A036412 /* NutritionInfo.m in Sources */,
+				7002C5661EB02FB10086210A /* WeightSummaryViewController.m in Sources */,
+				7002C56B1EB02FF60086210A /* WeightTableViewCell.m in Sources */,
+				7002C5771EB031260086210A /* AddWeightViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

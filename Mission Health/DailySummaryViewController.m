@@ -98,16 +98,15 @@
 
     UIView *nutritionInfoView = [[NutritionInfo alloc] init];
 
-    UITableView *tableView = [[UITableView alloc] init];
-    self.tableView = tableView;
+    self.tableView = [[UITableView alloc] init];
     [self.tableView registerClass:[FoodTableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"DailySummaryTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"TableSectionHeader"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 80.0;
-    tableView.dataSource = self;
-    tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 
-    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[nutritionInfoView, tableView]];
+    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[nutritionInfoView, self.tableView]];
     containerStackView.axis = UILayoutConstraintAxisVertical;
     containerStackView.alignment = UIStackViewAlignmentFill;
     containerStackView.distribution = UIStackViewDistributionFill;
@@ -115,7 +114,7 @@
 
     [self.view addSubview:containerStackView];
     
-    tableView.translatesAutoresizingMaskIntoConstraints = false;
+    self.tableView.translatesAutoresizingMaskIntoConstraints = false;
     
     [NSLayoutConstraint activateConstraints:@[
 
