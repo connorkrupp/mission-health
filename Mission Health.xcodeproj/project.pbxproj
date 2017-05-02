@@ -33,6 +33,8 @@
 		709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */; };
 		7094704B1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7094704A1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib */; };
 		70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70954C551E4A603F00832400 /* DailySummaryViewController.m */; };
+		7098D1EC1EB10F50000BF478 /* MHServing.m in Sources */ = {isa = PBXBuildFile; fileRef = 7098D1EB1EB10F50000BF478 /* MHServing.m */; };
+		7098D1EF1EB11EB3000BF478 /* FoodDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7098D1EE1EB11EB3000BF478 /* FoodDetailViewController.m */; };
 		70A030DB1E8C3F2800539BBB /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A030DA1E8C3F2800539BBB /* GroupInfoViewController.m */; };
 		70B721361E39B4D000401B9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721351E39B4D000401B9D /* main.m */; };
 		70B721391E39B4D000401B9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721381E39B4D000401B9D /* AppDelegate.m */; };
@@ -112,6 +114,10 @@
 		7094704A1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailySummaryTableSectionHeader.xib; sourceTree = "<group>"; };
 		70954C541E4A603F00832400 /* DailySummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailySummaryViewController.h; sourceTree = "<group>"; };
 		70954C551E4A603F00832400 /* DailySummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySummaryViewController.m; sourceTree = "<group>"; };
+		7098D1EA1EB10F50000BF478 /* MHServing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHServing.h; sourceTree = "<group>"; };
+		7098D1EB1EB10F50000BF478 /* MHServing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHServing.m; sourceTree = "<group>"; };
+		7098D1ED1EB11EB3000BF478 /* FoodDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodDetailViewController.h; sourceTree = "<group>"; };
+		7098D1EE1EB11EB3000BF478 /* FoodDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodDetailViewController.m; sourceTree = "<group>"; };
 		70A030D91E8C3F2800539BBB /* GroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoViewController.h; sourceTree = "<group>"; };
 		70A030DA1E8C3F2800539BBB /* GroupInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupInfoViewController.m; sourceTree = "<group>"; };
 		70B721311E39B4D000401B9D /* Mission Health.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mission Health.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +182,8 @@
 			children = (
 				70E223221E6676A40079FF22 /* MHFood.h */,
 				70E223231E6676A40079FF22 /* MHFood.m */,
+				7098D1EA1EB10F50000BF478 /* MHServing.h */,
+				7098D1EB1EB10F50000BF478 /* MHServing.m */,
 				70E2232D1E6710190079FF22 /* MHGroup.h */,
 				70E2232E1E6710190079FF22 /* MHGroup.m */,
 				70643C0E1E78805600DD3370 /* MHMember.h */,
@@ -216,7 +224,6 @@
 				7002C5881EB045E80086210A /* TextField */,
 				7002C56D1EB02FFB0086210A /* Weight */,
 			);
-			name = "Table View Cells";
 			path = "Table View Cells";
 			sourceTree = "<group>";
 		};
@@ -235,10 +242,9 @@
 			children = (
 				7002C5831EB045970086210A /* Meals */,
 				7002C5821EB0458E0086210A /* Missions */,
-				7002C5841EB0459D0086210A /* Networking */,
 				7002C5811EB045860086210A /* WeightHistory */,
+				7002C5841EB0459D0086210A /* Networking */,
 			);
-			name = Stores;
 			path = Stores;
 			sourceTree = "<group>";
 		};
@@ -372,7 +378,6 @@
 				70E223261E67077E0079FF22 /* Missions Tab */,
 				7002C5671EB02FE60086210A /* Progress Tab */,
 			);
-			name = Controllers;
 			path = Controllers;
 			sourceTree = "<group>";
 		};
@@ -452,6 +457,8 @@
 				70954C551E4A603F00832400 /* DailySummaryViewController.m */,
 				700E64C81E932A6E009E914F /* FoodSearchViewController.h */,
 				700E64C91E932A6E009E914F /* FoodSearchViewController.m */,
+				7098D1ED1EB11EB3000BF478 /* FoodDetailViewController.h */,
+				7098D1EE1EB11EB3000BF478 /* FoodDetailViewController.m */,
 			);
 			path = "Daily Summary Tab";
 			sourceTree = "<group>";
@@ -643,9 +650,11 @@
 				70B721391E39B4D000401B9D /* AppDelegate.m in Sources */,
 				70B721361E39B4D000401B9D /* main.m in Sources */,
 				705B94CE1E4C4435006241F1 /* MealManager.m in Sources */,
+				7098D1EC1EB10F50000BF478 /* MHServing.m in Sources */,
 				70E2232C1E6708430079FF22 /* MissionsCollectionViewCell.m in Sources */,
 				70954C561E4A603F00832400 /* DailySummaryViewController.m in Sources */,
 				700E64CD1E933E3B009E914F /* FoodTableViewCell.m in Sources */,
+				7098D1EF1EB11EB3000BF478 /* FoodDetailViewController.m in Sources */,
 				70A030DB1E8C3F2800539BBB /* GroupInfoViewController.m in Sources */,
 				7002C57B1EB031EF0086210A /* UIColor+MHColors.m in Sources */,
 				705B94C81E4C396E006241F1 /* AddFoodViewController.m in Sources */,

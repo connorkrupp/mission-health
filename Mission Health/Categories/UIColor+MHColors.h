@@ -13,5 +13,9 @@
 + (UIColor *)positiveColor;
 + (UIColor *)negativeColor;
 + (UIColor *)neutralColor;
++ (UIColor *)primaryColor;
++ (UIColor *)highlightColor;
++ (NSArray<UIColor *> *)flatColors;
+
 
 @end

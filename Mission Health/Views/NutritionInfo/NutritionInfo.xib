@@ -150,6 +150,16 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="caloriesLabel" destination="1OE-Ej-pfL" id="gBJ-Ys-8uv"/>
+                <outlet property="caloriesProgressView" destination="MGx-f3-gFz" id="Qmo-in-Xzr"/>
+                <outlet property="carbsLabel" destination="7lt-Ef-thh" id="cHq-D4-Pwk"/>
+                <outlet property="carbsProgressView" destination="NOa-84-6FF" id="gAe-2h-3xs"/>
+                <outlet property="fatLabel" destination="6wP-3H-fAX" id="fWi-CZ-7W2"/>
+                <outlet property="fatProgressView" destination="Ry5-KE-7OG" id="1hv-RZ-XSF"/>
+                <outlet property="proteinLabel" destination="U1B-mh-9uY" id="eAE-jm-KYZ"/>
+                <outlet property="proteinProgressView" destination="cRL-aT-0UH" id="UfG-tO-MLF"/>
+            </connections>
             <point key="canvasLocation" x="131.5" y="182"/>
         </view>
     </objects>

@@ -39,7 +39,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.4834877253" green="0.84660816189999999" blue="0.93113023039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.2764585018157959" green="0.80586594343185425" blue="0.77094739675521851" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="7Nu-p5-rtz" firstAttribute="top" secondItem="PcC-Nk-85d" secondAttribute="top" constant="2" id="Hyc-hs-qfh"/>
                         <constraint firstItem="6kf-at-XAI" firstAttribute="top" secondItem="PcC-Nk-85d" secondAttribute="top" constant="2" id="Qo3-nE-V0G"/>
@@ -61,6 +61,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="detailLabel" destination="6kf-at-XAI" id="MPc-da-MjE"/>
                 <outlet property="titleLabel" destination="7Nu-p5-rtz" id="OZW-pT-181"/>
             </connections>
             <point key="canvasLocation" x="-0.5" y="260"/>

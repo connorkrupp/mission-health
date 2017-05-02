@@ -7,6 +7,7 @@
 //
 
 #import <Realm/Realm.h>
+#import "MHServing.h"
 
 @interface MHFood : RLMObject
 
@@ -14,15 +15,33 @@
 @property NSString *brand;
 @property NSString *serving;
 
-@property double calories;
-@property double fat;
-@property double carbs;
-@property double protein;
+@property NSNumber<RLMDouble> *calories;
+@property NSNumber<RLMDouble> *fat;
+@property NSNumber<RLMDouble> *carbs;
+@property NSNumber<RLMDouble> *protein;
+@property NSNumber<RLMDouble> *saturatedFat;
+@property NSNumber<RLMDouble> *polyunsaturatedFat;
+@property NSNumber<RLMDouble> *monounsaturatedFat;
+@property NSNumber<RLMDouble> *transFat;
+@property NSNumber<RLMDouble> *cholesterol;
+@property NSNumber<RLMDouble> *sodium;
+@property NSNumber<RLMDouble> *potassium;
+@property NSNumber<RLMDouble> *fiber;
+@property NSNumber<RLMDouble> *sugar;
+@property NSNumber<RLMDouble> *vitaminA;
+@property NSNumber<RLMDouble> *vitaminC;
+@property NSNumber<RLMDouble> *calcium;
+@property NSNumber<RLMDouble> *iron;
+
+@property MHServing *defaultServing;
+@property RLMArray<MHServing *><MHServing> *servings;
 
 @property int foodId;
 
 @property int meal;
 @property NSDate *date;
+
+- (NSDictionary<NSString *, NSNumber *> *)getNutritionForServing:(MHServing *)serving;
 
 @end
 

@@ -12,12 +12,15 @@
 #import "FoodTableViewCell.h"
 #import "NutritionInfo.h"
 #import "DailySummaryTableSectionHeader.h"
+#import "UIColor+MHColors.h"
+#import "FoodDetailViewController.h"
 
 @interface DailySummaryViewController ()
 
 @property (strong, nonatomic) MealManager *mealManager;
 
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NutritionInfo *nutritionInfoView;
 
 @end
 
@@ -29,6 +32,28 @@
     }
     
     return self;
+}
+
+- (void)updateNutritionInfo {
+    double calorieLimit = 2000;
+    double fatLimit = 60;
+    double carbLimit = 275;
+    double proteinLimit = 70;
+    
+    double calorieProgress = [self.mealManager getTotalCalories];
+    double fatProgress = [self.mealManager getTotalFat];
+    double carbProgress = [self.mealManager getTotalCarbs];
+    double proteinProgress = [self.mealManager getTotalProtein];
+    
+    self.nutritionInfoView.caloriesLabel.text = [NSString stringWithFormat:@"%.f remaining", calorieLimit - calorieProgress];
+    self.nutritionInfoView.fatLabel.text = [NSString stringWithFormat:@"%.fg left", fatLimit - fatProgress];
+    self.nutritionInfoView.carbsLabel.text = [NSString stringWithFormat:@"%.fg left", carbLimit - carbProgress];
+    self.nutritionInfoView.proteinLabel.text = [NSString stringWithFormat:@"%.fg left", proteinLimit - proteinProgress];
+
+    self.nutritionInfoView.caloriesProgressView.progress = calorieProgress/calorieLimit;
+    self.nutritionInfoView.fatProgressView.progress = fatProgress/fatLimit;
+    self.nutritionInfoView.carbsProgressView.progress = carbProgress/carbLimit;
+    self.nutritionInfoView.proteinProgressView.progress = proteinProgress/proteinLimit;
 }
 
 - (void)addItem {
@@ -59,8 +84,9 @@
     NSArray *mealNames = @[@"Breakfast", @"Lunch", @"Dinner", @"Snacks"];
     
     DailySummaryTableSectionHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"TableSectionHeader"];
-    
+    header.contentView.backgroundColor = [UIColor primaryColor];
     header.titleLabel.text = mealNames[section];
+    header.detailLabel.text = [NSString stringWithFormat:@"%.0f", [self.mealManager getCaloriesForMeal:section]];
     
     return header;
 }
@@ -80,9 +106,16 @@
     
     cell.titleLabel.text = food.name;
     cell.subtitleLabel.text = food.brand != nil ? food.brand : @"Generic";
-    cell.detailLabel.text = [NSString stringWithFormat:@"%.f", food.calories];
+    cell.detailLabel.text = [NSString stringWithFormat:@"%@", food.calories];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MHFood *food = self.mealManager.meals[indexPath.section][indexPath.row];
+    FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc] initWithMealManager:self.mealManager food:food];
+    
+    [self.navigationController pushViewController:foodDetailViewController animated:true];
 }
 
 
@@ -96,7 +129,7 @@
     
     self.navigationItem.rightBarButtonItem = addButton;
 
-    UIView *nutritionInfoView = [[NutritionInfo alloc] init];
+    self.nutritionInfoView = [[NutritionInfo alloc] init];
 
     self.tableView = [[UITableView alloc] init];
     [self.tableView registerClass:[FoodTableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -106,7 +139,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 
-    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[nutritionInfoView, self.tableView]];
+    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.nutritionInfoView, self.tableView]];
     containerStackView.axis = UILayoutConstraintAxisVertical;
     containerStackView.alignment = UIStackViewAlignmentFill;
     containerStackView.distribution = UIStackViewDistributionFill;
@@ -118,7 +151,7 @@
     
     [NSLayoutConstraint activateConstraints:@[
 
-        [NSLayoutConstraint constraintWithItem:nutritionInfoView
+        [NSLayoutConstraint constraintWithItem:self.nutritionInfoView
                                      attribute:NSLayoutAttributeHeight
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:nil
@@ -159,6 +192,7 @@
     [super viewWillAppear:animated];
     
     [self.tableView reloadData];
+    [self updateNutritionInfo];
 }
 
 @end

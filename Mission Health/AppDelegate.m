@@ -11,6 +11,7 @@
 #import "DailySummaryViewController.h"
 #import "WeightSummaryViewController.h"
 #import "MealManager.h"
+#import "UIColor+MHColors.h"
 
 #import "FoodSearchViewController.h"
 
@@ -51,9 +52,7 @@
     
     //og blue UIColor *primary = [UIColor colorWithRed:46.0/255.0 green:196.0/255.0 blue:182.0/255.0 alpha:1.0];
     //green UIColor *primary = [UIColor colorWithRed:36.0/255.0 green:219.0/255.0 blue:165.0/255.0 alpha:1.0];
-    UIColor *primary = [UIColor colorWithRed:123.0/255.0 green:216.0/255.0 blue:237.0/255.0 alpha:1.0];
-
-    [UINavigationBar appearance].barTintColor = primary;
+    [UINavigationBar appearance].barTintColor = [UIColor primaryColor];
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [UINavigationBar appearance].translucent = false;
     [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -61,7 +60,7 @@
                                                            NSFontAttributeName: [UIFont fontWithName:@"HKGrotesk-SemiBold" size:19.0]
                                                            }];
     
-    [UITabBar appearance].tintColor = primary;
+    [UITabBar appearance].tintColor = [UIColor primaryColor];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabBarController;

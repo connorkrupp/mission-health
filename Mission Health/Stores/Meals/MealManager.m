@@ -11,11 +11,17 @@
 #import "MealManager.h"
 #import "APIManager.h"
 #import "MHFood.h"
+#import "MHServing.h"
 
 @interface MealManager ()
 
 @property (strong, nonatomic) NSString *apiConsumerKey;
 @property (strong, nonatomic) NSString *apiConsumerSecret;
+
+@property (nonatomic) double calories;
+@property (nonatomic) double fat;
+@property (nonatomic) double carbs;
+@property (nonatomic) double protein;
 
 @end
 
@@ -23,14 +29,6 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        MHFood *food = [[MHFood alloc] init];
-        food.calories = 100;
-        food.name = @"Shell";
-        food.brand = @"The Shellfish Company";
-        food.date = [NSDate new];
-        food.meal = 0;
-        
-        self.searchResults = @[food];
         self.meals = @[[NSMutableArray new],[NSMutableArray new],[NSMutableArray new],[NSMutableArray new]];
         
         RLMResults<MHFood *> *foods = [MHFood allObjects];
@@ -48,6 +46,50 @@
     return self;
 }
 
+- (double)getCaloriesForMeal:(int)meal {
+    double calories = 0;
+    for (MHFood *food in self.meals[meal]) {
+        calories += [food.calories doubleValue];
+    }
+    return calories;
+}
+
+- (double)getTotalCalories {
+    [self updateTotalNutrition];
+    return self.calories;
+}
+
+- (double)getTotalFat {
+    [self updateTotalNutrition];
+    return self.fat;
+}
+
+- (double)getTotalCarbs {
+    [self updateTotalNutrition];
+    return self.carbs;
+}
+
+- (double)getTotalProtein {
+    [self updateTotalNutrition];
+    return self.protein;
+}
+
+- (void)updateTotalNutrition {
+    self.calories = 0;
+    self.fat = 0;
+    self.carbs = 0;
+    self.protein = 0;
+    
+    for (NSArray<MHFood *> *meal in self.meals) {
+        for (MHFood *food in meal) {
+            self.calories += [food.calories doubleValue];
+            self.fat += [food.fat doubleValue];
+            self.carbs += [food.carbs doubleValue];
+            self.protein += [food.protein doubleValue];
+        }
+    }
+}
+
 - (void)addFood:(MHFood *)food {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
@@ -62,7 +104,7 @@
                       inMeal:(int)meal {
     
     MHFood *food = [[MHFood alloc] init];
-    food.calories = calories;
+    food.calories = [NSNumber numberWithDouble:calories];
     food.name = name;
     food.date = [NSDate new];
     food.meal = meal;
@@ -96,12 +138,26 @@
                  withConsumerSecret:self.apiConsumerSecret
                    withAccessSecret:@""
                          completion:^(NSDictionary<NSString *,id> *json) {
-                             NSLog(@"JSON: %@", json);
                              
                              dispatch_async(dispatch_get_main_queue(), ^{
+                                 id result = json[@"foods"][@"food"];
+                                 
+                                 if (!result) {
+                                     self.searchResults = @[];
+                                     [self.delegate mealManagerDidFinishSearch:self];
+                                     return;
+                                 }
+                                 
+                                 NSArray *foodsJSON;
+                                 if ([result isKindOfClass:[NSArray class]]) {
+                                     foodsJSON = result;
+                                 } else {
+                                     foodsJSON = @[result];
+                                 }
+                                 
                                  NSMutableArray<MHFood *> *results = [NSMutableArray new];
                                  
-                                 for (NSDictionary *foodData in json[@"foods"][@"food"]) {
+                                 for (NSDictionary *foodData in foodsJSON) {
                                      MHFood *food = [[MHFood alloc] init];
                                      
                                      NSString *desc = foodData[@"food_description"];
@@ -112,10 +168,10 @@
                                      NSString *carbsInfo = [nutritionInfo[2] componentsSeparatedByString:@": "][1];
                                      NSString *proteinInfo = [nutritionInfo[3] componentsSeparatedByString:@": "][1];
 
-                                     food.calories = [[caloriesInfo substringToIndex:caloriesInfo.length - 4] doubleValue];
-                                     food.fat = [[fatInfo substringToIndex:fatInfo.length - 1] doubleValue];
-                                     food.carbs = [[carbsInfo substringToIndex:carbsInfo.length - 1] doubleValue];
-                                     food.protein = [[proteinInfo substringToIndex:proteinInfo.length - 1] doubleValue];
+                                     food.calories = [NSNumber numberWithDouble:[[caloriesInfo substringToIndex:caloriesInfo.length - 4] doubleValue]];
+                                     food.fat = [NSNumber numberWithDouble:[[fatInfo substringToIndex:fatInfo.length - 1] doubleValue]];
+                                     food.carbs = [NSNumber numberWithDouble:[[carbsInfo substringToIndex:carbsInfo.length - 1] doubleValue]];
+                                     food.protein = [NSNumber numberWithDouble:[[proteinInfo substringToIndex:proteinInfo.length - 1] doubleValue]];
                                      food.serving = [[desc componentsSeparatedByString:@" - "][0] componentsSeparatedByString:@" "][1];
                                      
                                      food.name = foodData[@"food_name"];
@@ -139,6 +195,90 @@
                          }];
 
 
+}
+
+- (void)getDetailsForFood:(MHFood *)food {
+    NSString *route = @"/rest/server.api";
+    NSURL *baseURL = [NSURL URLWithString:@"http://platform.fatsecret.com"];
+    NSString *method = @"GET";
+    
+    NSDictionary<NSString *, id> *parameters = @{
+                                                 @"method": @"food.get",
+                                                 @"format": @"json",
+                                                 @"food_id": [NSString stringWithFormat:@"%d", food.foodId]
+                                                 };
+    
+    [APIManager secureTaskWithRoute:route
+                          atBaseURL:baseURL
+                        usingMethod:method
+                     withParameters:parameters
+                    withConsumerKey:self.apiConsumerKey
+                 withConsumerSecret:self.apiConsumerSecret
+                   withAccessSecret:@""
+                         completion:^(NSDictionary<NSString *,id> *json) {
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 NSArray *servingJSON;
+                                 id result = json[@"food"][@"servings"][@"serving"];
+                                 if ([result isKindOfClass:[NSArray class]]) {
+                                     servingJSON = result;
+                                 } else {
+                                     servingJSON = @[result];
+                                 }
+                                 
+                                 for (NSDictionary *foodData in servingJSON) {
+                                     NSNumber *calories = [self getDecimalStringAsNumber:foodData[@"calories"]];
+                                     RLMRealm *realm = [RLMRealm defaultRealm];
+                                     
+                                     [realm beginWriteTransaction];
+                                     MHServing *serving = [[MHServing alloc] init];
+                                     
+                                     serving.desc = foodData[@"serving_description"];
+                                     if (foodData[@"metric_serving_amount"]) {
+                                         serving.amount = [self getDecimalStringAsNumber:foodData[@"metric_serving_amount"]];
+                                         NSString *unit = foodData[@"metric_serving_unit"];
+                                         if ([unit isEqualToString:@"g"]) {
+                                             serving.unit = @0;
+                                         } else if ([unit isEqualToString:@"ml"]) {
+                                             serving.unit = @1;
+                                         } else if ([unit isEqualToString:@"oz"]) {
+                                             serving.unit = @2;
+                                         } else {
+                                             [NSException raise:@"UnrecognizedValue" format:@"Serving Unit Not Recognized"];
+                                         }
+                                     }
+                                     
+                                     [realm addObject:serving];
+                                     [food.servings addObject:serving];
+                                     
+                                     if ([calories isEqualToNumber:food.calories]) {
+                                         food.calcium = [self getDecimalStringAsNumber:foodData[@"calories"]];
+                                         food.carbs = [self getDecimalStringAsNumber:foodData[@"carbohydrate"]];
+                                         food.cholesterol = [self getDecimalStringAsNumber:foodData[@"cholesterol"]];
+                                         food.fiber = [self getDecimalStringAsNumber:foodData[@"fiber"]];
+                                         food.iron = [self getDecimalStringAsNumber:foodData[@"iron"]];
+                                         food.transFat = [self getDecimalStringAsNumber:foodData[@"trans_fat"]];
+                                         food.monounsaturatedFat = [self getDecimalStringAsNumber:foodData[@"monounsaturated_fat"]];
+                                         food.polyunsaturatedFat = [self getDecimalStringAsNumber:foodData[@"polyunsaturated_fat"]];
+                                         food.saturatedFat = [self getDecimalStringAsNumber:foodData[@"saturated_fat"]];
+                                         food.potassium = [self getDecimalStringAsNumber:foodData[@"potassium"]];
+                                         food.sodium = [self getDecimalStringAsNumber:foodData[@"sodium"]];
+                                         food.sugar = [self getDecimalStringAsNumber:foodData[@"sugar"]];
+                                         food.vitaminA = [self getDecimalStringAsNumber:foodData[@"vitamin_a"]];
+                                         food.vitaminC = [self getDecimalStringAsNumber:foodData[@"vitamin_c"]];
+                                         
+                                         food.defaultServing = serving;
+                                     }
+                                     [[RLMRealm defaultRealm] commitWriteTransaction];
+                                 }
+                                 
+                                 [self.delegate mealManager:self didGettingDetailsForFood:food];
+                             });
+                         }];
+
+}
+
+- (NSNumber *)getDecimalStringAsNumber:(NSString *)str {
+    return [NSNumber numberWithDouble:[str doubleValue]];
 }
 
 - (void)didCancelSearch {

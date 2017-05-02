@@ -9,6 +9,8 @@
 #import "FoodSearchViewController.h"
 #import "FoodTableViewCell.h"
 #import "MHFood.h"
+#import "FoodDetailViewController.h"
+#import "AddFoodViewController.h"
 
 @interface FoodSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MealManagerDelegate>
 
@@ -31,8 +33,12 @@
 - (void)loadView {
     self.view = [UIView new];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationItem.title = @"Food Search";
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(quickAdd)];
+
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
@@ -88,11 +94,28 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
+- (void)quickAdd {
+    AddFoodViewController *addFoodViewController = [[AddFoodViewController alloc] initWithMealManager:self.mealManager];
+    
+    [self.navigationController pushViewController:addFoodViewController animated:true];
+}
+
 #pragma mark - MealManagerDelegate
 
 - (void)mealManagerDidFinishSearch:(MealManager *)mealManager {
     NSLog(@"Reloading");
-    [self.resultsTableView reloadData];
+    if (mealManager.searchResults.count == 0) {
+        self.resultsTableView.hidden = true;
+    } else {
+        self.resultsTableView.hidden = false;
+        [self.resultsTableView reloadData];
+    }
+}
+
+- (void)mealManager:(MealManager *)mealManager didGettingDetailsForFood:(MHFood *)food {
+    FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc] initWithMealManager:self.mealManager food:food];
+    
+    [self.navigationController pushViewController:foodDetailViewController animated:true];
 }
 
 #pragma mark - UITableViewDataSource
@@ -108,7 +131,7 @@
     
     cell.titleLabel.text = food.name;
     cell.subtitleLabel.text = food.brand != nil ? food.brand : @"Generic";
-    cell.detailLabel.text = [NSString stringWithFormat:@"%.f", food.calories];
+    cell.detailLabel.text = [NSString stringWithFormat:@"%@", food.calories];
     
     return cell;
 }
@@ -117,10 +140,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MHFood *food = self.mealManager.searchResults[indexPath.row];
-    food.meal = arc4random_uniform(3);
     
-    [self.mealManager addFood:food];
-    [self dismissViewControllerAnimated:true completion:nil];
+    [self.mealManager getDetailsForFood:food];
 }
 
 #pragma mark - UISearchBarDelegate

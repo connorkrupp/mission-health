@@ -15,6 +15,7 @@
 @protocol MealManagerDelegate <NSObject>
 
 - (void)mealManagerDidFinishSearch:(MealManager *)mealManager;
+- (void)mealManager:(MealManager *)mealManager didGettingDetailsForFood:(MHFood *)food;
 
 @end
 
@@ -24,6 +25,13 @@
 @property (strong, nonatomic) NSArray<MHFood *> *searchResults;
 @property (weak, nonatomic) id<MealManagerDelegate> delegate;
 
+- (double)getCaloriesForMeal:(int)meal;
+- (double)getTotalCalories;
+- (double)getTotalFat;
+- (double)getTotalCarbs;
+- (double)getTotalProtein;
+
+
 - (void)addFood:(MHFood *)food;
 
 - (void)quickAddFoodWithName:(NSString *)name
@@ -32,5 +40,7 @@
 
 - (void)searchFoodsWithExpression:(NSString *)expression;
 - (void)didCancelSearch;
+
+- (void)getDetailsForFood:(MHFood *)food;
 
 @end
