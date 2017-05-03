@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddWeightViewControllerDelegate.h"
 
-@protocol AddWeightViewControllerDelegate;
+@class MHWeight;
+@class AddWeightViewController;
+
+@protocol AddWeightViewControllerDelegate <NSObject>
+
+- (void)addWeightViewController:(AddWeightViewController *)addWeightViewController
+                   didAddWeight:(MHWeight *)weight;
+
+@end
 
 @interface AddWeightViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

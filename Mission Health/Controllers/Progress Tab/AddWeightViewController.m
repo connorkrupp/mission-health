@@ -8,6 +8,7 @@
 
 #import "AddWeightViewController.h"
 #import "TextFieldTableViewCell.h"
+#import "MHWeight.h"
 
 @interface AddWeightViewController ()
 

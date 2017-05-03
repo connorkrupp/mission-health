@@ -7,24 +7,31 @@
 //
 
 #import "DailySummaryViewController.h"
-#import "AddFoodViewController.h"
-#import "FoodSearchViewController.h"
+
 #import "FoodTableViewCell.h"
-#import "NutritionInfo.h"
+
 #import "DailySummaryTableSectionHeader.h"
+
+#import "NutritionInfo.h"
+#import "MealManager.h"
+
 #import "UIColor+MHColors.h"
-#import "FoodDetailViewController.h"
+#import "NSString+PrettyDates.h"
 
 @interface DailySummaryViewController ()
 
+// Models
 @property (strong, nonatomic) MealManager *mealManager;
 
+// Views
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NutritionInfo *nutritionInfoView;
 
 @end
 
 @implementation DailySummaryViewController
+
+#pragma mark - Initializers
 
 - (instancetype)initWithMealManager:(MealManager *)mealManager {
     if (self = [super init]) {
@@ -33,6 +40,115 @@
     
     return self;
 }
+
+#pragma mark - View Lifecycle
+
+- (void)loadView {
+    self.view = [[UIView alloc] init];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.hidesBackButton = true;
+    
+    NSString *titleDate = [NSString formattedStringFromDate:self.mealManager.date];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addFood)];
+    
+    self.navigationItem.rightBarButtonItem = addButton;
+    
+    CGFloat containerHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat containerWidth = 120;//0.95 * self.view.frame.size.width;
+    UIView *titleContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, containerWidth, containerHeight)];
+    
+    UIButton *prevButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [prevButton setFrame:CGRectMake(0, 0, 20, 44)];
+    [prevButton setTitle:@"\U00002329\U0000FE0E" forState:UIControlStateNormal];
+    [prevButton addTarget:self action:@selector(navigateToPreviousDay) forControlEvents:UIControlEventTouchUpInside];
+    [prevButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    prevButton.titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:18.0];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 44)];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setText:titleDate];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:18.0];
+    
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [nextButton setFrame:CGRectMake(containerWidth - 20, 0, 20, 44)];
+    [nextButton setTitle:@"\U0000232A\U0000FE0E" forState:UIControlStateNormal];
+    [nextButton addTarget:self action:@selector(navigateToNextDay) forControlEvents:UIControlEventTouchUpInside];
+    [nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    nextButton.titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:18.0];
+    
+    [titleContainer addSubview:prevButton];
+    [titleContainer addSubview:nextButton];
+    [titleContainer addSubview:titleLabel];
+    
+    self.navigationItem.titleView = titleContainer;
+    self.nutritionInfoView = [[NutritionInfo alloc] init];
+    self.tableView = [[UITableView alloc] init];
+    
+    [self.tableView registerClass:[FoodTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"DailySummaryTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"TableSectionHeader"];
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 80.0;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.nutritionInfoView, self.tableView]];
+    
+    containerStackView.axis = UILayoutConstraintAxisVertical;
+    containerStackView.alignment = UIStackViewAlignmentFill;
+    containerStackView.distribution = UIStackViewDistributionFill;
+    containerStackView.translatesAutoresizingMaskIntoConstraints = false;
+    
+    [self.view addSubview:containerStackView];
+    
+    self.tableView.translatesAutoresizingMaskIntoConstraints = false;
+    
+    [NSLayoutConstraint activateConstraints:@[
+                                              
+                                              [NSLayoutConstraint constraintWithItem:self.nutritionInfoView
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:160.0],
+                                              [NSLayoutConstraint constraintWithItem:containerStackView
+                                                                           attribute:NSLayoutAttributeTop
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.topLayoutGuide attribute:NSLayoutAttributeBottom
+                                                                          multiplier:1.0
+                                                                            constant:0.0],
+                                              [NSLayoutConstraint constraintWithItem:containerStackView
+                                                                           attribute:NSLayoutAttributeLeading
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.view attribute:NSLayoutAttributeLeading
+                                                                          multiplier:1.0
+                                                                            constant:0.0],
+                                              [NSLayoutConstraint constraintWithItem:containerStackView
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.view attribute:NSLayoutAttributeTrailing
+                                                                          multiplier:1.0
+                                                                            constant:0.0],
+                                              [NSLayoutConstraint constraintWithItem:containerStackView
+                                                                           attribute:NSLayoutAttributeBottom
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.bottomLayoutGuide attribute:NSLayoutAttributeTop
+                                                                          multiplier:1.0
+                                                                            constant:0.0]
+                                              
+                                              ]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+    [self updateNutritionInfo];
+}
+
+#pragma mark - View Updates
 
 - (void)updateNutritionInfo {
     double calorieLimit = 2000;
@@ -56,37 +172,39 @@
     self.nutritionInfoView.proteinProgressView.progress = proteinProgress/proteinLimit;
 }
 
-- (void)addItem {
-    /*
-    AddFoodViewController *addFoodViewController = [[AddFoodViewController alloc] initWithMealManager:self.mealManager];
-    UINavigationController *addFoodNavigationController = [[UINavigationController alloc] initWithRootViewController:addFoodViewController];
-    
-    [self presentViewController:addFoodNavigationController animated:true completion:nil];
-     */
-    FoodSearchViewController *foodSearchViewController = [[FoodSearchViewController alloc] initWithMealManager:self.mealManager];
-    
-    UINavigationController *addFoodNavigationController = [[UINavigationController alloc] initWithRootViewController:foodSearchViewController];
-    
-    [self presentViewController:addFoodNavigationController animated:true completion:nil];
+#pragma mark - Actions
+
+- (void)addFood {
+    [self.coordinator dailySummaryViewController:self didTapAddFoodWithMealManager:self.mealManager];
 }
+
+- (void)navigateToPreviousDay {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *prevDate = [calendar startOfDayForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.mealManager.date options:NSCalendarMatchFirst]];
+    
+    [self.coordinator dailySummaryViewController:self didNavigateToDate:prevDate fromDate:self.mealManager.date];
+}
+
+- (void)navigateToNextDay {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [calendar startOfDayForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:self.mealManager.date options:NSCalendarMatchFirst]];
+    
+    [self.coordinator dailySummaryViewController:self didNavigateToDate:nextDate fromDate:self.mealManager.date];
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.mealManager.meals.count;
 }
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-        NSArray *mealNames = @[@"Breakfast", @"Lunch", @"Dinner", @"Snacks"];
-    return mealNames[section];
-}
-*/
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
     NSArray *mealNames = @[@"Breakfast", @"Lunch", @"Dinner", @"Snacks"];
-    
     DailySummaryTableSectionHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"TableSectionHeader"];
+    
     header.contentView.backgroundColor = [UIColor primaryColor];
     header.titleLabel.text = mealNames[section];
-    header.detailLabel.text = [NSString stringWithFormat:@"%.0f", [self.mealManager getCaloriesForMeal:section]];
+    header.detailLabel.text = [NSString stringWithFormat:@"%.0f", [self.mealManager getCaloriesForMeal:self.mealManager.meals[section]]];
     
     return header;
 }
@@ -96,13 +214,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.mealManager.meals[section].count;
+    return self.mealManager.meals[section].foods.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FoodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
-    MHFood *food = self.mealManager.meals[indexPath.section][indexPath.row];
+    MHFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
     
     cell.titleLabel.text = food.name;
     cell.subtitleLabel.text = food.brand != nil ? food.brand : @"Generic";
@@ -111,88 +228,28 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MHFood *food = self.mealManager.meals[indexPath.section][indexPath.row];
-    FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc] initWithMealManager:self.mealManager food:food];
+    MHFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
     
-    [self.navigationController pushViewController:foodDetailViewController animated:true];
+    [self.coordinator dailySummaryViewController:self didSelectFood:food withMealManager:self.mealManager];
 }
 
-
-- (void)loadView {
-    self.view = [[UIView alloc] init];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.navigationItem.title = @"Today";
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem)];
-    
-    self.navigationItem.rightBarButtonItem = addButton;
-
-    self.nutritionInfoView = [[NutritionInfo alloc] init];
-
-    self.tableView = [[UITableView alloc] init];
-    [self.tableView registerClass:[FoodTableViewCell class] forCellReuseIdentifier:@"cell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"DailySummaryTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:@"TableSectionHeader"];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 80.0;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-
-    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.nutritionInfoView, self.tableView]];
-    containerStackView.axis = UILayoutConstraintAxisVertical;
-    containerStackView.alignment = UIStackViewAlignmentFill;
-    containerStackView.distribution = UIStackViewDistributionFill;
-    containerStackView.translatesAutoresizingMaskIntoConstraints = false;
-
-    [self.view addSubview:containerStackView];
-    
-    self.tableView.translatesAutoresizingMaskIntoConstraints = false;
-    
-    [NSLayoutConstraint activateConstraints:@[
-
-        [NSLayoutConstraint constraintWithItem:self.nutritionInfoView
-                                     attribute:NSLayoutAttributeHeight
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:nil
-                                     attribute:NSLayoutAttributeNotAnAttribute
-                                    multiplier:1.0
-                                      constant:160.0],
-        [NSLayoutConstraint constraintWithItem:containerStackView
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.topLayoutGuide attribute:NSLayoutAttributeBottom
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:containerStackView
-                                     attribute:NSLayoutAttributeLeading
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view attribute:NSLayoutAttributeLeading
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:containerStackView
-                                     attribute:NSLayoutAttributeTrailing
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view attribute:NSLayoutAttributeTrailing
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:containerStackView
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.bottomLayoutGuide attribute:NSLayoutAttributeTop
-                                    multiplier:1.0
-                                      constant:0.0]
-    
-                                              ]];
-    
-    
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return true;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        MHFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
+        [self.mealManager removeFood:food];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        //[self.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+        [self updateNutritionInfo];
+    }];
     
-    [self.tableView reloadData];
-    [self updateNutritionInfo];
+    return @[deleteAction];
 }
 
 @end

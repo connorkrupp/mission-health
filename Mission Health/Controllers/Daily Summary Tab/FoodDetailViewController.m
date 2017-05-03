@@ -7,8 +7,9 @@
 //
 
 #import "FoodDetailViewController.h"
+#import "PickerTableViewCell.h"
 
-@interface FoodDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FoodDetailViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (strong, nonatomic) MealManager *mealManager;
 @property (strong, nonatomic) MHFood *food;
@@ -42,41 +43,37 @@
      */
     self.food.meal = arc4random_uniform(3);
     
-    [self.mealManager addFood:self.food];
+    [self.mealManager addFood:self.food inMeal:self.mealManager.meals[0]];
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.nutritionIds.count;
+    return 1;//self.nutritionIds.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-    }
+    PickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PickerCell"];
     
-    cell.textLabel.text = self.nutritionIds[indexPath.row];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.nutrition[self.nutritionIds[indexPath.row]]];
+    cell.titleLabel.text = @"Serving Size";
+    cell.detailLabel.text = @"1 ounce";
     
     return cell;
 }
-
 
 - (void)loadView {
     self.view = [[UIView alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.title = @"Today";
+    self.navigationItem.title = @"Add Food";
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveItem)];
     
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.tableView = [[UITableView alloc] init];
-    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[PickerTableViewCell class] forCellReuseIdentifier:@"PickerCell"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 80.0;
+    self.tableView.estimatedRowHeight = 40.0;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     

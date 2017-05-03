@@ -7,17 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddWeightViewControllerDelegate.h"
 #import "WeightHistoryManager.h"
 #import "WeightHistoryManagerDelegate.h"
 #import "WeightInfo.h"
 
+#import "AddWeightViewController.h"
+
 @interface WeightSummaryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddWeightViewControllerDelegate, WeightHistoryManagerDelegate>
 
 @property (strong, nonatomic) WeightInfo *weightInfoView;
-
 @property (strong, nonatomic) UITableView *weightsTableView;
-
 @property (strong, nonatomic) WeightHistoryManager *weightHistoryManager;
 
 @end

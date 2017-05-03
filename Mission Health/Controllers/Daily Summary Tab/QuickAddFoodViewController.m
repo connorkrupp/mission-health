@@ -1,15 +1,15 @@
 //
-//  AddFoodViewController.m
+//  QuickAddFoodViewController.m
 //  Mission Health
 //
 //  Created by Connor Krupp on 2/9/17.
 //  Copyright © 2017 Connor Krupp. All rights reserved.
 //
 
-#import "AddFoodViewController.h"
+#import "QuickAddFoodViewController.h"
 #import "TextFieldTableViewCell.h"
 
-@interface AddFoodViewController ()
+@interface QuickAddFoodViewController ()
 
 @property (strong, nonatomic) TextFieldTableViewCell *foodTableViewCell;
 @property (strong, nonatomic) TextFieldTableViewCell *caloriesTableViewCell;
@@ -19,7 +19,9 @@
 
 @end
 
-@implementation AddFoodViewController
+@implementation QuickAddFoodViewController
+
+#pragma mark - Initializers
 
 - (instancetype)initWithMealManager:(MealManager *)mealManager {
     if (self = [super init]) {
@@ -28,6 +30,8 @@
     
     return self;
 }
+
+#pragma mark - View Lifecycle
 
 - (void)loadView {
     self.view = [[UIView alloc] init];
@@ -93,6 +97,8 @@
     
 }
 
+#pragma mark - Actions
+
 - (void)cancel {
     [self dismissViewControllerAnimated:true completion:nil];
 }
@@ -102,9 +108,11 @@
     double calories = self.caloriesTableViewCell.textField.text.doubleValue;
     int meal = self.mealTableViewCell.textField.text.intValue;
     
-    [self.mealManager quickAddFoodWithName:foodName calories:calories inMeal:meal];
+    [self.mealManager quickAddFoodWithName:foodName calories:calories inMeal:self.mealManager.meals[meal]];
     [self dismissViewControllerAnimated:true completion:nil];
 }
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 3;

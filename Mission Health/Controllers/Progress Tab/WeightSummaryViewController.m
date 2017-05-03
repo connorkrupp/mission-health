@@ -9,7 +9,6 @@
 #import "WeightSummaryViewController.h"
 #import "WeightTableViewCell.h"
 #import "MHWeight.h"
-#import "AddWeightViewController.h"
 #import "UIColor+MHColors.h"
 
 @implementation WeightSummaryViewController

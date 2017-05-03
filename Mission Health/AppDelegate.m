@@ -7,17 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "MissionsCollectionViewController.h"
-#import "DailySummaryViewController.h"
-#import "WeightSummaryViewController.h"
-#import "MealManager.h"
 #import "UIColor+MHColors.h"
-
-#import "FoodSearchViewController.h"
+#import "AppCoordinator.h"
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) MealManager *mealManager;
+@property (strong, nonatomic) AppCoordinator *appCoordinator;
 
 @end
 
@@ -25,31 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    MealManager *mealManager = [[MealManager alloc] init];
-    
-    //FoodSearchViewController *foodSearchViewController = [[FoodSearchViewController alloc] initWithMealManager:mealManager];
-    
-    MissionsCollectionViewController *groupViewController = [[MissionsCollectionViewController alloc] init];
-    UINavigationController *groupNavigationController = [[UINavigationController alloc] initWithRootViewController:groupViewController];
-    groupNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Missions" image:[UIImage imageNamed:@"cup"] tag:1];
-    
-    DailySummaryViewController *dailySummaryViewController = [[DailySummaryViewController alloc] initWithMealManager:mealManager];
-    UINavigationController *dailySummaryNavigationController = [[UINavigationController alloc] initWithRootViewController:dailySummaryViewController];
-    dailySummaryNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Summary" image:[UIImage imageNamed:@"log"] tag:2];
-    
-    WeightSummaryViewController *progressViewController = [[WeightSummaryViewController alloc] init];
-    UINavigationController *progressNavigationController = [[UINavigationController alloc] initWithRootViewController:progressViewController];
-    progressNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Progress" image:[UIImage imageNamed:@"progress"] tag:3];
-    
-    UIViewController *profileViewController = [[UIViewController alloc] init];
-    UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-    profileNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Me" image:[UIImage imageNamed:@"profile"] tag:4];
-    
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[groupNavigationController, dailySummaryNavigationController, progressNavigationController, profileNavigationController];
-    
+
     //og blue UIColor *primary = [UIColor colorWithRed:46.0/255.0 green:196.0/255.0 blue:182.0/255.0 alpha:1.0];
     //green UIColor *primary = [UIColor colorWithRed:36.0/255.0 green:219.0/255.0 blue:165.0/255.0 alpha:1.0];
     [UINavigationBar appearance].barTintColor = [UIColor primaryColor];
@@ -63,7 +34,7 @@
     [UITabBar appearance].tintColor = [UIColor primaryColor];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = tabBarController;
+    self.appCoordinator = [[AppCoordinator alloc] initWithWindow:self.window];
     [self.window makeKeyAndVisible];
     
     return YES;

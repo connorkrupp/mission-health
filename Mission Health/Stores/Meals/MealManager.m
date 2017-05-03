@@ -10,10 +10,12 @@
 
 #import "MealManager.h"
 #import "APIManager.h"
-#import "MHFood.h"
 #import "MHServing.h"
+#import "MHDay.h"
 
 @interface MealManager ()
+
+@property (strong, nonatomic) MHDay *day;
 
 @property (strong, nonatomic) NSString *apiConsumerKey;
 @property (strong, nonatomic) NSString *apiConsumerSecret;
@@ -28,13 +30,28 @@
 @implementation MealManager
 
 - (instancetype)init {
+    return [self initWithDate:[NSDate date]];
+}
+
+- (instancetype)initWithDate:(NSDate *)date {
     if (self = [super init]) {
-        self.meals = @[[NSMutableArray new],[NSMutableArray new],[NSMutableArray new],[NSMutableArray new]];
+        self.date = [[NSCalendar currentCalendar] startOfDayForDate:date];
         
-        RLMResults<MHFood *> *foods = [MHFood allObjects];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"date = %@", self.date];
+        RLMResults<MHDay *> *days = [MHDay objectsWithPredicate:pred];
         
-        for (MHFood *food in foods) {
-            [self.meals[food.meal] addObject:food];
+        NSAssert(days.count <= 1, @"There should never be two days with the same date");
+        
+        if (days.count == 0) {
+            MHDay *day = [[MHDay alloc] initWithDate:self.date];
+            RLMRealm *realm = [RLMRealm defaultRealm];
+            [realm transactionWithBlock:^{
+                [realm addObject:day];
+            }];
+            
+            self.day = day;
+        } else {
+            self.day = days[0];
         }
         
         NSString *configurationPath = [[NSBundle mainBundle] pathForResource:@"configuration" ofType:@"plist"];
@@ -46,9 +63,9 @@
     return self;
 }
 
-- (double)getCaloriesForMeal:(int)meal {
+- (double)getCaloriesForMeal:(MHMeal *)meal {
     double calories = 0;
-    for (MHFood *food in self.meals[meal]) {
+    for (MHFood *food in meal.foods) {
         calories += [food.calories doubleValue];
     }
     return calories;
@@ -80,8 +97,8 @@
     self.carbs = 0;
     self.protein = 0;
     
-    for (NSArray<MHFood *> *meal in self.meals) {
-        for (MHFood *food in meal) {
+    for (MHMeal *meal in self.day.meals) {
+        for (MHFood *food in meal.foods) {
             self.calories += [food.calories doubleValue];
             self.fat += [food.fat doubleValue];
             self.carbs += [food.carbs doubleValue];
@@ -90,31 +107,30 @@
     }
 }
 
-- (void)addFood:(MHFood *)food {
+- (void)addFood:(MHFood *)food inMeal:(MHMeal *)meal {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
-        [realm addObject:food];
+        [meal.foods addObject:food];
     }];
-    
-    [self.meals[food.meal] addObject:food];
+}
+
+- (void)removeFood:(MHFood *)food {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        [realm deleteObject:food];
+    }];
 }
 
 - (void)quickAddFoodWithName:(NSString *)name
                     calories:(double)calories
-                      inMeal:(int)meal {
+                      inMeal:(MHMeal *)meal {
     
     MHFood *food = [[MHFood alloc] init];
     food.calories = [NSNumber numberWithDouble:calories];
     food.name = name;
     food.date = [NSDate new];
-    food.meal = meal;
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        [realm addObject:food];
-    }];
-    
-    [self.meals[meal] addObject:food];
+    [self addFood:food inMeal:meal];
 }
 
 - (void)searchFoodsWithExpression:(NSString *)expression {
@@ -144,7 +160,7 @@
                                  
                                  if (!result) {
                                      self.searchResults = @[];
-                                     [self.delegate mealManagerDidFinishSearch:self];
+                                     [self.searchDelegate mealManagerDidFinishSearch:self];
                                      return;
                                  }
                                  
@@ -190,7 +206,7 @@
                                  
                                  self.searchResults = results;
                                  
-                                 [self.delegate mealManagerDidFinishSearch:self];
+                                 [self.searchDelegate mealManagerDidFinishSearch:self];
                              });
                          }];
 
@@ -271,7 +287,7 @@
                                      [[RLMRealm defaultRealm] commitWriteTransaction];
                                  }
                                  
-                                 [self.delegate mealManager:self didGettingDetailsForFood:food];
+                                 [self.searchDelegate mealManager:self didFinishGettingDetailsForFood:food];
                              });
                          }];
 
@@ -283,6 +299,10 @@
 
 - (void)didCancelSearch {
     self.searchResults = [[NSArray<MHFood *> alloc] init];
+}
+
+- (RLMArray<MHMeal *> *)meals {
+    return self.day.meals;
 }
 
 @end

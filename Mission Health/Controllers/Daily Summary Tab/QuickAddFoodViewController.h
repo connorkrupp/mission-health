@@ -1,5 +1,5 @@
 //
-//  AddFoodViewController.h
+//  QuickAddFoodViewController.h
 //  Mission Health
 //
 //  Created by Connor Krupp on 2/9/17.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MealManager.h"
 
-@interface AddFoodViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface QuickAddFoodViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (instancetype)initWithMealManager:(MealManager *)mealManager;
 

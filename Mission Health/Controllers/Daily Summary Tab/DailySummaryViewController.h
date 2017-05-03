@@ -7,9 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MealManager.h"
+
+@class MealManager;
+@class MHFood;
+@class DailySummaryViewController;
+
+@protocol DailySummaryViewControllerDelegate <NSObject>
+
+- (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didTapAddFoodWithMealManager:(MealManager *)mealManager;
+- (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didNavigateToDate:(NSDate *)toDate fromDate:(NSDate *)fromDate;
+- (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didSelectFood:(MHFood *)food withMealManager:(MealManager *)mealManager;
+
+@end
 
 @interface DailySummaryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) id<DailySummaryViewControllerDelegate> coordinator;
 
 - (instancetype)initWithMealManager:(MealManager *)mealManager;
 

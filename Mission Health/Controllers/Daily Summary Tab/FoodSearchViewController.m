@@ -9,10 +9,9 @@
 #import "FoodSearchViewController.h"
 #import "FoodTableViewCell.h"
 #import "MHFood.h"
-#import "FoodDetailViewController.h"
-#import "AddFoodViewController.h"
+#import "MealManager.h"
 
-@interface FoodSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MealManagerDelegate>
+@interface FoodSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MealManagerSearchDelegate>
 
 @property (strong, nonatomic) MealManager *mealManager;
 @property (strong, nonatomic) UITableView *resultsTableView;
@@ -21,14 +20,18 @@
 
 @implementation FoodSearchViewController
 
+#pragma mark - Initializers
+
 - (instancetype)initWithMealManager:(MealManager *)mealManager {
     if (self = [super init]) {
         self.mealManager = mealManager;
-        self.mealManager.delegate = self;
+        self.mealManager.searchDelegate = self;
     }
     
     return self;
 }
+
+#pragma mark - View Lifecycle
 
 - (void)loadView {
     self.view = [UIView new];
@@ -38,7 +41,6 @@
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(quickAdd)];
-
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
@@ -89,15 +91,15 @@
     ]];
 }
 
+#pragma mark - Actions
+
 - (void)cancel {
     [self.mealManager didCancelSearch];
-    [self dismissViewControllerAnimated:true completion:nil];
+    [self.coordinator foodSearchViewControllerDidCancel:self];
 }
 
 - (void)quickAdd {
-    AddFoodViewController *addFoodViewController = [[AddFoodViewController alloc] initWithMealManager:self.mealManager];
-    
-    [self.navigationController pushViewController:addFoodViewController animated:true];
+    [self.coordinator foodSearchViewController:self didTapQuickAddWithMealManager:self.mealManager];
 }
 
 #pragma mark - MealManagerDelegate
@@ -112,10 +114,8 @@
     }
 }
 
-- (void)mealManager:(MealManager *)mealManager didGettingDetailsForFood:(MHFood *)food {
-    FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc] initWithMealManager:self.mealManager food:food];
-    
-    [self.navigationController pushViewController:foodDetailViewController animated:true];
+- (void)mealManager:(MealManager *)mealManager didFinishGettingDetailsForFood:(MHFood *)food {
+    [self.coordinator foodSearchViewController:self didGetDetailsForFood:food withMealManager:self.mealManager];
 }
 
 #pragma mark - UITableViewDataSource
