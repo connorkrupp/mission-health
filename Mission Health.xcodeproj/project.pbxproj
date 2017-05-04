@@ -55,6 +55,7 @@
 		70ED3F9C1EB981AE0090428D /* PickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED3F9A1EB981AE0090428D /* PickerTableViewCell.m */; };
 		70ED3FA01EBA4D760090428D /* AppCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED3F9F1EBA4D760090428D /* AppCoordinator.m */; };
 		70ED3FA31EBA5AB80090428D /* NSString+PrettyDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED3FA21EBA5AB80090428D /* NSString+PrettyDates.m */; };
+		70ED3FA61EBAAA8F0090428D /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED3FA51EBAAA8F0090428D /* TextFieldTableViewCell.m */; };
 		90E7B6F9E137A5920A036412 /* NutritionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E7B9056890092DC83530F7 /* NutritionInfo.m */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +165,8 @@
 		70ED3F9F1EBA4D760090428D /* AppCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCoordinator.m; sourceTree = "<group>"; };
 		70ED3FA11EBA5AB80090428D /* NSString+PrettyDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PrettyDates.h"; sourceTree = "<group>"; };
 		70ED3FA21EBA5AB80090428D /* NSString+PrettyDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PrettyDates.m"; sourceTree = "<group>"; };
+		70ED3FA41EBAAA8F0090428D /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
+		70ED3FA51EBAAA8F0090428D /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableViewCell.m; sourceTree = "<group>"; };
 		90E7B4A9E15834511AF699A9 /* NutritionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionInfo.h; sourceTree = "<group>"; };
 		90E7B9056890092DC83530F7 /* NutritionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,6 +378,8 @@
 				700E64CC1E933E3B009E914F /* FoodTableViewCell.m */,
 				70ED3F991EB981AE0090428D /* PickerTableViewCell.h */,
 				70ED3F9A1EB981AE0090428D /* PickerTableViewCell.m */,
+				70ED3FA41EBAAA8F0090428D /* TextFieldTableViewCell.h */,
+				70ED3FA51EBAAA8F0090428D /* TextFieldTableViewCell.m */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -712,6 +717,7 @@
 				70ED3F8A1EB911260090428D /* MHMeal.m in Sources */,
 				7002C56B1EB02FF60086210A /* WeightTableViewCell.m in Sources */,
 				7002C5771EB031260086210A /* AddWeightViewController.m in Sources */,
+				70ED3FA61EBAAA8F0090428D /* TextFieldTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

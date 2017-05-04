@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MealManager.h"
-#import "MHFood.h"
+
+@class MealManager;
+@class MHFood;
 
 @interface FoodDetailViewController : UIViewController
 
