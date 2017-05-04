@@ -7,8 +7,10 @@
 //
 
 #import "FoodDetailViewController.h"
+#import "FoodInfoTableViewCell.h"
 #import "PickerTableViewCell.h"
 #import "TextFieldTableViewCell.h"
+#import "NutritionInfoTableViewCell.h"
 #import "MHFood.h"
 #import "MHServing.h"
 #import "MealManager.h"
@@ -26,8 +28,10 @@
 
 @end
 
-static const NSUInteger kServingSizeCellIndex = 0;
-static const NSUInteger kServingCountCellIndex = 1;
+static const NSUInteger kFoodInfoCellIndex = 0;
+static const NSUInteger kServingSizeCellIndex = 1;
+static const NSUInteger kServingCountCellIndex = 2;
+static const NSUInteger kFirstNutritionCellIndex = 3;
 
 @implementation FoodDetailViewController
 
@@ -37,6 +41,7 @@ static const NSUInteger kServingCountCellIndex = 1;
         self.food = food;
         self.nutrition = [food getNutritionForServing:food.defaultServing];
         self.nutritionIds = [self.nutrition allKeys];
+        self.selectedServing = food.defaultServing;
     }
     
     return self;
@@ -61,10 +66,12 @@ static const NSUInteger kServingCountCellIndex = 1;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.selectedServing = self.food.servings[row];
     
-    NSIndexPath *servingSizeIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *servingSizeIndexPath = [NSIndexPath indexPathForRow:kServingSizeCellIndex inSection:0];
     PickerTableViewCell *cell = [self.tableView cellForRowAtIndexPath:servingSizeIndexPath];
     
     cell.detailLabel.text = self.selectedServing.desc;
+    self.nutrition = [self.food getNutritionForServing:self.selectedServing];
+    [self.tableView reloadData];
 }
 
 - (void)saveItem {
@@ -77,45 +84,64 @@ static const NSUInteger kServingCountCellIndex = 1;
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2 ;//self.nutritionIds.count;
+    return 3 + self.nutritionIds.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     switch (indexPath.row) {
+        case kFoodInfoCellIndex: {
+            FoodInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"FoodInfoCell"];
+            
+            cell.titleLabel.text = self.food.name;
+            cell.subtitleLabel.text = self.food.brand ? self.food.brand : @"Generic";
+            cell.detailLabel.text = [NSString stringWithFormat:@"%@ kcal", self.food.calories];
+            
+            return cell;
+        }
         case kServingSizeCellIndex: {
-            PickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PickerCell"];
+            PickerTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PickerCell"];
             
             cell.pickerView.delegate = self;
             cell.pickerView.dataSource = self;
             cell.titleLabel.text = @"Serving Size";
-            cell.detailLabel.text = self.food.defaultServing.desc;
+            cell.detailLabel.text = self.selectedServing.desc;
             cell.pickerView.hidden = true;
             
-            [cell.pickerView selectRow:[self indexForDefaultServing] inComponent:0 animated:false];
+            [cell.pickerView selectRow:[self indexForSelectedServing] inComponent:0 animated:false];
 
             return cell;
         }
         case kServingCountCellIndex: {
-            TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldCell"];
+            TextFieldTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TextFieldCell"];
             
-            cell.titleLabel.text = @"Number of Servings";
+            cell.titleLabel.text = @"Servings";
             cell.textField.text = @"1";
             cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
 
             return cell;
         }
-        default:
-            break;
+        default: {
+            NutritionInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"NutritionCell"];
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            NSString *nutritionId = self.nutritionIds[indexPath.row - kFirstNutritionCellIndex];
+            
+            [formatter setPositiveFormat:@"0.##"];
+
+            cell.titleLabel.text = nutritionId;
+            cell.detailLabel.text = [formatter stringFromNumber:self.nutrition[nutritionId]];
+            
+            return cell;
+        }
     }
     
 
     return [[UITableViewCell alloc] init];
 }
 
-- (NSUInteger)indexForDefaultServing {
+- (NSUInteger)indexForSelectedServing {
     for (NSUInteger i = 0; i < self.food.servings.count; i++) {
-        if ([self.food.servings[i].desc isEqualToString:self.food.defaultServing.desc]) {
+        if ([self.food.servings[i].desc isEqualToString:self.selectedServing.desc]) {
             return i;
         }
     }
@@ -124,11 +150,22 @@ static const NSUInteger kServingCountCellIndex = 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PickerTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    [self.tableView beginUpdates];
-    cell.pickerView.hidden = !cell.pickerView.hidden;
-    [self.tableView endUpdates];
+    switch (indexPath.row) {
+        case kServingSizeCellIndex: {
+            PickerTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            
+            [self.tableView beginUpdates];
+            cell.pickerView.hidden = !cell.pickerView.hidden;
+            [self.tableView endUpdates];
+        }
+        case kServingCountCellIndex: {
+            TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldCell"];
+            
+            [cell.textField becomeFirstResponder];
+        }
+        default:
+            break;
+    }
 }
 
 - (void)loadView {
@@ -142,8 +179,11 @@ static const NSUInteger kServingCountCellIndex = 1;
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.tableView = [[UITableView alloc] init];
+    
+    [self.tableView registerClass:[FoodInfoTableViewCell class] forCellReuseIdentifier:@"FoodInfoCell"];
     [self.tableView registerClass:[PickerTableViewCell class] forCellReuseIdentifier:@"PickerCell"];
     [self.tableView registerClass:[TextFieldTableViewCell class] forCellReuseIdentifier:@"TextFieldCell"];
+    [self.tableView registerClass:[NutritionInfoTableViewCell class] forCellReuseIdentifier:@"NutritionCell"];
 
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 40.0;

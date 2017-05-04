@@ -46,7 +46,7 @@
 - (void)loadView {
     self.view = [[UIView alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.hidesBackButton = true;
+    //self.navigationItem.hidesBackButton = true;
     
     NSString *titleDate = [NSString formattedStringFromDate:self.mealManager.date];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addFood)];
@@ -81,7 +81,8 @@
     [titleContainer addSubview:nextButton];
     [titleContainer addSubview:titleLabel];
     
-    self.navigationItem.titleView = titleContainer;
+    //self.navigationItem.titleView = titleContainer;
+    self.navigationItem.title = @"Today";
     self.nutritionInfoView = [[NutritionInfo alloc] init];
     self.tableView = [[UITableView alloc] init];
     

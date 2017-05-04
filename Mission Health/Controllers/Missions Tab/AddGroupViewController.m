@@ -41,10 +41,12 @@
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.addGroupTableViewCell = [[TextFieldTableViewCell alloc] init];
+    self.addGroupTableViewCell.titleLabel.text = @"Group ID";
     self.addGroupTableViewCell.textField.placeholder = @"Group ID";
     self.addGroupTableViewCell.textField.keyboardType = UIKeyboardTypeNumberPad;
     
     self.createGroupTableViewCell = [[TextFieldTableViewCell alloc] init];
+    self.createGroupTableViewCell.titleLabel.text = @"Group Name";
     self.createGroupTableViewCell.textField.placeholder = @"Group Name";
     self.createGroupTableViewCell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
 }

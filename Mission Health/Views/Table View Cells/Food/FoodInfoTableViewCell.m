@@ -1,36 +1,43 @@
 //
-//  TextFieldTableViewCell.m
+//  FoodInfoTableViewCell.m
 //  Mission Health
 //
-//  Created by Connor Krupp on 5/3/17.
+//  Created by Connor Krupp on 5/4/17.
 //  Copyright © 2017 Connor Krupp. All rights reserved.
 //
 
-#import "TextFieldTableViewCell.h"
-#import "UIColor+MHColors.h"
+#import "FoodInfoTableViewCell.h"
 
-@implementation TextFieldTableViewCell
+@implementation FoodInfoTableViewCell
+
+- (instancetype)init {
+    return [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         self.titleLabel = [[UILabel alloc] init];
-        self.textField = [[UITextField alloc] init];
+        self.subtitleLabel = [[UILabel alloc] init];
+        self.detailLabel = [[UILabel alloc] init];
+        self.titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:21.0];
+        self.titleLabel.numberOfLines = 0;
+        self.titleLabel.adjustsFontSizeToFitWidth = true;
         
-        self.titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:16.0];
+        self.subtitleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:16.0];
+        self.subtitleLabel.textColor = [UIColor grayColor];
         
-        self.textField.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:16.0];
-        self.textField.textAlignment = NSTextAlignmentRight;
-        [self.textField setTextColor:[UIColor primaryColor]];
+        self.detailLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:16.0];
+        self.detailLabel.textAlignment = NSTextAlignmentRight;
         
-        UIStackView *labelsStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.titleLabel, self.textField]];
-        labelsStackView.axis = UILayoutConstraintAxisHorizontal;
-        labelsStackView.distribution = UIStackViewDistributionFillEqually;
+        UIStackView *primaryContentStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.titleLabel, self.subtitleLabel]];
+        primaryContentStackView.axis = UILayoutConstraintAxisVertical;
+        primaryContentStackView.spacing = 2;
         
-        UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[labelsStackView, self.textField]];
-        containerStackView.axis = UILayoutConstraintAxisVertical;
+        UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[primaryContentStackView, self.detailLabel]];
+        containerStackView.axis = UILayoutConstraintAxisHorizontal;
+        containerStackView.distribution = UIStackViewDistributionEqualSpacing;
         containerStackView.spacing = 20.0;
         
         containerStackView.translatesAutoresizingMaskIntoConstraints = false;
@@ -38,12 +45,13 @@
         [self addSubview:containerStackView];
         
         [NSLayoutConstraint activateConstraints:@[
+                                                  
                                                   [NSLayoutConstraint constraintWithItem:containerStackView
                                                                                attribute:NSLayoutAttributeTop
                                                                                relatedBy:NSLayoutRelationEqual
                                                                                   toItem:self attribute:NSLayoutAttributeTop
                                                                               multiplier:1.0
-                                                                                constant:20.0],
+                                                                                constant:12.0],
                                                   [NSLayoutConstraint constraintWithItem:containerStackView
                                                                                attribute:NSLayoutAttributeLeading
                                                                                relatedBy:NSLayoutRelationEqual
@@ -61,14 +69,12 @@
                                                                                relatedBy:NSLayoutRelationEqual
                                                                                   toItem:self attribute:NSLayoutAttributeBottom
                                                                               multiplier:1.0
-                                                                                constant:-20.0]
+                                                                                constant:-12.0]
                                                   
                                                   ]];
         
     }
     return self;
 }
-
-
 
 @end

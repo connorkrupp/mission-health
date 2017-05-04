@@ -51,7 +51,7 @@
         UITabBarController *tabBarController = [[UITabBarController alloc] init];
         tabBarController.viewControllers = @[groupNavigationController, self.dailySummaryNavigationController, progressNavigationController, profileNavigationController];
         
-        window.rootViewController = self.dailySummaryNavigationController;
+        window.rootViewController = tabBarController;
     }
     
     return self;
