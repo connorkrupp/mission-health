@@ -10,9 +10,11 @@
 
 @class MealManager;
 @class MHFood;
+@class MHConsumedFood;
 
 @interface FoodDetailViewController : UIViewController
 
 - (instancetype)initWithMealManager:(MealManager *)mealManager food:(MHFood *)food;
+- (instancetype)initWithMealManager:(MealManager *)mealManager consumedFood:(MHConsumedFood *)consumedFood;
 
 @end

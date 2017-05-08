@@ -35,9 +35,11 @@
 - (double)getTotalCarbs;
 - (double)getTotalProtein;
 
+- (NSString *)titleForMeal:(MHMeal *)meal;
 
-- (void)addFood:(MHFood *)food inMeal:(MHMeal *)meal;
-- (void)removeFood:(MHFood *)food;
+- (void)addFood:(MHConsumedFood *)food inMeal:(MHMeal *)meal;
+- (void)updateFood:(MHConsumedFood *)food toMeal:(MHMeal *)meal withServing:(MHServing *)serving withNumberOfServings:(double)numberOfServings;
+- (void)removeFood:(MHConsumedFood *)food;
 
 - (void)quickAddFoodWithName:(NSString *)name
                     calories:(double)calories

@@ -65,9 +65,11 @@
 
 - (double)getCaloriesForMeal:(MHMeal *)meal {
     double calories = 0;
-    for (MHFood *food in meal.foods) {
-        calories += [food.calories doubleValue];
+    
+    for (MHConsumedFood *consumedFood in meal.foods) {
+        calories += [consumedFood totalCalories];
     }
+    
     return calories;
 }
 
@@ -98,23 +100,38 @@
     self.protein = 0;
     
     for (MHMeal *meal in self.day.meals) {
-        for (MHFood *food in meal.foods) {
-            self.calories += [food.calories doubleValue];
-            self.fat += [food.fat doubleValue];
-            self.carbs += [food.carbs doubleValue];
-            self.protein += [food.protein doubleValue];
+        for (MHConsumedFood *consumedFood in meal.foods) {
+            self.calories += [consumedFood totalCalories];
+            self.fat += [consumedFood totalFat];
+            self.carbs += [consumedFood totalCarbs];
+            self.protein += [consumedFood totalProtein];
         }
     }
 }
 
-- (void)addFood:(MHFood *)food inMeal:(MHMeal *)meal {
+- (void)addFood:(MHConsumedFood *)food inMeal:(MHMeal *)meal {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
         [meal.foods addObject:food];
     }];
 }
 
-- (void)removeFood:(MHFood *)food {
+- (void)updateFood:(MHConsumedFood *)food toMeal:(MHMeal *)meal withServing:(MHServing *)serving withNumberOfServings:(double)numberOfServings {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        food.serving = serving;
+        food.numberOfServings = numberOfServings;
+        
+        if (![food.meal[0] isEqualToObject:meal]) {
+            MHMeal *oldMeal = food.meal[0];
+            
+            [oldMeal.foods removeObjectAtIndex:[oldMeal.foods indexOfObject:food]];
+            [meal.foods addObject:food];
+        }
+    }];
+}
+
+- (void)removeFood:(MHConsumedFood *)food {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm transactionWithBlock:^{
         [realm deleteObject:food];
@@ -128,9 +145,11 @@
     MHFood *food = [[MHFood alloc] init];
     food.calories = [NSNumber numberWithDouble:calories];
     food.name = name;
-    food.date = [NSDate new];
     
-    [self addFood:food inMeal:meal];
+    MHConsumedFood *consumedFood = [[MHConsumedFood alloc] init];
+    consumedFood.food = food;
+    
+    [self addFood:consumedFood inMeal:meal];
 }
 
 - (void)searchFoodsWithExpression:(NSString *)expression {
@@ -198,9 +217,6 @@
                                      
                                      food.foodId = [(NSNumber *)foodData[@"food_id"] intValue];
                                      
-                                     food.meal = 0;
-                                     food.date = [NSDate new];
-                                     
                                      [results addObject:food];
                                  }
                                  
@@ -241,6 +257,7 @@
                                      servingJSON = @[result];
                                  }
                                  
+                                 bool defaultSet = false;
                                  for (NSDictionary *foodData in servingJSON) {
                                      NSNumber *calories = [self getDecimalStringAsNumber:foodData[@"calories"]];
                                      RLMRealm *realm = [RLMRealm defaultRealm];
@@ -266,7 +283,7 @@
                                      [realm addObject:serving];
                                      [food.servings addObject:serving];
                                      
-                                     if ([calories isEqualToNumber:food.calories]) {
+                                     if (!defaultSet || [calories isEqualToNumber:food.calories]) {
                                          food.calcium = [self getDecimalStringAsNumber:foodData[@"calories"]];
                                          food.carbs = [self getDecimalStringAsNumber:foodData[@"carbohydrate"]];
                                          food.cholesterol = [self getDecimalStringAsNumber:foodData[@"cholesterol"]];
@@ -283,6 +300,7 @@
                                          food.vitaminC = [self getDecimalStringAsNumber:foodData[@"vitamin_c"]];
                                          
                                          food.defaultServing = serving;
+                                         defaultSet = true;
                                      }
                                      [[RLMRealm defaultRealm] commitWriteTransaction];
                                  }
@@ -303,6 +321,12 @@
 
 - (RLMArray<MHMeal *> *)meals {
     return self.day.meals;
+}
+
+- (NSString *)titleForMeal:(MHMeal *)meal {
+    NSArray *mealNames = @[@"Breakfast", @"Lunch", @"Dinner", @"Snacks"];
+
+    return mealNames[[self.day.meals indexOfObject:meal]];
 }
 
 @end

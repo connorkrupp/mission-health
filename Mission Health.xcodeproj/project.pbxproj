@@ -30,7 +30,9 @@
 		706004291E66735D00FA1EFF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706004281E66735D00FA1EFF /* Realm.framework */; };
 		7061D1151EBAED1D00C2565F /* FoodInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061D1141EBAED1D00C2565F /* FoodInfoTableViewCell.m */; };
 		7061D1181EBAF25E00C2565F /* NutritionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061D1171EBAF25E00C2565F /* NutritionInfoTableViewCell.m */; };
+		7061D11E1EBB73AD00C2565F /* MHConsumedFood.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061D11D1EBB73AD00C2565F /* MHConsumedFood.m */; };
 		70643C101E78805600DD3370 /* MHMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 70643C0F1E78805600DD3370 /* MHMember.m */; };
+		7068F9281EC1267500A32774 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7068F9271EC1267500A32774 /* HealthKit.framework */; };
 		709470421EAD192E00C2C876 /* NutritionInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 709470411EAD192E00C2C876 /* NutritionInfo.xib */; };
 		709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */; };
 		7094704B1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7094704A1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib */; };
@@ -117,8 +119,12 @@
 		7061D1141EBAED1D00C2565F /* FoodInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodInfoTableViewCell.m; sourceTree = "<group>"; };
 		7061D1161EBAF25E00C2565F /* NutritionInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionInfoTableViewCell.h; sourceTree = "<group>"; };
 		7061D1171EBAF25E00C2565F /* NutritionInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionInfoTableViewCell.m; sourceTree = "<group>"; };
+		7061D11C1EBB73AD00C2565F /* MHConsumedFood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConsumedFood.h; sourceTree = "<group>"; };
+		7061D11D1EBB73AD00C2565F /* MHConsumedFood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHConsumedFood.m; sourceTree = "<group>"; };
 		70643C0E1E78805600DD3370 /* MHMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMember.h; sourceTree = "<group>"; };
 		70643C0F1E78805600DD3370 /* MHMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMember.m; sourceTree = "<group>"; };
+		7068F9261EC1267500A32774 /* Mission Health.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mission Health.entitlements"; sourceTree = "<group>"; };
+		7068F9271EC1267500A32774 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		709470411EAD192E00C2C876 /* NutritionInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NutritionInfo.xib; sourceTree = "<group>"; };
 		709470471EAD380B00C2C876 /* DailySummaryTableSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailySummaryTableSectionHeader.h; sourceTree = "<group>"; };
 		709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySummaryTableSectionHeader.m; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				706004291E66735D00FA1EFF /* Realm.framework in Frameworks */,
+				7068F9281EC1267500A32774 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +216,8 @@
 				70ED3F891EB911260090428D /* MHMeal.m */,
 				70E223221E6676A40079FF22 /* MHFood.h */,
 				70E223231E6676A40079FF22 /* MHFood.m */,
+				7061D11C1EBB73AD00C2565F /* MHConsumedFood.h */,
+				7061D11D1EBB73AD00C2565F /* MHConsumedFood.m */,
 				7098D1EA1EB10F50000BF478 /* MHServing.h */,
 				7098D1EB1EB10F50000BF478 /* MHServing.m */,
 				70E2232D1E6710190079FF22 /* MHGroup.h */,
@@ -401,6 +410,7 @@
 		706004271E66735C00FA1EFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7068F9271EC1267500A32774 /* HealthKit.framework */,
 				706004281E66735D00FA1EFF /* Realm.framework */,
 			);
 			name = Frameworks;
@@ -440,6 +450,7 @@
 		70B721331E39B4D000401B9D /* Mission Health */ = {
 			isa = PBXGroup;
 			children = (
+				7068F9261EC1267500A32774 /* Mission Health.entitlements */,
 				7002C5851EB045A40086210A /* Categories */,
 				7098D1E91EB04826000BF478 /* Controllers */,
 				7002C55C1EAFA6FA0086210A /* Models */,
@@ -595,6 +606,11 @@
 						DevelopmentTeam = UHGXZH2S96;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					70B721491E39B4D000401B9D = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -687,6 +703,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7061D11E1EBB73AD00C2565F /* MHConsumedFood.m in Sources */,
 				709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */,
 				70E223381E6766B00079FF22 /* GroupViewController.m in Sources */,
 				7002C5801EB037B80086210A /* WeightInfo.m in Sources */,
@@ -866,6 +883,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Mission Health/Mission Health.entitlements";
 				DEVELOPMENT_TEAM = UHGXZH2S96;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -885,6 +903,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Mission Health/Mission Health.entitlements";
 				DEVELOPMENT_TEAM = UHGXZH2S96;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

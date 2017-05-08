@@ -7,11 +7,11 @@
 //
 
 #import <Realm/Realm.h>
-#import "MHFood.h"
+#import "MHConsumedFood.h"
 
 @interface MHMeal : RLMObject
 
-@property RLMArray<MHFood *><MHFood> *foods;
+@property RLMArray<MHConsumedFood *><MHConsumedFood> *foods;
 
 @end
 

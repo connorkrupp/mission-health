@@ -18,6 +18,7 @@
     MHMeal *lunch = [[MHMeal alloc] init];
     MHMeal *dinner = [[MHMeal alloc] init];
     MHMeal *snack = [[MHMeal alloc] init];
+    
     NSDate *todayDate = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
 
     return @{@"date": todayDate, @"meals": @[breakfast, lunch, dinner, snack]};

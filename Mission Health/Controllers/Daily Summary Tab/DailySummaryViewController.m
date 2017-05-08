@@ -205,7 +205,7 @@
     
     header.contentView.backgroundColor = [UIColor primaryColor];
     header.titleLabel.text = mealNames[section];
-    header.detailLabel.text = [NSString stringWithFormat:@"%.0f", [self.mealManager getCaloriesForMeal:self.mealManager.meals[section]]];
+    header.detailLabel.text = [NSString stringWithFormat:@"%.0f kcals", [self.mealManager getCaloriesForMeal:self.mealManager.meals[section]]];
     
     return header;
 }
@@ -220,19 +220,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FoodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    MHFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
+    MHConsumedFood *consumedFood = self.mealManager.meals[indexPath.section].foods[indexPath.row];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     
-    cell.titleLabel.text = food.name;
-    cell.subtitleLabel.text = food.brand != nil ? food.brand : @"Generic";
-    cell.detailLabel.text = [NSString stringWithFormat:@"%@", food.calories];
+    [formatter setPositiveFormat:@"0"];
+
+    NSString *cals = [formatter stringFromNumber:[NSNumber numberWithDouble:[consumedFood totalCalories]]];
+    NSString *brand = consumedFood.food.brand != nil ? consumedFood.food.brand : @"Generic";
+    NSString *amount = consumedFood.serving.desc;
     
+    cell.titleLabel.text = consumedFood.food.name;
+    cell.subtitleLabel.text = consumedFood.numberOfServings == 1 ? [NSString stringWithFormat:@"%@, %@", brand, amount] : [NSString stringWithFormat:@"%@, %.f x %@",  brand, consumedFood.numberOfServings, amount];
+    cell.detailLabel.text = [cals stringByAppendingString:@" kcals"];
+   
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MHFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
+    MHConsumedFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
     
     [self.coordinator dailySummaryViewController:self didSelectFood:food withMealManager:self.mealManager];
 }
@@ -243,7 +250,7 @@
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        MHFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
+        MHConsumedFood *food = self.mealManager.meals[indexPath.section].foods[indexPath.row];
         [self.mealManager removeFood:food];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         //[self.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];

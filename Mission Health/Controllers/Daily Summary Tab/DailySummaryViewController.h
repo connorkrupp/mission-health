@@ -10,13 +10,14 @@
 
 @class MealManager;
 @class MHFood;
+@class MHConsumedFood;
 @class DailySummaryViewController;
 
 @protocol DailySummaryViewControllerDelegate <NSObject>
 
 - (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didTapAddFoodWithMealManager:(MealManager *)mealManager;
 - (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didNavigateToDate:(NSDate *)toDate fromDate:(NSDate *)fromDate;
-- (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didSelectFood:(MHFood *)food withMealManager:(MealManager *)mealManager;
+- (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didSelectFood:(MHConsumedFood *)food withMealManager:(MealManager *)mealManager;
 
 @end
 

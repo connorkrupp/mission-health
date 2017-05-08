@@ -79,8 +79,8 @@
     [self.dailySummaryNavigationController pushViewController:newDailySummaryViewController animated:true];
 }
 
-- (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didSelectFood:(MHFood *)food withMealManager:(MealManager *)mealManager {
-    FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc] initWithMealManager:mealManager food:food];
+- (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didSelectFood:(MHConsumedFood *)food withMealManager:(MealManager *)mealManager {
+    FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc] initWithMealManager:mealManager consumedFood:food];
     
     [self.dailySummaryNavigationController pushViewController:foodDetailViewController animated:true];
 }

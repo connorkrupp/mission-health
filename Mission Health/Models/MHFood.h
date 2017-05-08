@@ -38,9 +38,6 @@
 
 @property int foodId;
 
-@property int meal;
-@property NSDate *date;
-
 - (NSDictionary<NSString *, NSNumber *> *)getNutritionForServing:(MHServing *)serving;
 
 @end

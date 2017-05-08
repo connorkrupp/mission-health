@@ -28,6 +28,8 @@
         
         self.subtitleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:15.0];
         self.subtitleLabel.textColor = [UIColor grayColor];
+        self.subtitleLabel.numberOfLines = 0;
+        self.subtitleLabel.adjustsFontSizeToFitWidth = true;
         
         self.detailLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:16.0];
         self.detailLabel.textAlignment = NSTextAlignmentRight;
