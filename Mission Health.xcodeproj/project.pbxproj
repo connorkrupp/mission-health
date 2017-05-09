@@ -33,6 +33,7 @@
 		7061D11E1EBB73AD00C2565F /* MHConsumedFood.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061D11D1EBB73AD00C2565F /* MHConsumedFood.m */; };
 		70643C101E78805600DD3370 /* MHMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 70643C0F1E78805600DD3370 /* MHMember.m */; };
 		7068F9281EC1267500A32774 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7068F9271EC1267500A32774 /* HealthKit.framework */; };
+		7068F92B1EC1284000A32774 /* MHHealthKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7068F92A1EC1284000A32774 /* MHHealthKitManager.m */; };
 		709470421EAD192E00C2C876 /* NutritionInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 709470411EAD192E00C2C876 /* NutritionInfo.xib */; };
 		709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */; };
 		7094704B1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7094704A1EAD382000C2C876 /* DailySummaryTableSectionHeader.xib */; };
@@ -125,6 +126,8 @@
 		70643C0F1E78805600DD3370 /* MHMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMember.m; sourceTree = "<group>"; };
 		7068F9261EC1267500A32774 /* Mission Health.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mission Health.entitlements"; sourceTree = "<group>"; };
 		7068F9271EC1267500A32774 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		7068F9291EC1284000A32774 /* MHHealthKitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHHealthKitManager.h; sourceTree = "<group>"; };
+		7068F92A1EC1284000A32774 /* MHHealthKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHHealthKitManager.m; sourceTree = "<group>"; };
 		709470411EAD192E00C2C876 /* NutritionInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NutritionInfo.xib; sourceTree = "<group>"; };
 		709470471EAD380B00C2C876 /* DailySummaryTableSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailySummaryTableSectionHeader.h; sourceTree = "<group>"; };
 		709470481EAD380B00C2C876 /* DailySummaryTableSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySummaryTableSectionHeader.m; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 				7002C5821EB0458E0086210A /* Missions */,
 				7002C5811EB045860086210A /* WeightHistory */,
 				7002C5841EB0459D0086210A /* Networking */,
+				7068F9291EC1284000A32774 /* MHHealthKitManager.h */,
+				7068F92A1EC1284000A32774 /* MHHealthKitManager.m */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -709,6 +714,7 @@
 				7002C5801EB037B80086210A /* WeightInfo.m in Sources */,
 				70E223241E6676A40079FF22 /* MHFood.m in Sources */,
 				70E223291E6707D30079FF22 /* MissionsCollectionViewController.m in Sources */,
+				7068F92B1EC1284000A32774 /* MHHealthKitManager.m in Sources */,
 				70E223351E675D3C0079FF22 /* AddGroupViewController.m in Sources */,
 				70B721391E39B4D000401B9D /* AppDelegate.m in Sources */,
 				70B721361E39B4D000401B9D /* main.m in Sources */,

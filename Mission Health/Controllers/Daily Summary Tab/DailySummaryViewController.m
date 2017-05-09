@@ -53,36 +53,28 @@
     
     self.navigationItem.rightBarButtonItem = addButton;
     
-    CGFloat containerHeight = self.navigationController.navigationBar.frame.size.height;
-    CGFloat containerWidth = 120;//0.95 * self.view.frame.size.width;
-    UIView *titleContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, containerWidth, containerHeight)];
-    
     UIButton *prevButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [prevButton setFrame:CGRectMake(0, 0, 20, 44)];
     [prevButton setTitle:@"\U00002329\U0000FE0E" forState:UIControlStateNormal];
     [prevButton addTarget:self action:@selector(navigateToPreviousDay) forControlEvents:UIControlEventTouchUpInside];
-    [prevButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [prevButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     prevButton.titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:18.0];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 44)];
-    [titleLabel setTextColor:[UIColor whiteColor]];
     [titleLabel setText:titleDate];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:18.0];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(containerWidth - 20, 0, 20, 44)];
     [nextButton setTitle:@"\U0000232A\U0000FE0E" forState:UIControlStateNormal];
     [nextButton addTarget:self action:@selector(navigateToNextDay) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     nextButton.titleLabel.font = [UIFont fontWithName:@"HKGrotesk-SemiBold" size:18.0];
     
-    [titleContainer addSubview:prevButton];
-    [titleContainer addSubview:nextButton];
-    [titleContainer addSubview:titleLabel];
+    UIStackView *dateNavigator = [[UIStackView alloc] initWithArrangedSubviews:@[prevButton, titleLabel, nextButton]];
+    dateNavigator.axis = UILayoutConstraintAxisHorizontal;
     
     //self.navigationItem.titleView = titleContainer;
-    self.navigationItem.title = @"Today";
+    self.navigationItem.title = @"Nutrition";
     self.nutritionInfoView = [[NutritionInfo alloc] init];
     self.tableView = [[UITableView alloc] init];
     
@@ -94,7 +86,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.nutritionInfoView, self.tableView]];
+    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[dateNavigator, self.nutritionInfoView, self.tableView]];
     
     containerStackView.axis = UILayoutConstraintAxisVertical;
     containerStackView.alignment = UIStackViewAlignmentFill;
@@ -106,7 +98,20 @@
     self.tableView.translatesAutoresizingMaskIntoConstraints = false;
     
     [NSLayoutConstraint activateConstraints:@[
-                                              
+                                              [NSLayoutConstraint constraintWithItem:prevButton
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:40.0],
+                                              [NSLayoutConstraint constraintWithItem:nextButton
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:40.0],
                                               [NSLayoutConstraint constraintWithItem:self.nutritionInfoView
                                                                            attribute:NSLayoutAttributeHeight
                                                                            relatedBy:NSLayoutRelationEqual

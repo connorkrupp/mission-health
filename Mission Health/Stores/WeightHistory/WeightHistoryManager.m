@@ -7,14 +7,53 @@
 //
 
 #import "WeightHistoryManager.h"
+#import "MHHealthKitManager.h"
 
 @interface WeightHistoryManager ()
 
 @property (strong, nonatomic) NSMutableArray<MHWeight *> *weightHistory;
+@property (strong, nonatomic) MHHealthKitManager *healthkitManager;
 
 @end
 
 @implementation WeightHistoryManager
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.weightHistory = [[NSMutableArray alloc] init];
+        
+        RLMResults<MHWeight *> *weights = [[MHWeight allObjects] sortedResultsUsingKeyPath:@"date" ascending:false];
+        
+        for (MHWeight *weight in weights) {
+            [self.weightHistory addObject:weight];
+        }
+        
+        self.healthkitManager = [[MHHealthKitManager alloc] init];
+        
+        NSDate *lastUpdate = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"HKLastBodyMassUpdate"];
+        if (!lastUpdate) {
+            [self.healthkitManager requestAuthorizationWithCompletion:^(BOOL success) {
+                if (success) {
+                    [self.healthkitManager getWeightsSinceDate:nil withCompletion:^(NSArray<MHWeight *> *weights) {
+                        RLMRealm *realm = [RLMRealm defaultRealm];
+                        [[RLMRealm defaultRealm] transactionWithBlock:^{
+                            for (MHWeight *weight in weights) {
+                                [realm addObject:weight];
+                                [self.weightHistory addObject:weight];
+                            }
+                        }];
+                        
+                        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"HKLastBodyMassUpdate"];
+                    }];
+                }
+            }];
+        } else {
+            NSLog(@"TODO");
+        }
+    }
+    
+    return self;
+}
 
 - (NSArray *)getWeightHistory {
     return self.weightHistory;
@@ -61,6 +100,8 @@
     [realm transactionWithBlock:^{
         [realm addObject:weight];
     }];
+    
+    [self.healthkitManager setWeightData:weight];
 }
 
 - (void)removeWeightDataAtIndex:(NSUInteger)index {
@@ -73,20 +114,6 @@
     [realm transactionWithBlock:^{
         [realm deleteObject:removedWeight];
     }];
-}
-
-- (WeightHistoryManager *)init {
-    if (self = [super init]) {
-        self.weightHistory = [[NSMutableArray alloc] init];
-        
-        RLMResults<MHWeight *> *weights = [[MHWeight allObjects] sortedResultsUsingKeyPath:@"date" ascending:false];
-        
-        for (MHWeight *weight in weights) {
-            [self.weightHistory addObject:weight];
-        }
-    }
-
-    return self;
 }
 
 @end

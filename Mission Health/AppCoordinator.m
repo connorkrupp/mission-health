@@ -71,12 +71,19 @@
 - (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didNavigateToDate:(NSDate *)toDate fromDate:(NSDate *)fromDate {
     MealManager *newMealManager = [[MealManager alloc] initWithDate:toDate];
     DailySummaryViewController *newDailySummaryViewController = [[DailySummaryViewController alloc] initWithMealManager:newMealManager];
-    
     newDailySummaryViewController.coordinator = self;
-    newDailySummaryViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    newDailySummaryViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+
     
-    [self.dailySummaryNavigationController pushViewController:newDailySummaryViewController animated:true];
+    if ([fromDate compare:toDate] == NSOrderedAscending) {
+        dailySummaryViewController.navigationItem.hidesBackButton = true;
+        newDailySummaryViewController.navigationItem.hidesBackButton = true;
+        [self.dailySummaryNavigationController setViewControllers:@[newDailySummaryViewController] animated:true];
+    } else {
+        dailySummaryViewController.navigationItem.hidesBackButton = true;
+        newDailySummaryViewController.navigationItem.hidesBackButton = true;
+        [self.dailySummaryNavigationController setViewControllers:@[newDailySummaryViewController, dailySummaryViewController]];
+        [self.dailySummaryNavigationController popViewControllerAnimated:true];
+    }
 }
 
 - (void)dailySummaryViewController:(DailySummaryViewController *)dailySummaryViewController didSelectFood:(MHConsumedFood *)food withMealManager:(MealManager *)mealManager {
