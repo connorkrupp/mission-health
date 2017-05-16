@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class GroupManager;
+
 @interface MissionsCollectionViewController : UICollectionViewController
+
+- (instancetype)initWithGroupManager:(GroupManager *)groupManager;
 
 @end

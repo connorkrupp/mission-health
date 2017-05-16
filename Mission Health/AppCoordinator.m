@@ -18,7 +18,13 @@
 #import "FoodSearchViewController.h"
 #import "QuickAddFoodViewController.h"
 
+#import "LoginViewController.h"
+#import "APIManager.h"
+#import "GroupManager.h"
+
 @interface AppCoordinator () <DailySummaryViewControllerDelegate, FoodSearchViewControllerDelegate>
+
+@property (strong, nonatomic) APIManager *apiManager;
 
 @property (strong, nonatomic) UINavigationController *dailySummaryNavigationController;
 
@@ -29,9 +35,10 @@
 - (instancetype)initWithWindow:(UIWindow *)window {
     if (self = [super init]) {
         
+        self.apiManager = [[APIManager alloc] init];
         MealManager *mealManager = [[MealManager alloc] init];
         
-        MissionsCollectionViewController *groupViewController = [[MissionsCollectionViewController alloc] init];
+        MissionsCollectionViewController *groupViewController = [[MissionsCollectionViewController alloc] initWithGroupManager:self.apiManager.groupManager];
         UINavigationController *groupNavigationController = [[UINavigationController alloc] initWithRootViewController:groupViewController];
         groupNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Missions" image:[UIImage imageNamed:@"cup"] tag:1];
         
@@ -44,8 +51,8 @@
         UINavigationController *progressNavigationController = [[UINavigationController alloc] initWithRootViewController:progressViewController];
         progressNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Progress" image:[UIImage imageNamed:@"progress"] tag:3];
         
-        UIViewController *profileViewController = [[UIViewController alloc] init];
-        UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+        LoginViewController *loginViewController = [[LoginViewController alloc] initWithAuthManager:self.apiManager.authManager];
+        UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         profileNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Me" image:[UIImage imageNamed:@"profile"] tag:4];
         
         UITabBarController *tabBarController = [[UITabBarController alloc] init];

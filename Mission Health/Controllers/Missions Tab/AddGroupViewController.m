@@ -31,6 +31,8 @@
     tableView.dataSource = self;
     self.view = tableView;
     self.tableView = tableView;
+    self.tableView.estimatedRowHeight = 40;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     self.navigationItem.title = @"Add Group";
     
@@ -57,7 +59,7 @@
 
 - (void)saveItem {
     if ([self.addGroupTableViewCell.textField.text length] > 0) {
-        int groupId = [self.addGroupTableViewCell.textField.text intValue];
+        NSString *groupId = self.addGroupTableViewCell.textField.text;
         [self.groupManager joinGroup:groupId];
         [self dismissViewControllerAnimated:true completion:nil];
     } else if ([self.createGroupTableViewCell.textField.text length] > 0) {

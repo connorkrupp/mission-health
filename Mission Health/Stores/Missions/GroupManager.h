@@ -11,6 +11,7 @@
 #import "MHGroup.h"
 #import "MHMember.h"
 
+@class APIManager;
 @class GroupManager;
 
 @protocol GroupManagerDelegate <NSObject>
@@ -24,8 +25,13 @@
 @property (strong, nonatomic) NSArray<MHGroup *> *groups;
 @property (weak, nonatomic) id<GroupManagerDelegate> delegate;
 
-- (void)getGroups;
+//@property (strong, nonatomic) NSArrayNSArray *> *groups;
+
+- (instancetype)initWithAPIManager:(APIManager *)apiManager;
+
+- (void)getUserGroups;
 - (void)createGroup:(NSString *)name;
-- (void)joinGroup:(int)groupId;
+- (void)joinGroup:(NSString *)groupId;
+- (void)getGroupMessages:(NSString *)groupId withCount:(int)count withOffset:(int)offset;
 
 @end

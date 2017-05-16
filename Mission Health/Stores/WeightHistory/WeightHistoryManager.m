@@ -31,6 +31,7 @@
         self.healthkitManager = [[MHHealthKitManager alloc] init];
         
         NSDate *lastUpdate = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"HKLastBodyMassUpdate"];
+        
         if (!lastUpdate) {
             [self.healthkitManager requestAuthorizationWithCompletion:^(BOOL success) {
                 if (success) {

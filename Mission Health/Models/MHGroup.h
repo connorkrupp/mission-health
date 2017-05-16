@@ -9,13 +9,16 @@
 #import <Realm/Realm.h>
 
 #import "MHMember.h"
+#import "MHMessage.h"
 
 @interface MHGroup : RLMObject
 
-@property int groupId;
+@property NSString *groupId;
 @property NSString *name;
 
 @property RLMArray<MHMember *><MHMember> *members;
+
+@property RLMArray<MHMessage *><MHMessage> *messages;
 
 @end
 

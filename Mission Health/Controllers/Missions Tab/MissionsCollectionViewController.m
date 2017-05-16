@@ -24,7 +24,7 @@
 
 static NSString * const reuseIdentifier = @"GroupCell";
 
-- (instancetype)init {
+- (instancetype)initWithGroupManager:(GroupManager *)groupManager {
     UICollectionViewLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
     self = [self initWithCollectionViewLayout:layout];
@@ -35,9 +35,9 @@ static NSString * const reuseIdentifier = @"GroupCell";
     self.title = @"Missions";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroup)];
     
-    self.groupManager = [[GroupManager alloc] init];
+    self.groupManager = groupManager;
     self.groupManager.delegate = self;
-    [self.groupManager getGroups];
+    [self.groupManager getUserGroups];
     
     return self;
 }
@@ -84,7 +84,7 @@ static NSString * const reuseIdentifier = @"GroupCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     MHGroup *group = self.groupManager.groups[indexPath.row];
     
-    GroupViewController *groupViewController = [[GroupViewController alloc] initWithGroup:group];
+    GroupViewController *groupViewController = [[GroupViewController alloc] initWithGroupManager:_groupManager group:group];
     
     [self.navigationController pushViewController:groupViewController animated:true];
 }

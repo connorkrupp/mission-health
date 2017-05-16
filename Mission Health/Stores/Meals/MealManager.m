@@ -165,7 +165,7 @@
     
     NSLog(@"Searching with expression: %@", expression);
     
-    [APIManager secureTaskWithRoute:route
+    [APIManager oauthTaskWithRoute:route
                           atBaseURL:baseURL
                         usingMethod:method
                      withParameters:parameters
@@ -240,7 +240,7 @@
                                                  @"food_id": [NSString stringWithFormat:@"%d", food.foodId]
                                                  };
     
-    [APIManager secureTaskWithRoute:route
+    [APIManager oauthTaskWithRoute:route
                           atBaseURL:baseURL
                         usingMethod:method
                      withParameters:parameters

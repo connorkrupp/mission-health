@@ -10,12 +10,54 @@
 #include <CommonCrypto/CommonHMAC.h>
 
 #import "APIManager.h"
+#import "AuthManager.h"
+#import "GroupManager.h"
+#import "MHAccount.h"
+
+@interface APIManager ()
+
+@property (strong, nonatomic) NSURL *baseURL;
+
+@end
 
 @implementation APIManager
 
+- (instancetype)init {
+    if (self = [super init]) {
+        #if TARGET_IPHONE_SIMULATOR
+            _baseURL = [[NSURL alloc] initWithString:@"http://localhost:3000/v1"];
+        #else
+            _baseURL = [[NSURL alloc] initWithString:@"http://mission-health.herokuapp.com/api"];
+        #endif
+        
+        self.authManager = [[AuthManager alloc] initWithAPIManager:self];
+        self.groupManager = [[GroupManager alloc] initWithAPIManager:self];
+    }
+    
+    return self;
+}
+
 #pragma mark - Public Networking Methods
 
-+ (void)taskWithRoute:(NSString *)route atBaseURL:(NSURL *)baseURL parameters:(NSDictionary<NSString *, id> *)parameters usingMethod:(NSString *)method completion:(void (^)(NSDictionary<NSString *, id> *))completionBlock {
+- (void)secureTaskWithRoute:(NSString *)route
+                usingMethod:(NSString *)method
+             withParameters:(NSDictionary<NSString *, id> *)parameters
+                 completion:(void (^)(NSDictionary<NSString *, id> *))completionBlock {
+    
+    NSDictionary<NSString *, id> *headers = @{
+                                              @"Authorization": [NSString stringWithFormat:@"Bearer %@", _account.token]
+                                              };
+    
+    NSURLRequest *request = [APIManager createRequestForRoute:route atBaseURL:_baseURL withParameters:parameters withHeaders:headers usingHTTPMethod:method];
+    
+    [APIManager taskWithRequest:request completion:completionBlock];
+}
+
++ (void)taskWithRoute:(NSString *)route
+            atBaseURL:(NSURL *)baseURL
+       withParameters:(NSDictionary<NSString *, id> *)parameters
+          usingMethod:(NSString *)method
+           completion:(void (^)(NSDictionary<NSString *, id> *))completionBlock {
     
     if (![method isEqualToString:@"GET"] &&
         ![method isEqualToString:@"POST"] &&
@@ -26,13 +68,14 @@
         return;
     }
     
-    NSURLRequest *request = [self createRequestForRoute:route atBaseURL:baseURL parameters:parameters usingHTTPMethod:method];
+    NSURLRequest *request = [APIManager createRequestForRoute:route atBaseURL:baseURL withParameters:parameters withHeaders:nil usingHTTPMethod:method];
     
-    [self taskWithRequest:request completion:completionBlock];
+    [APIManager taskWithRequest:request completion:completionBlock];
+
 }
 
-+ (void)secureTaskWithRoute:(NSString *)route
-                  atBaseURL:(NSURL *)baseURL
++ (void)oauthTaskWithRoute:(NSString *)route
+                 atBaseURL:(NSURL *)baseURL
                 usingMethod:(NSString *)method
              withParameters:(NSDictionary<NSString *, id> *)parameters
             withConsumerKey:(NSString *)consumerKey
@@ -67,6 +110,7 @@
     [self taskWithRequest:request completion:completionBlock];
 }
 
+
 #pragma mark - Networking Helpers
 
 + (void)taskWithRequest:(NSURLRequest *)request completion:(void (^)(NSDictionary<NSString *, id> *))completionBlock {
@@ -99,7 +143,11 @@
 
 #pragma mark - Request Generation Helpers
 
-+ (NSURLRequest *)createRequestForRoute:(NSString *)route atBaseURL:(NSURL *)baseURL parameters:(NSDictionary<NSString *, id> *)parameters usingHTTPMethod:(NSString *)method {
++ (NSURLRequest *)createRequestForRoute:(NSString *)route
+                              atBaseURL:(NSURL *)baseURL
+                         withParameters:(NSDictionary<NSString *, id> *)parameters
+                            withHeaders:(NSDictionary<NSString *, id> *)headers
+                        usingHTTPMethod:(NSString *)method {
     
     // Generate URL Components
     NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:[baseURL URLByAppendingPathComponent:route] resolvingAgainstBaseURL:false];
@@ -117,6 +165,12 @@
     if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"PATCH"]) {
         request.HTTPBody = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
         [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    }
+    
+    if (headers) {
+        for (NSString *header in headers) {
+            [request addValue:headers[header] forHTTPHeaderField:header];
+        }
     }
     
     return request;

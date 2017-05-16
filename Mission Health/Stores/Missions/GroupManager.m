@@ -12,69 +12,69 @@
 @interface GroupManager ()
 
 @property (strong, nonatomic) NSURL *baseURL;
+@property (weak, nonatomic) APIManager  *apiManager;
 
 @end
 
-
 @implementation GroupManager
 
-
-- (instancetype)init {
+- (instancetype)initWithAPIManager:(APIManager *)apiManager {
     if (self = [super init]) {
-#if TARGET_IPHONE_SIMULATOR
-        self.baseURL = [[NSURL alloc] initWithString:@"http://localhost:3000/api"];
-#else
-        self.baseURL = [[NSURL alloc] initWithString:@"http://mission-health.herokuapp.com/api"];
-#endif
+        self.apiManager = apiManager;
     }
     
     return self;
 }
 
-- (void)getGroups {
-    [APIManager taskWithRoute:@"/users/1/groups" atBaseURL:self.baseURL parameters:nil usingMethod:@"GET" completion:^(NSDictionary<NSString *,id> *json) {
-        
-        NSMutableArray *groups = [[NSMutableArray alloc] init];
-        for (NSDictionary *data in json[@"data"]) {
-            MHGroup *group = [[MHGroup alloc] init];
-              
-            group.groupId = [(NSNumber *)data[@"group_id"] intValue];
-            group.name = data[@"name"];
-            
-            for (NSDictionary *user in data[@"users"]) {
-                MHMember *member = [[MHMember alloc] init];
+- (void)getUserGroups {
+    [self.apiManager secureTaskWithRoute:@"/user/groups" usingMethod:@"GET" withParameters:nil completion:^(NSDictionary<NSString *,id> *json) {
+        if (json[@"status"]) {
+            NSMutableArray *groups = [[NSMutableArray alloc] init];
+            for (NSDictionary *data in json[@"groups"]) {
+                MHGroup *group = [[MHGroup alloc] init];
                 
-                member.memberId = [(NSNumber *)user[@"id"] intValue];
-                member.name = user[@"name"];
+                group.groupId = data[@"_id"];
+                group.name = data[@"name"];
                 
-                [group.members addObject:member];
+                for (NSString *user in data[@"members"]) {
+                    MHMember *member = [[MHMember alloc] init];
+                    
+                    member.memberId = user;//[(NSNumber *)user[@"id"] intValue];
+                    member.name = user;//[@"id"];
+                    
+                    [group.members addObject:member];
+                }
+                
+                
+                [groups addObject:group];
             }
             
-              
-            [groups addObject:group];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.groups = groups;
+                [self.delegate groupManagerDidLoadGroups:self];
+            });
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.groups = groups;
-            [self.delegate groupManagerDidLoadGroups:self];
-        });
     }];
 }
 
 - (void)createGroup:(NSString *)name {
-    NSDictionary<NSString *, id> *parameters = @{@"name": name, @"user_id": @1};
-    [APIManager taskWithRoute:@"/groups" atBaseURL:self.baseURL parameters:parameters usingMethod:@"POST" completion:^(NSDictionary<NSString *,id> *json) {
+    NSDictionary<NSString *, id> *parameters = @{@"name": name, @"is_public": @true};
+    [self.apiManager secureTaskWithRoute:@"/groups" usingMethod:@"POST" withParameters:parameters completion:^(NSDictionary<NSString *,id> *json) {
         
-        [self getGroups];
+        [self getUserGroups];
     }];
 }
 
-- (void)joinGroup:(int)groupId {
+- (void)joinGroup:(NSString *)groupId {
     NSDictionary<NSString *, id> *parameters = @{@"user_id": @1};
-    [APIManager taskWithRoute:[NSString stringWithFormat:@"/groups/%d/join", groupId] atBaseURL:self.baseURL parameters:parameters usingMethod:@"POST" completion:^(NSDictionary<NSString *,id> *json) {
+    [self.apiManager secureTaskWithRoute:[NSString stringWithFormat:@"/groups/%@/join", groupId] usingMethod:@"POST" withParameters:parameters completion:^(NSDictionary<NSString *,id> *json) {
         
-        [self getGroups];
+        [self getUserGroups];
     }];
+}
+
+- (void)getGroupMessages:(NSString *)groupId withCount:(int)count withOffset:(int)offset {
+    
 }
 
 @end

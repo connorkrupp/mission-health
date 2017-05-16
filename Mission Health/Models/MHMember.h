@@ -10,7 +10,7 @@
 
 @interface MHMember : RLMObject
 
-@property int memberId;
+@property NSString *memberId;
 @property NSString *name;
 
 @end
