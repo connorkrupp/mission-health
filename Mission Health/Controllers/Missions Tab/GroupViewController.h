@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "MHGroup.h"
 
-@class GroupManager;
+@class GroupListManager;
 
-@interface GroupViewController : UIViewController
+@interface GroupViewController : UITableViewController
 
-- (instancetype)initWithGroupManager:(GroupManager *)groupManager group:(MHGroup *)group;
+- (instancetype)initWithGroupListManager:(GroupListManager *)groupManager group:(MHGroup *)group;
 
 @end

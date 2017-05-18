@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 @class MHAccount;
 @class AuthManager;
-@class GroupManager;
+@class GroupListManager;
 
 @interface APIManager : NSObject
 
 @property (strong, nonatomic) MHAccount *account;
 @property (strong, nonatomic) AuthManager *authManager;
-@property (strong, nonatomic) GroupManager *groupManager;
+@property (strong, nonatomic) GroupListManager *groupListManager;
 
 - (void)secureTaskWithRoute:(NSString *)route
                 usingMethod:(NSString *)method

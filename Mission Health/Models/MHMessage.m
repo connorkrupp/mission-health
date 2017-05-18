@@ -11,6 +11,10 @@
 
 @implementation MHMessage
 
++ (NSString *)primaryKey {
+    return @"messageId";
+}
+
 // Specify default values for properties
 
 //+ (NSDictionary *)defaultPropertyValues

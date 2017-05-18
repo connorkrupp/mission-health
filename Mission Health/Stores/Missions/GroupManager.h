@@ -8,30 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MHGroup.h"
-#import "MHMember.h"
-
 @class APIManager;
 @class GroupManager;
+@class MHGroup;
+@class MHMember;
 
 @protocol GroupManagerDelegate <NSObject>
 
-- (void)groupManagerDidLoadGroups:(GroupManager *)groupManager;
+- (void)groupManagerDidLoadMessages:(GroupManager *)groupManager;
+- (void)groupManagerDidLoadMessagesWithNoChanges:(GroupManager *)groupManager;
 
 @end
 
 @interface GroupManager : NSObject
 
-@property (strong, nonatomic) NSArray<MHGroup *> *groups;
+@property (strong, nonatomic) MHGroup *group;
 @property (weak, nonatomic) id<GroupManagerDelegate> delegate;
 
-//@property (strong, nonatomic) NSArrayNSArray *> *groups;
+- (instancetype)initWithAPIManager:(APIManager *)apiManager group:(MHGroup *)group;
 
-- (instancetype)initWithAPIManager:(APIManager *)apiManager;
-
-- (void)getUserGroups;
-- (void)createGroup:(NSString *)name;
-- (void)joinGroup:(NSString *)groupId;
-- (void)getGroupMessages:(NSString *)groupId withCount:(int)count withOffset:(int)offset;
+- (void)reloadGroupMessages;
+- (void)composeMessageWithBody:(NSString *)body;
 
 @end

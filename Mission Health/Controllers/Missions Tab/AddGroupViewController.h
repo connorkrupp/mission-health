@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "GroupManager.h"
+@class GroupListManager;
 
 @interface AddGroupViewController : UITableViewController
 
-- (instancetype)initWithGroupManager:(GroupManager *)groupManager;
+- (instancetype)initWithGroupListManager:(GroupListManager *)groupListManager;
     
 @end

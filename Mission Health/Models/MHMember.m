@@ -10,4 +10,8 @@
 
 @implementation MHMember
 
++ (NSString *)primaryKey {
+    return @"memberId";
+}
+
 @end

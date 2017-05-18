@@ -12,6 +12,7 @@
 
 @interface MHMessage : RLMObject
 
+@property NSString *messageId;
 @property NSString *body;
 @property MHMember *sender;
 @property NSDate *date;

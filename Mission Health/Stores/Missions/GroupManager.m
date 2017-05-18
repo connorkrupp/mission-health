@@ -8,73 +8,98 @@
 
 #import "GroupManager.h"
 #import "APIManager.h"
+#import "MHGroup.h"
+#import "MHMessage.h"
+#import "NSDate+JSONFormat.h"
 
 @interface GroupManager ()
 
-@property (strong, nonatomic) NSURL *baseURL;
-@property (weak, nonatomic) APIManager  *apiManager;
+@property (weak, nonatomic) APIManager *apiManager;
+@property (strong, nonatomic) NSDictionary *messageIds;
 
 @end
 
 @implementation GroupManager
 
-- (instancetype)initWithAPIManager:(APIManager *)apiManager {
+- (instancetype)initWithAPIManager:(APIManager *)apiManager group:(MHGroup *)group {
     if (self = [super init]) {
-        self.apiManager = apiManager;
+        _apiManager = apiManager;
+        _group = group;
+        
+        [self updateMessageIds];
     }
     
     return self;
 }
 
-- (void)getUserGroups {
-    [self.apiManager secureTaskWithRoute:@"/user/groups" usingMethod:@"GET" withParameters:nil completion:^(NSDictionary<NSString *,id> *json) {
+// Must be called on main thread
+- (void)updateMessageIds {
+    NSMutableDictionary *messageIds = [[NSMutableDictionary alloc] init];
+    
+    for (MHMessage *message in self.group.messages) {
+        messageIds[message.messageId] = message.date;
+    }
+    
+    self.messageIds = messageIds;
+}
+
+- (void)reloadGroupMessages {
+    [self getGroupMessagesWithLimit:20000];
+}
+
+- (void)getGroupMessagesWithLimit:(int)limit {
+    NSDictionary<NSString *, id> *parameters = @{
+                                                 @"limit": [NSNumber numberWithInt:limit]
+                                                 };
+    [self.apiManager secureTaskWithRoute:[NSString stringWithFormat:@"/groups/%@/messages", _group.groupId] usingMethod:@"GET" withParameters:parameters completion:^(NSDictionary<NSString *,id> *json) {
+        
         if (json[@"status"]) {
-            NSMutableArray *groups = [[NSMutableArray alloc] init];
-            for (NSDictionary *data in json[@"groups"]) {
-                MHGroup *group = [[MHGroup alloc] init];
+            NSMutableArray<MHMessage *> *messagesToAdd = [[NSMutableArray alloc] init];
+            
+            for (NSDictionary *messageData in json[@"messages"]) {
+                NSString *messageId = messageData[@"_id"];
                 
-                group.groupId = data[@"_id"];
-                group.name = data[@"name"];
-                
-                for (NSString *user in data[@"members"]) {
-                    MHMember *member = [[MHMember alloc] init];
+                if (!self.messageIds[messageId]) {
+                    MHMessage *message = [[MHMessage alloc] init];
+                    message.messageId = messageData[@"_id"];
+                    message.body = messageData[@"body"];
+                    message.date = [NSDate dateFromJSONString:messageData[@"createdAt"]];
                     
-                    member.memberId = user;//[(NSNumber *)user[@"id"] intValue];
-                    member.name = user;//[@"id"];
-                    
-                    [group.members addObject:member];
+                    //message.sender = messageData[@"sender"];
+                    [messagesToAdd addObject:message];
                 }
-                
-                
-                [groups addObject:group];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.groups = groups;
-                [self.delegate groupManagerDidLoadGroups:self];
+                if (messagesToAdd.count > 0) {
+                    RLMRealm *realm = [RLMRealm defaultRealm];
+                    [realm transactionWithBlock:^{
+                        for (MHMessage *message in messagesToAdd) {
+                            [self.group.messages insertObject:message atIndex:0];
+                        }
+                    }];
+                    
+                    [self updateMessageIds];
+                    [self.delegate groupManagerDidLoadMessages:self];
+                } else {
+                    [self.delegate groupManagerDidLoadMessagesWithNoChanges:self];
+                }
             });
         }
-    }];
-}
-
-- (void)createGroup:(NSString *)name {
-    NSDictionary<NSString *, id> *parameters = @{@"name": name, @"is_public": @true};
-    [self.apiManager secureTaskWithRoute:@"/groups" usingMethod:@"POST" withParameters:parameters completion:^(NSDictionary<NSString *,id> *json) {
         
-        [self getUserGroups];
+
     }];
 }
 
-- (void)joinGroup:(NSString *)groupId {
-    NSDictionary<NSString *, id> *parameters = @{@"user_id": @1};
-    [self.apiManager secureTaskWithRoute:[NSString stringWithFormat:@"/groups/%@/join", groupId] usingMethod:@"POST" withParameters:parameters completion:^(NSDictionary<NSString *,id> *json) {
-        
-        [self getUserGroups];
-    }];
-}
+- (void)composeMessageWithBody:(NSString *)body {
+    NSDictionary<NSString *, id> *parameters = @{
+                                                 @"message": body
+                                                 };
 
-- (void)getGroupMessages:(NSString *)groupId withCount:(int)count withOffset:(int)offset {
-    
+    [self.apiManager secureTaskWithRoute:[NSString stringWithFormat:@"/groups/%@/messages", _group.groupId] usingMethod:@"POST" withParameters:parameters completion:^(NSDictionary<NSString *,id> *json) {
+        //TODO
+        [self reloadGroupMessages];
+    }];
 }
 
 @end

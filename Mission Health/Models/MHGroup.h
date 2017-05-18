@@ -15,9 +15,12 @@
 
 @property NSString *groupId;
 @property NSString *name;
+@property BOOL isPublic;
+
+@property NSDate *lastUpdatedMetadata;
+@property NSDate *lastUpdatedMessages;
 
 @property RLMArray<MHMember *><MHMember> *members;
-
 @property RLMArray<MHMessage *><MHMessage> *messages;
 
 @end

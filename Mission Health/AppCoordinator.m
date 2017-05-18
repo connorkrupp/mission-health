@@ -20,7 +20,7 @@
 
 #import "LoginViewController.h"
 #import "APIManager.h"
-#import "GroupManager.h"
+#import "GroupListManager.h"
 
 @interface AppCoordinator () <DailySummaryViewControllerDelegate, FoodSearchViewControllerDelegate>
 
@@ -38,7 +38,7 @@
         self.apiManager = [[APIManager alloc] init];
         MealManager *mealManager = [[MealManager alloc] init];
         
-        MissionsCollectionViewController *groupViewController = [[MissionsCollectionViewController alloc] initWithGroupManager:self.apiManager.groupManager];
+        MissionsCollectionViewController *groupViewController = [[MissionsCollectionViewController alloc] initWithGroupListManager:self.apiManager.groupListManager];
         UINavigationController *groupNavigationController = [[UINavigationController alloc] initWithRootViewController:groupViewController];
         groupNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Missions" image:[UIImage imageNamed:@"cup"] tag:1];
         

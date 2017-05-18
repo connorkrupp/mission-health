@@ -8,10 +8,11 @@
 
 #import "AddGroupViewController.h"
 #import "TextFieldTableViewCell.h"
+#import "GroupListManager.h"
 
 @interface AddGroupViewController ()
 
-@property (strong, nonatomic) GroupManager *groupManager;
+@property (strong, nonatomic) GroupListManager *groupListManager;
 @property (strong, nonatomic) TextFieldTableViewCell *addGroupTableViewCell;
 @property (strong, nonatomic) TextFieldTableViewCell *createGroupTableViewCell;
 
@@ -19,8 +20,8 @@
 
 @implementation AddGroupViewController
 
-- (instancetype)initWithGroupManager:(GroupManager *)groupManager {
-    self.groupManager = groupManager;
+- (instancetype)initWithGroupListManager:(GroupListManager *)groupListManager {
+    self.groupListManager = groupListManager;
     
     return [self initWithStyle:UITableViewStyleGrouped];
 }
@@ -60,10 +61,10 @@
 - (void)saveItem {
     if ([self.addGroupTableViewCell.textField.text length] > 0) {
         NSString *groupId = self.addGroupTableViewCell.textField.text;
-        [self.groupManager joinGroup:groupId];
+        [self.groupListManager joinGroup:groupId];
         [self dismissViewControllerAnimated:true completion:nil];
     } else if ([self.createGroupTableViewCell.textField.text length] > 0) {
-        [self.groupManager createGroup:self.createGroupTableViewCell.textField.text];
+        [self.groupListManager createGroup:self.createGroupTableViewCell.textField.text];
         [self dismissViewControllerAnimated:true completion:nil];
     }
 }

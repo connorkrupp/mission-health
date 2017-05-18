@@ -51,6 +51,8 @@
 		70B7214F1E39B4D000401B9D /* Mission_HealthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B7214E1E39B4D000401B9D /* Mission_HealthTests.m */; };
 		70B7215A1E39B4D000401B9D /* Mission_HealthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B721591E39B4D000401B9D /* Mission_HealthUITests.m */; };
 		70C0CB901ECAA35000BE6625 /* MHMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C0CB8F1ECAA35000BE6625 /* MHMessage.m */; };
+		70C0CB931ECB536D00BE6625 /* GroupListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C0CB921ECB536D00BE6625 /* GroupListManager.m */; };
+		70C0CB9E1ECB728400BE6625 /* GroupMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C0CB9D1ECB728400BE6625 /* GroupMessageTableViewCell.m */; };
 		70E223241E6676A40079FF22 /* MHFood.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223231E6676A40079FF22 /* MHFood.m */; };
 		70E223291E6707D30079FF22 /* MissionsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223281E6707D30079FF22 /* MissionsCollectionViewController.m */; };
 		70E2232C1E6708430079FF22 /* MissionsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */; };
@@ -58,6 +60,7 @@
 		70E223321E6710650079FF22 /* GroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223311E6710650079FF22 /* GroupManager.m */; };
 		70E223351E675D3C0079FF22 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223341E675D3B0079FF22 /* AddGroupViewController.m */; };
 		70E223381E6766B00079FF22 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E223371E6766B00079FF22 /* GroupViewController.m */; };
+		70EB88451ECD44DA0042BF79 /* NSDate+JSONFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EB88441ECD44DA0042BF79 /* NSDate+JSONFormat.m */; };
 		70ED3F8A1EB911260090428D /* MHMeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED3F891EB911260090428D /* MHMeal.m */; };
 		70ED3F8D1EB9121B0090428D /* MHDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED3F8C1EB9121B0090428D /* MHDay.m */; };
 		70ED3F901EB9245E0090428D /* DayNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED3F8F1EB9245E0090428D /* DayNavigator.m */; };
@@ -165,6 +168,10 @@
 		70B7215B1E39B4D000401B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70C0CB8E1ECAA35000BE6625 /* MHMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMessage.h; sourceTree = "<group>"; };
 		70C0CB8F1ECAA35000BE6625 /* MHMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMessage.m; sourceTree = "<group>"; };
+		70C0CB911ECB536D00BE6625 /* GroupListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupListManager.h; sourceTree = "<group>"; };
+		70C0CB921ECB536D00BE6625 /* GroupListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupListManager.m; sourceTree = "<group>"; };
+		70C0CB9C1ECB728400BE6625 /* GroupMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMessageTableViewCell.h; sourceTree = "<group>"; };
+		70C0CB9D1ECB728400BE6625 /* GroupMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMessageTableViewCell.m; sourceTree = "<group>"; };
 		70E223221E6676A40079FF22 /* MHFood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFood.h; sourceTree = "<group>"; };
 		70E223231E6676A40079FF22 /* MHFood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFood.m; sourceTree = "<group>"; };
 		70E223271E6707D30079FF22 /* MissionsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsCollectionViewController.h; sourceTree = "<group>"; };
@@ -179,6 +186,8 @@
 		70E223341E675D3B0079FF22 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
 		70E223361E6766B00079FF22 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
 		70E223371E6766B00079FF22 /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupViewController.m; sourceTree = "<group>"; };
+		70EB88431ECD44DA0042BF79 /* NSDate+JSONFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JSONFormat.h"; sourceTree = "<group>"; };
+		70EB88441ECD44DA0042BF79 /* NSDate+JSONFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JSONFormat.m"; sourceTree = "<group>"; };
 		70ED3F881EB911260090428D /* MHMeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMeal.h; sourceTree = "<group>"; };
 		70ED3F891EB911260090428D /* MHMeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMeal.m; sourceTree = "<group>"; };
 		70ED3F8B1EB9121B0090428D /* MHDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHDay.h; sourceTree = "<group>"; };
@@ -343,6 +352,8 @@
 			children = (
 				70E223301E6710650079FF22 /* GroupManager.h */,
 				70E223311E6710650079FF22 /* GroupManager.m */,
+				70C0CB911ECB536D00BE6625 /* GroupListManager.h */,
+				70C0CB921ECB536D00BE6625 /* GroupListManager.m */,
 			);
 			path = Missions;
 			sourceTree = "<group>";
@@ -372,6 +383,8 @@
 				7002C57A1EB031EF0086210A /* UIColor+MHColors.m */,
 				70ED3FA11EBA5AB80090428D /* NSString+PrettyDates.h */,
 				70ED3FA21EBA5AB80090428D /* NSString+PrettyDates.m */,
+				70EB88431ECD44DA0042BF79 /* NSDate+JSONFormat.h */,
+				70EB88441ECD44DA0042BF79 /* NSDate+JSONFormat.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -425,6 +438,8 @@
 			children = (
 				70E2232A1E6708430079FF22 /* MissionsCollectionViewCell.h */,
 				70E2232B1E6708430079FF22 /* MissionsCollectionViewCell.m */,
+				70C0CB9C1ECB728400BE6625 /* GroupMessageTableViewCell.h */,
+				70C0CB9D1ECB728400BE6625 /* GroupMessageTableViewCell.m */,
 			);
 			path = Missions;
 			sourceTree = "<group>";
@@ -745,6 +760,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7061D11E1EBB73AD00C2565F /* MHConsumedFood.m in Sources */,
+				70EB88451ECD44DA0042BF79 /* NSDate+JSONFormat.m in Sources */,
 				709470491EAD380B00C2C876 /* DailySummaryTableSectionHeader.m in Sources */,
 				70E223381E6766B00079FF22 /* GroupViewController.m in Sources */,
 				7002C5801EB037B80086210A /* WeightInfo.m in Sources */,
@@ -768,6 +784,7 @@
 				70ED3F8D1EB9121B0090428D /* MHDay.m in Sources */,
 				703149571EC4C48E00707A8F /* AuthManager.m in Sources */,
 				70ED3F901EB9245E0090428D /* DayNavigator.m in Sources */,
+				70C0CB9E1ECB728400BE6625 /* GroupMessageTableViewCell.m in Sources */,
 				7031495B1EC4C9AA00707A8F /* MHAccount.m in Sources */,
 				70643C101E78805600DD3370 /* MHMember.m in Sources */,
 				7002C5741EB030840086210A /* WeightHistoryManager.m in Sources */,
@@ -781,6 +798,7 @@
 				70E223321E6710650079FF22 /* GroupManager.m in Sources */,
 				70ED3F9C1EB981AE0090428D /* PickerTableViewCell.m in Sources */,
 				705B94CB1E4C3C1A006241F1 /* TextFieldTableViewCell.m in Sources */,
+				70C0CB931ECB536D00BE6625 /* GroupListManager.m in Sources */,
 				90E7B6F9E137A5920A036412 /* NutritionInfo.m in Sources */,
 				7002C5661EB02FB10086210A /* WeightSummaryViewController.m in Sources */,
 				70ED3F8A1EB911260090428D /* MHMeal.m in Sources */,

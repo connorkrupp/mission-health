@@ -10,9 +10,9 @@
 
 @interface MHAccount : RLMObject
 
+@property NSString *userId;
 @property NSString *email;
 @property NSString *name;
-@property NSString *userId;
 @property NSString *token;
 
 @end

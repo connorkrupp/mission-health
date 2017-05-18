@@ -12,19 +12,19 @@
 #import "GroupViewController.h"
 #import "UIColor+MHColors.h"
 
-#import "GroupManager.h"
+#import "GroupListManager.h"
 
-@interface MissionsCollectionViewController () <GroupManagerDelegate, UICollectionViewDelegateFlowLayout>
+@interface MissionsCollectionViewController () <GroupListManagerDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (strong, nonatomic) GroupManager *groupManager;
+@property (strong, nonatomic) GroupListManager *groupListManager;
 
 @end
 
 @implementation MissionsCollectionViewController
 
-static NSString * const reuseIdentifier = @"GroupCell";
+static NSString *const reuseIdentifier = @"GroupCell";
 
-- (instancetype)initWithGroupManager:(GroupManager *)groupManager {
+- (instancetype)initWithGroupListManager:(GroupListManager *)groupListManager {
     UICollectionViewLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
     self = [self initWithCollectionViewLayout:layout];
@@ -35,15 +35,29 @@ static NSString * const reuseIdentifier = @"GroupCell";
     self.title = @"Missions";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroup)];
     
-    self.groupManager = groupManager;
-    self.groupManager.delegate = self;
-    [self.groupManager getUserGroups];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    
+    [refreshControl addTarget:self action:@selector(updateUserGroups) forControlEvents:UIControlEventValueChanged];
+    
+    self.collectionView.refreshControl = refreshControl;
+    
+    [self.collectionView addSubview:refreshControl];
+    [self.collectionView setAlwaysBounceVertical:true];
+    
+    self.groupListManager = groupListManager;
+    self.groupListManager.delegate = self;
+    
+    [self updateUserGroups];
     
     return self;
 }
 
+- (void)updateUserGroups {
+    [self.groupListManager updateUserGroups];
+}
+
 - (void)addGroup {
-    AddGroupViewController *addGroupViewController = [[AddGroupViewController alloc] initWithGroupManager:self.groupManager];
+    AddGroupViewController *addGroupViewController = [[AddGroupViewController alloc] initWithGroupListManager:self.groupListManager];
     UINavigationController *addGroupNavigationController = [[UINavigationController alloc] initWithRootViewController:addGroupViewController];
     
     [self presentViewController:addGroupNavigationController animated:true completion:nil];
@@ -51,8 +65,18 @@ static NSString * const reuseIdentifier = @"GroupCell";
 
 #pragma mark <GroupManagerDelegate>
 
-- (void)groupManagerDidLoadGroups:(GroupManager *)groupManager {
+- (void)groupListManagerDidFinishUpdatingGroups:(GroupListManager *)groupListManager {
+    if ([self.collectionView.refreshControl isRefreshing]) {
+        [self.collectionView.refreshControl endRefreshing];
+    }
+    
     [self.collectionView reloadData];
+}
+
+- (void)groupListManagerDidFinishUpdateWithNoChanges:(GroupListManager *)groupListManager {
+    if ([self.collectionView.refreshControl isRefreshing]) {
+        [self.collectionView.refreshControl endRefreshing];
+    }
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -63,13 +87,13 @@ static NSString * const reuseIdentifier = @"GroupCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.groupManager.groups.count;
+    return self.groupListManager.groups.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MissionsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    MHGroup *group = self.groupManager.groups[indexPath.row];
+    MHGroup *group = self.groupListManager.groups[indexPath.row];
     
     cell.missionsLabel.text = group.name;
     cell.missionsLabel.textColor = [UIColor whiteColor];
@@ -82,9 +106,9 @@ static NSString * const reuseIdentifier = @"GroupCell";
 #pragma mark <UICollectionViewDelegate>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    MHGroup *group = self.groupManager.groups[indexPath.row];
+    MHGroup *group = self.groupListManager.groups[indexPath.row];
     
-    GroupViewController *groupViewController = [[GroupViewController alloc] initWithGroupManager:_groupManager group:group];
+    GroupViewController *groupViewController = [[GroupViewController alloc] initWithGroupListManager:_groupListManager group:group];
     
     [self.navigationController pushViewController:groupViewController animated:true];
 }

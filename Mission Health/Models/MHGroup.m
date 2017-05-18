@@ -10,4 +10,16 @@
 
 @implementation MHGroup
 
++ (NSString *)primaryKey {
+    return @"groupId";
+}
+
++ (NSDictionary *)defaultPropertyValues
+{
+    return @{
+             @"lastUpdatedMetadata": [NSDate dateWithTimeIntervalSince1970:0],
+             @"lastUpdatedMessages": [NSDate dateWithTimeIntervalSince1970:0]
+             };
+}
+
 @end

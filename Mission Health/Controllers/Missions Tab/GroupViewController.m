@@ -10,78 +10,67 @@
 
 #import "GroupInfoViewController.h"
 #import "GroupManager.h"
+#import "GroupListManager.h"
+#import "GroupMessageTableViewCell.h"
 
-@interface GroupViewController () <UITableViewDelegate, UITableViewDataSource>
+static NSString *const reuseIdentifier = @"MessageCell";
+
+@interface GroupViewController () <GroupManagerDelegate>
 
 @property (strong, nonatomic) MHGroup *group;
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) GroupListManager *groupListManager;
+@property (strong, nonatomic) GroupManager *groupManager;
 @end
 
 @implementation GroupViewController
 
-- (instancetype)initWithGroupManager:(GroupManager *)groupManager group:(MHGroup *)group {
-    if (self = [super init]) {
+- (instancetype)initWithGroupListManager:(GroupListManager *)groupListManager group:(MHGroup *)group {
+    if (self = [super initWithStyle:UITableViewStylePlain]) {
         self.group = group;
+        self.groupListManager = groupListManager;
+        self.groupManager = [groupListManager getGroupManagerForGroup:group];
+        self.groupManager.delegate = self;
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(composeMessage)];
+        
+        [self.tableView registerClass:[GroupMessageTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     }
     
     return self;
 }
 
-- (void)loadView {
-    self.view = [[UIView alloc] init];
-    self.view.backgroundColor = [UIColor whiteColor];
+- (void)viewDidLoad {
+    [self refreshMessages];
     
-    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithTitle:@"Info" style:UIBarButtonItemStylePlain target:self action:@selector(loadGroupInfo)];
-    self.navigationItem.rightBarButtonItem = infoButton;
-    
-    self.title = self.group.name;
-    
-    self.tableView = [[UITableView alloc] init];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100;
     
-    //[self.tableView registerNib:[UINib nibWithNibName:@"WeightTableViewCell" bundle:nil] forCellReuseIdentifier:@"WeightCell"];
+    self.title = _group.name;
     
-    UIStackView *containerStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.tableView]];
-    containerStackView.axis = UILayoutConstraintAxisVertical;
-    containerStackView.alignment = UIStackViewAlignmentFill;
-    containerStackView.distribution = UIStackViewDistributionFill;
-    containerStackView.translatesAutoresizingMaskIntoConstraints = false;
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshMessages) forControlEvents:UIControlEventValueChanged];
     
-    [self.view addSubview:containerStackView];
-    
-    self.tableView.translatesAutoresizingMaskIntoConstraints = false;
-    
-    [NSLayoutConstraint activateConstraints:@[
-                                              [NSLayoutConstraint constraintWithItem:containerStackView
-                                                                           attribute:NSLayoutAttributeTop
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:self.topLayoutGuide attribute:NSLayoutAttributeBottom
-                                                                          multiplier:1.0
-                                                                            constant:0.0],
-                                              [NSLayoutConstraint constraintWithItem:containerStackView
-                                                                           attribute:NSLayoutAttributeLeading
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:self.view attribute:NSLayoutAttributeLeading
-                                                                          multiplier:1.0
-                                                                            constant:0.0],
-                                              [NSLayoutConstraint constraintWithItem:containerStackView
-                                                                           attribute:NSLayoutAttributeTrailing
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:self.view attribute:NSLayoutAttributeTrailing
-                                                                          multiplier:1.0
-                                                                            constant:0.0],
-                                              [NSLayoutConstraint constraintWithItem:containerStackView
-                                                                           attribute:NSLayoutAttributeBottom
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:self.bottomLayoutGuide attribute:NSLayoutAttributeTop
-                                                                          multiplier:1.0
-                                                                            constant:0.0]
-                                              
-                                              ]];
+    [super viewDidLoad];
+}
 
+- (void)refreshMessages {
+    [self.groupManager reloadGroupMessages];
+}
+
+- (void)composeMessage {
+    //AddGroupViewController *addGroupViewController = [[AddGroupViewController alloc] initWithGroupListManager:self.groupListManager];
+    //UINavigationController *addGroupNavigationController = [[UINavigationController alloc] initWithRootViewController:addGroupViewController];
+    
+    //[self presentViewController:addGroupNavigationController animated:true completion:nil];
+    [self.groupManager composeMessageWithBody:@"This is a test message"];
+}
+
+- (void)groupManagerDidLoadMessagesWithNoChanges:(GroupManager *)groupManager {
+    [self.refreshControl endRefreshing];
+}
+- (void)groupManagerDidLoadMessages:(GroupManager *)groupManager {
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)loadGroupInfo {
@@ -90,12 +79,46 @@
     [self.navigationController pushViewController:groupInfoViewController animated:true];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#pragma mark <UITableViewDataSource>
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (_group.messages.count > 0) {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        return 1;
+    } else {
+        // Display a message when the table is empty
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No messages yet!";
+        messageLabel.textColor = [UIColor blackColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"HKGrotesk" size:20];
+        
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
     return 0;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _group.messages.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    GroupMessageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    MHMessage *message = _group.messages[indexPath.row];
+    
+    cell.senderLabel.text = @"Konnor Krupp";
+    cell.timestampLabel.text = @"6h ago";
+    cell.bodyLabel.text = message.body;
+    
+    return cell;
 }
 
 @end

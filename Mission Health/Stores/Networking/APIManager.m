@@ -11,7 +11,7 @@
 
 #import "APIManager.h"
 #import "AuthManager.h"
-#import "GroupManager.h"
+#import "GroupListManager.h"
 #import "MHAccount.h"
 
 @interface APIManager ()
@@ -31,7 +31,7 @@
         #endif
         
         self.authManager = [[AuthManager alloc] initWithAPIManager:self];
-        self.groupManager = [[GroupManager alloc] initWithAPIManager:self];
+        self.groupListManager = [[GroupListManager alloc] initWithAPIManager:self];
     }
     
     return self;
@@ -238,9 +238,14 @@
     return [base64Encoded stringByAddingPercentEncodingWithAllowedCharacters:allowed];
 }
 
-+ (NSString *)percentEncodeRFC3986:(NSString *)str {
-    NSCharacterSet *allowed = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"];
-    return [str stringByAddingPercentEncodingWithAllowedCharacters:allowed];
++ (NSString *)percentEncodeRFC3986:(id)obj {
+    
+    if ([obj isKindOfClass:[NSString class]]) {
+        NSCharacterSet *allowed = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"];
+        return [obj stringByAddingPercentEncodingWithAllowedCharacters:allowed];
+    } else {
+        return obj;
+    }
 }
 
 @end
